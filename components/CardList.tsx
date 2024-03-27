@@ -9,6 +9,7 @@ import { Button, CardActionArea, CardActions } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import { CategoryType } from "@/type";
 import { fetchArticles } from "@/app/action/page";
+import Link from "next/link";
 
 const data = Array.from(Array(9), (_, i) => {
   const image = i % 2 === 0 ? "/static/cat.jpeg" : "/static/reptile.jpg";
@@ -21,11 +22,20 @@ const data = Array.from(Array(9), (_, i) => {
   };
 });
 
+type ArticleInterface = {
+  title: string,
+  date: string,
+  content: string,
+  images: string,
+  parsedName?: string,
+}
+
 type CardListProps = {
-  type: CategoryType;
+  // type: CategoryType;
+  articles: ArticleInterface[],
 };
 
-export default function CardList(props: CardListProps) {
+export default function CardList({articles}: CardListProps) {
   return (
     <Container maxWidth="xl">
       <Box
@@ -37,22 +47,22 @@ export default function CardList(props: CardListProps) {
           flexWrap: "wrap",
         }}
       >
-        {data.map((item) => {
+        {articles.map((article) => {
           return (
-            <Card key={item.name} sx={{ maxWidth: 345 }}>
+            <Card key={article.title} sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   height="140"
-                  image={item.image}
+                  image={article.images[0]}
                   alt="green iguana"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    {item.name}
+                    {article.title}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {item.desc}
+                    {`${article.content.slice(0, 70)}...`}
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -60,7 +70,7 @@ export default function CardList(props: CardListProps) {
                 <Button size="small" color="primary">
                   Share
                 </Button>
-                <Button size="small">Learn More</Button>
+                <Link href={`/${article.parsedName}`}><Button size="small">Learn More</Button></Link>
               </CardActions>
             </Card>
           );
@@ -75,7 +85,7 @@ export default function CardList(props: CardListProps) {
           flexWrap: "wrap",
         }}
       >
-        <Pagination count={10} variant="outlined" color="primary" />
+        {/* <Pagination count={10} variant="outlined" color="primary" /> */}
       </Box>
     </Container>
   );

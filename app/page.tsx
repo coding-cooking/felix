@@ -1,21 +1,21 @@
-"use client";
-
 import NavCategory from "@/components/NavCategory";
 import { useState } from "react";
 import { CategoryType } from "@/type";
 import CardList from "@/components/CardList";
+import { fetchArticles } from "./action/page";
 
-export default function Homepage() {
-  const [activeCategory, setActiveCategory] = useState<CategoryType>(
-    CategoryType.Newest
-  );
+export default async function Homepage() {
+  // const [activeCategory, setActiveCategory] = useState<CategoryType>(
+  //   CategoryType.Newest
+  // );
+  const articles = await fetchArticles();
   return (
     <>
-      <NavCategory
+      {/* <NavCategory
         category={activeCategory}
         setActiveCategory={setActiveCategory}
-      />
-      <CardList type={activeCategory} />
+      /> */}
+      <CardList articles={articles}/>
     </>
   );
 }
