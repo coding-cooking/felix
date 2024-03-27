@@ -1,8 +1,5 @@
-import NavCategory from "@/components/NavCategory";
-import { useState } from "react";
-import { CategoryType } from "@/type";
 import CardList from "@/components/CardList";
-import { fetchArticles } from "./action/page";
+import { fetchArticles } from "./lib/actions";
 
 export default async function Homepage() {
   // const [activeCategory, setActiveCategory] = useState<CategoryType>(
@@ -15,7 +12,7 @@ export default async function Homepage() {
         category={activeCategory}
         setActiveCategory={setActiveCategory}
       /> */}
-      <CardList articles={articles}/>
+      <CardList articles={articles} />
     </>
   );
 }

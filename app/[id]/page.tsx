@@ -1,4 +1,4 @@
-import { fetchArticleById } from "@/app/action/page";
+import { fetchArticleById } from "@/app/lib/actions";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";

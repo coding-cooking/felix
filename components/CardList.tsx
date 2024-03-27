@@ -6,9 +6,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
-import Pagination from "@mui/material/Pagination";
-import { CategoryType } from "@/type";
-import { fetchArticles } from "@/app/action/page";
 import Link from "next/link";
 
 const data = Array.from(Array(9), (_, i) => {
@@ -35,7 +32,7 @@ type CardListProps = {
   articles: ArticleInterface[],
 };
 
-export default function CardList({articles}: CardListProps) {
+export default function CardList({ articles }: CardListProps) {
   return (
     <Container maxWidth="xl">
       <Box
