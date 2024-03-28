@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { notFound } from "next/navigation";
-import { marked } from "marked";
 
 const contentDir = path.join(process.cwd(), "/md");
 const files = fs.readdirSync(contentDir);

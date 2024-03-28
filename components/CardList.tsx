@@ -19,11 +19,11 @@ const data = Array.from(Array(9), (_, i) => {
   };
 });
 
-type ArticleInterface = {
+export type ArticleInterface = {
   title: string,
   date: string,
   content: string,
-  images: string,
+  images: Array<string>,
   parsedName?: string,
 }
 

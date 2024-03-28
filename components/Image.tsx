@@ -1,7 +1,11 @@
 "use client";
 
+import React from 'react';
 import styled from "@emotion/styled";
-import Image from "next/image";
+import Stack from '@mui/material/Stack';
+import Image from 'next/image';
+import { ArticleInterface } from "./CardList";
+
 
 const StyledImageWrapper = styled.div`
   position: relative;
@@ -12,11 +16,19 @@ const StyledImageWrapper = styled.div`
   }
 `;
 
-export const StyledImage = (props: {
-    imageUrl: string
-}) => {
-    return <StyledImageWrapper>
-        <Image src={props.imageUrl} alt="" fill >
-        </Image>
-    </StyledImageWrapper>
+interface StyledImageProps {
+    article: ArticleInterface;
 }
+
+export const StyledImage: React.FC<StyledImageProps> = ({ article }) => {
+    return (
+        <Stack direction="row" spacing={2} width="100%">
+            {article.images.map((imageUrl: string, index: number) => (
+                <StyledImageWrapper key={index}>
+                    <Image src={imageUrl} alt="" fill />
+                </StyledImageWrapper>
+            ))}
+        </Stack>
+    );
+};
+
