@@ -24,7 +24,8 @@ export default async function Article({ params }: { params: { id: string } }) {
           flexWrap: "wrap",
         }}
       >
-        <Typography variant="h3" lineHeight={2} gutterBottom>
+        <StyledImage article={article} />
+        <Typography variant="h4" lineHeight={2} gutterBottom>
           {article.title}
         </Typography>
         <Typography variant="subtitle1" lineHeight={3} gutterBottom>
@@ -33,7 +34,7 @@ export default async function Article({ params }: { params: { id: string } }) {
         <Typography variant="body1" lineHeight={2} gutterBottom>
           <ReactMarkdown>{article.content}</ReactMarkdown>
         </Typography>
-        <StyledImage article={article} />
+       
       </Box>
     </Container>
   );

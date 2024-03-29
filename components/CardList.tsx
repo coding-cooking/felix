@@ -58,7 +58,7 @@ export default function CardList({ articles }: CardListProps) {
                   <Typography gutterBottom variant="h5" component="div">
                     {article.title}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="text.secondary" height={80}>
                     {`${article.content.slice(0, 70)}...`}
                   </Typography>
                 </CardContent>

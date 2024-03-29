@@ -5,12 +5,22 @@ import styled from "@emotion/styled";
 import Stack from '@mui/material/Stack';
 import Image from 'next/image';
 import { ArticleInterface } from "./CardList";
+import { theme } from '@/theme/default';
 
+const StyledStack = styled(Stack)`
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    /* @media ${theme.breakpoints.values.lg} {
+        flex-direction: column;
+    } */
+`
 
 const StyledImageWrapper = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 16/9;
+  margin-bottom: 20px;
+  aspect-ratio: 4/1;
   img {
     object-fit: cover;
   }
@@ -22,13 +32,13 @@ interface StyledImageProps {
 
 export const StyledImage: React.FC<StyledImageProps> = ({ article }) => {
     return (
-        <Stack direction="row" spacing={2} width="100%">
+        <StyledStack>
             {article.images.map((imageUrl: string, index: number) => (
                 <StyledImageWrapper key={index}>
                     <Image src={imageUrl} alt="" fill />
                 </StyledImageWrapper>
             ))}
-        </Stack>
+        </StyledStack>
     );
 };
 
