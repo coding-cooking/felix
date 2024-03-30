@@ -2,16 +2,15 @@
 
 import Link from "next/link";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
+import Stack from '@mui/material/Stack';
 import Toolbar from "@mui/material/Toolbar";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Container from "@mui/material/Container";
-import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
+import { styled } from "@mui/material/styles";
 import { LogoSvg } from "./Icon";
 import SearchBar from "./SearchBar";
 import { Suspense } from "react";
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 const StyledAppBar = styled(AppBar)`
   background-color: rgb(var(--header-bg));
@@ -34,14 +33,18 @@ function HeaderBar() {
             <LogoSvg width={60} height={35} />
           </StyledLink>
           <Suspense><SearchBar /></Suspense>
-          <Box sx={{ flexGrow: 1, textAlign: "right" }}>
+
+          <Stack sx={{ flexDirection:"row", flexGrow: 1, textAlign: "right", gap: 2, justifyContent: "end"}}>
+            <StyledLink href="mailto:felixzhang.rocinante@gmail.com">
+              <MailOutlineIcon />
+            </StyledLink>
             <StyledLink
               href="https://github.com/coding-cooking"
               target="_blank"
             >
               <GitHubIcon />
             </StyledLink>
-          </Box>
+          </Stack>
         </StyledToolBar>
       </Container>
     </StyledAppBar>
