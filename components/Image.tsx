@@ -5,17 +5,12 @@ import styled from "@emotion/styled";
 import Stack from '@mui/material/Stack';
 import Image from 'next/image';
 import { ArticleInterface } from "./CardList";
-import { theme } from '@/theme/default';
 import Skeleton from '@mui/material/Skeleton';
-
 
 const StyledStack = styled(Stack)`
     flex-direction: row;
     gap: 20px;
     width: 100%;
-    /* @media ${theme.breakpoints.values.lg} {
-        flex-direction: column;
-    } */
 `
 
 const StyledImageWrapper = styled.div`

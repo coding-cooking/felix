@@ -8,18 +8,12 @@ type HomepageProps = {
 }
 
 export default async function Homepage({ searchParams }: HomepageProps) {
-  // const [activeCategory, setActiveCategory] = useState<CategoryType>(
-  //   CategoryType.Newest
-  // );
+  
   const q = searchParams?.q;
-
   const articles = await fetchArticles();
+  
   return (
     <>
-      {/* <NavCategory
-        category={activeCategory}
-        setActiveCategory={setActiveCategory}
-      /> */}
       <CardList articles={articles} q={q}/>
     </>
   );

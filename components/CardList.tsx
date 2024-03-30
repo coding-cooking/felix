@@ -18,13 +18,12 @@ export type ArticleInterface = {
 }
 
 type CardListProps = {
-  // type: CategoryType;
   articles: ArticleInterface[],
   q: string,
 };
 
 export default function CardList({ articles, q }: CardListProps) {
-  const [selectedArticles, setSelectedArticles] = useState<ArticleInterface[]>(articles);
+  const [searchedArticles, setSearchedArticles] = useState<ArticleInterface[]>(articles);
   useEffect(() => {
     const _articles = q
       ? articles.filter(
@@ -32,7 +31,7 @@ export default function CardList({ articles, q }: CardListProps) {
           article.title.toLowerCase().includes(q.toLowerCase()) || article.content.toLowerCase().includes(q.toLowerCase())
       )
       : articles;
-    setSelectedArticles(_articles);
+    setSearchedArticles(_articles);
   }, [q, articles])
 
   return (
@@ -46,7 +45,7 @@ export default function CardList({ articles, q }: CardListProps) {
           flexWrap: "wrap",
         }}
       >
-        {selectedArticles.map((article) => {
+        {searchedArticles?.map((article) => {
           return (
             <Card key={article.title} sx={{ maxWidth: 345 }}>
               <CardActionArea>
@@ -75,7 +74,7 @@ export default function CardList({ articles, q }: CardListProps) {
           );
         })}
       </Box>
-      <Box
+      {/* <Box
         sx={{
           my: 14,
           flexGrow: 1,
@@ -84,8 +83,8 @@ export default function CardList({ articles, q }: CardListProps) {
           flexWrap: "wrap",
         }}
       >
-        {/* <Pagination count={10} variant="outlined" color="primary" /> */}
-      </Box>
+        <Pagination count={10} variant="outlined" color="primary" />
+      </Box> */}
     </Container>
   );
 }
