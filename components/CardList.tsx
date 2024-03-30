@@ -1,4 +1,4 @@
-
+"use client"
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
@@ -7,17 +7,18 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const data = Array.from(Array(9), (_, i) => {
-  const image = i % 2 === 0 ? "/static/cat.jpeg" : "/static/reptile.jpg";
-  const name = i % 2 == 0 ? "Cat" : "Lizard";
-  return {
-    name,
-    image,
-    desc: `Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica`,
-  };
-});
+// const data = Array.from(Array(9), (_, i) => {
+//   const image = i % 2 === 0 ? "/static/cat.jpeg" : "/static/reptile.jpg";
+//   const name = i % 2 == 0 ? "Cat" : "Lizard";
+//   return {
+//     name,
+//     image,
+//     desc: `Lizards are a widespread group of squamate reptiles, with over
+//                 6,000 species, ranging across all continents except Antarctica`,
+//   };
+// });
 
 export type ArticleInterface = {
   title: string,
@@ -30,9 +31,21 @@ export type ArticleInterface = {
 type CardListProps = {
   // type: CategoryType;
   articles: ArticleInterface[],
+  q: string,
 };
 
-export default function CardList({ articles }: CardListProps) {
+export default function CardList({ articles, q }: CardListProps) {
+  const [selectedArticles, setSelectedArticles] = useState<ArticleInterface[]>(articles);
+  useEffect(() => {
+    const _articles = q
+      ? articles.filter(
+        (article: ArticleInterface) =>
+          article.title.includes(q) || article.content.includes(q)
+      )
+      : articles;
+    setSelectedArticles(_articles);
+  }, [q, articles])
+
   return (
     <Container maxWidth="xl">
       <Box
@@ -44,7 +57,7 @@ export default function CardList({ articles }: CardListProps) {
           flexWrap: "wrap",
         }}
       >
-        {articles.map((article) => {
+        {selectedArticles.map((article) => {
           return (
             <Card key={article.title} sx={{ maxWidth: 345 }}>
               <CardActionArea>
