@@ -6,7 +6,8 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import "./globals.css";
 import HeaderBar from "@/components/HeaderBar";
 import Footer from "@/components/Footer";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import Loading from "./Loading"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,14 +33,14 @@ export default function RootLayout({
         <AppRouterCacheProvider options={{ key: "fei" }}>
           <HeaderBar />
           {windowHeight && (
-            <>
+            <Suspense fallback={<Loading />}>
               <main
                 style={{ minHeight: `${windowHeight}px`, marginTop: "6rem" }}
               >
                 {children}
               </main>
               <Footer />
-            </>
+            </Suspense>
           )}
         </AppRouterCacheProvider>
       </body>

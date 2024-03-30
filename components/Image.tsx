@@ -6,6 +6,8 @@ import Stack from '@mui/material/Stack';
 import Image from 'next/image';
 import { ArticleInterface } from "./CardList";
 import { theme } from '@/theme/default';
+import Skeleton from '@mui/material/Skeleton';
+
 
 const StyledStack = styled(Stack)`
     flex-direction: row;
@@ -35,7 +37,7 @@ export const StyledImage: React.FC<StyledImageProps> = ({ article }) => {
         <StyledStack>
             {article.images.map((imageUrl: string, index: number) => (
                 <StyledImageWrapper key={index}>
-                    <Image src={imageUrl} alt="" fill />
+                    <Skeleton variant="rectangular" width="100%" height="100%" /> || <Image src={imageUrl} alt="" fill />
                 </StyledImageWrapper>
             ))}
         </StyledStack>

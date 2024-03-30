@@ -29,7 +29,7 @@ export default function CardList({ articles, q }: CardListProps) {
     const _articles = q
       ? articles.filter(
         (article: ArticleInterface) =>
-          article.title.includes(q) || article.content.includes(q)
+          article.title.toLowerCase().includes(q.toLowerCase()) || article.content.toLowerCase().includes(q.toLowerCase())
       )
       : articles;
     setSelectedArticles(_articles);
