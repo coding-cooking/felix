@@ -9,17 +9,6 @@ import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-// const data = Array.from(Array(9), (_, i) => {
-//   const image = i % 2 === 0 ? "/static/cat.jpeg" : "/static/reptile.jpg";
-//   const name = i % 2 == 0 ? "Cat" : "Lizard";
-//   return {
-//     name,
-//     image,
-//     desc: `Lizards are a widespread group of squamate reptiles, with over
-//                 6,000 species, ranging across all continents except Antarctica`,
-//   };
-// });
-
 export type ArticleInterface = {
   title: string,
   date: string,
