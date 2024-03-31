@@ -8,11 +8,6 @@ const nextConfig = {
 			},
 		],
 	},
-	distDir: "docs",
-	webpack: (config) => {
-		config.output.filename = "index.js";
-		return config;
-	},
 };
 
 export default nextConfig;
