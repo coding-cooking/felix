@@ -12,11 +12,11 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-          cache: 'npm'
+          node-version: 18.17.0
+          cache: "npm"
       - run: npm ci
       - run: npm run export
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: out # The folder where the exported files will be
+          folder: docs # The folder where the exported files will be
