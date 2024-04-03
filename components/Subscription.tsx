@@ -17,10 +17,6 @@ const Container = styled("div")(({ theme }) => ({
 
 const Congratulation = styled("div")(({ theme }) => ({}));
 
-const FormWrapper = styled("div")(({ theme }) => ({
-  width: "100%",
-}));
-
 const StyledIcon = styled("div")<{ isShow: boolean }>(({ theme, isShow }) => ({
   position: "absolute",
   right: 0,
@@ -43,10 +39,7 @@ const StyledForm = styled("form")<{ isShow: boolean }>(({ theme, isShow }) => ({
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 1),
   boxShadow: "0 4px 16px 0 rgba(0,0,0,.15)",
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    width: "auto",
-  },
+  width: "auto",
   transform: `${isShow ? "translateX(0)" : "translateX(100%)"}`,
   transition: "transform .3s ease",
 }));
@@ -60,11 +53,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 1),
     transition: theme.transitions.create("width"),
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
+    width: "12ch",
+    "&:focus": {
+      width: "20ch",
+    },
+    "&:-webkit-autofill": {
+      boxShadow: `${alpha(theme.palette.common.white, 1)} !important`,
+      backgroundColor: `${alpha(theme.palette.common.white, 1)} !important`,
     },
   },
 }));
@@ -95,7 +90,7 @@ export default function Subscription() {
           Thank you!
         </Congratulation>
       ) : (
-        <FormWrapper>
+        <>
           <StyledIcon onClick={handleShowForm} isShow={showIcon}>
             <SubscriptionsIcon />
           </StyledIcon>
@@ -106,6 +101,7 @@ export default function Subscription() {
               name="email"
               placeholder="Your Email"
               style={{
+                fontSize: "14px",
                 padding: "0 12px",
               }}
             />
@@ -121,12 +117,13 @@ export default function Subscription() {
               disabled={state.submitting}
               style={{
                 width: "100%",
+                fontSize: "12px",
               }}
             >
               Subscribe
             </Button>
           </StyledForm>
-        </FormWrapper>
+        </>
       )}
     </Container>
   );
