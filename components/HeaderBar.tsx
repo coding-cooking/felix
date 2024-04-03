@@ -33,7 +33,6 @@ function HeaderBar() {
             <LogoSvg width={60} height={35} />
           </StyledLink>
           <Suspense><SearchBar /></Suspense>
-
           <Stack sx={{ flexDirection:"row", flexGrow: 1, textAlign: "right", gap: 2, justifyContent: "end"}}>
             <StyledLink href="mailto:felixzhang.rocinante@gmail.com">
               <MailOutlineIcon />

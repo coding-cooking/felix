@@ -31,7 +31,7 @@ export default function Footer() {
         >
           Copyright © 2024 | Felix
         </Typography>
-      </Container>
-    </Wrapper>
+    </Container>
+    </Wrapper >
   );
 }

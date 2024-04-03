@@ -1,5 +1,6 @@
 import CardList from "@/components/CardList";
 import { fetchArticles } from "./lib/actions";
+import Subscription from "@/components/Subscription";
 
 type HomepageProps = {
   searchParams: {
@@ -15,6 +16,7 @@ export default async function Homepage({ searchParams }: HomepageProps) {
   return (
     <>
       <CardList articles={articles} q={q}/>
+      <Subscription />
     </>
   );
 }

@@ -43,6 +43,7 @@ export default function CardList({ articles, q }: CardListProps) {
           display: "flex",
           justifyContent: "center",
           flexWrap: "wrap",
+          marginBottom: "30px",
         }}
       >
         {searchedArticles?.map((article) => {
