@@ -8,7 +8,6 @@ const nextConfig = {
 			},
 		],
 	},
-	favicon: "/favicon.ico",
 };
 
 export default nextConfig;
