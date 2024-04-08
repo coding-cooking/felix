@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import PaginationCard from "./PagenationCard";
 
 export type ArticleInterface = {
   title: string,
@@ -24,6 +25,15 @@ type CardListProps = {
 
 export default function CardList({ articles, q }: CardListProps) {
   const [searchedArticles, setSearchedArticles] = useState<ArticleInterface[]>(articles);
+  const [page, setPage] = useState<number>(1);
+
+  function paginate(articles: ArticleInterface[], page: number, pageSize: number){
+    const startIndex = (page -1 ) * pageSize;
+    const endIndex = startIndex + pageSize - 1;
+    const pageItems = articles.slice(startIndex, endIndex + 1);
+    return pageItems;
+  }
+
   useEffect(() => {
     const _articles = q
       ? articles.filter(
@@ -33,6 +43,7 @@ export default function CardList({ articles, q }: CardListProps) {
       : articles;
     setSearchedArticles(_articles);
   }, [q, articles])
+
 
   return (
     <Container maxWidth="xl">
@@ -46,47 +57,38 @@ export default function CardList({ articles, q }: CardListProps) {
           marginBottom: "30px",
         }}
       >
-        {searchedArticles?.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.parsedName) - Number(a.parsedName))
-          .map((article: ArticleInterface) => {
-            return (
-              <Card key={article.title} sx={{ maxWidth: 345 }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={article.images[0]}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {article.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" height={80}>
-                      {`${article.content.slice(0, 70)}...`}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Share
-                  </Button>
-                  <Link href={`/${article.parsedName}`}><Button size="small">Learn More</Button></Link>
-                </CardActions>
-              </Card>
-            );
-          })}
+        {paginate(searchedArticles, page, 9)?.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.parsedName) - Number(a.parsedName))
+        .map((article) => {
+          return (
+            <Card key={article.title} sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={article.images[0]}
+                  alt="green iguana"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {article.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" height={80}>
+                    {`${article.content.slice(0, 70)}...`}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button size="small" color="primary">
+                  Share
+                </Button>
+                <Link href={`/${article.parsedName}`}><Button size="small">Learn More</Button></Link>
+              </CardActions>
+            </Card>
+          );
+        })}
       </Box>
-      {/* <Box
-        sx={{
-          my: 14,
-          flexGrow: 1,
-          display: "flex",
-          justifyContent: "center",
-          flexWrap: "wrap",
-        }}
-      >
-        <Pagination count={10} variant="outlined" color="primary" />
-      </Box> */}
+      <PaginationCard searchedArticles={searchedArticles} page={page} setPage={setPage}/>
+      
     </Container>
   );
 }
