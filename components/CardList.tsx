@@ -31,7 +31,6 @@ export default function CardList({ articles, q }: CardListProps) {
     const startIndex = (page -1 ) * pageSize;
     const endIndex = startIndex + pageSize - 1;
     const pageItems = articles.slice(startIndex, endIndex + 1);
-    console.log(startIndex, endIndex, pageItems, articles[8])
     return pageItems;
   }
 
