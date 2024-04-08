@@ -1,6 +1,5 @@
 "use client";
 
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import "./globals.css";
@@ -9,11 +8,6 @@ import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
-
-const metadata: Metadata = {
-  title: "Felix's website",
-  description: "A record of a new immigrant settled in Sydney, documenting the city, cuisine, lifestyle, reading, and computer technology.",
-};
 
 export default function RootLayout({
   children,
