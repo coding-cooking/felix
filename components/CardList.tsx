@@ -46,34 +46,35 @@ export default function CardList({ articles, q }: CardListProps) {
           marginBottom: "30px",
         }}
       >
-        {searchedArticles?.map((article) => {
-          return (
-            <Card key={article.title} sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={article.images[0]}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {article.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" height={80}>
-                    {`${article.content.slice(0, 70)}...`}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Share
-                </Button>
-                <Link href={`/${article.parsedName}`}><Button size="small">Learn More</Button></Link>
-              </CardActions>
-            </Card>
-          );
-        })}
+        {searchedArticles?.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.parsedName) - Number(a.parsedName))
+          .map((article: ArticleInterface) => {
+            return (
+              <Card key={article.title} sx={{ maxWidth: 345 }}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={article.images[0]}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {article.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" height={80}>
+                      {`${article.content.slice(0, 70)}...`}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    Share
+                  </Button>
+                  <Link href={`/${article.parsedName}`}><Button size="small">Learn More</Button></Link>
+                </CardActions>
+              </Card>
+            );
+          })}
       </Box>
       {/* <Box
         sx={{
