@@ -9,6 +9,7 @@ import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import PaginationCard from "./PagenationCard";
+import { sendGTMEvent } from '@next/third-parties/google'
 
 export type ArticleInterface = {
   title: string,
@@ -81,7 +82,9 @@ export default function CardList({ articles, q }: CardListProps) {
                 <Button size="small" color="primary">
                   Share
                 </Button>
-                <Link href={`/${article.parsedName}`}><Button size="small">Learn More</Button></Link>
+                <Link href={`/${article.parsedName}`}>
+                  <Button size="small" onClick={() => sendGTMEvent({ event: 'buttonClicked', value: 'xyz' })}>Learn More</Button>
+                  </Link>
               </CardActions>
             </Card>
           );
