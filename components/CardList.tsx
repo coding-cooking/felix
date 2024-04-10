@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import PaginationCard from "./PagenationCard";
 // import { sendGTMEvent } from '@next/third-parties/google'
 
+
 export type ArticleInterface = {
   title: string,
   date: string,
@@ -89,6 +90,7 @@ export default function CardList({ articles, q }: CardListProps) {
               </Card>
             );
           })}
+
       </Box>
       <PaginationCard searchedArticles={searchedArticles} page={page} setPage={setPage} />
 
