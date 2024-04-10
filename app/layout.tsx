@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
 import Head from 'next/head';
 import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <GoogleTagManager gtmId="GTM-TTVSHND3" />
+      <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
+
       <body className={inter.className}>
         <AppRouterCacheProvider options={{ key: "fei" }}>
           <HeaderBar />

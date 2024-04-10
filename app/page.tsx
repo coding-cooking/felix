@@ -3,6 +3,8 @@ import CardList from "@/components/CardList";
 import { fetchArticles } from "./lib/actions";
 import Subscription from "@/components/Subscription";
 import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 
 export const metadata: Metadata = {
   title: "Fei Zhang | Felix | Software | Blog | Web Development | felix-one.vercel.app",
@@ -26,6 +28,7 @@ export default async function Homepage({ searchParams }: HomepageProps) {
   return (
     <>
       <GoogleTagManager gtmId="GTM-TTVSHND3" />
+      <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
       <CardList articles={articles} q={q} />
       <Subscription />
     </>
