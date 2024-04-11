@@ -6,9 +6,9 @@ import "./globals.css";
 import HeaderBar from "@/components/HeaderBar";
 import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
-import Head from 'next/head';
-import { GoogleTagManager } from '@next/third-parties/google'
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
+import { usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [windowHeight, setWindowHeight] = useState(0);
+  const pathname = usePathname();
+
   useEffect(() => {
     if (window) {
       setWindowHeight(window.innerHeight);
@@ -34,7 +36,10 @@ export default function RootLayout({
           {windowHeight && (
             <>
               <main
-                style={{ minHeight: `${windowHeight}px`, marginTop: "6rem" }}
+                style={{
+                  minHeight: `${windowHeight}px`,
+                  marginTop: pathname === '/' ? '6rem' : '4rem',
+                }}
               >
                 {children}
               </main>
