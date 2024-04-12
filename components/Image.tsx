@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from "@emotion/styled";
 import Stack from '@mui/material/Stack';
 import Image from 'next/image';
@@ -27,12 +27,22 @@ interface StyledImageProps {
 }
 
 export const StyledImage: React.FC<StyledImageProps> = ({ article }) => {
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        },200)
+    },[])
+
     return (
         <StyledStack>
             {article.images.map((imageUrl: string, index: number) => (
                 <StyledImageWrapper key={index}>
-                    <Skeleton variant="rectangular" width="100%" height="100%" />
-                    <Image src={imageUrl} alt="" fill />
+                    {loading
+                        ? <Skeleton variant="rectangular" width="100%" height="100%" animation="wave" />
+                        : <Image src={imageUrl} alt="" fill />
+                    }
                 </StyledImageWrapper>
             ))}
         </StyledStack>
