@@ -20,6 +20,10 @@ const StyledImageWrapper = styled.div`
   img {
     object-fit: cover;
   }
+
+  @media (max-width: 700px) {
+    margin-top: -0.5em;
+  }
 `;
 
 interface StyledImageProps {

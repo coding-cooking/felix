@@ -16,7 +16,7 @@ export default async function Article({ params }: { params: { id: string } }) {
   return (
     <Stack>
       <StyledImage article={article} />
-      <Container maxWidth="lg" sx={{ width: "100%"}}>
+      <Container maxWidth="lg" sx={{ width: "100%" }}>
         <Box
           sx={{
             mb: 4,
@@ -26,10 +26,10 @@ export default async function Article({ params }: { params: { id: string } }) {
             flexWrap: "wrap",
           }}
         >
-          <Typography variant="h4" lineHeight={2} gutterBottom>
+          <Typography variant="h4" lineHeight={2} gutterBottom sx={{ '@media (max-width: 768px)': { fontSize: "24px", fontWeight: "400" } }}>
             {article.title}
           </Typography>
-          <Typography variant="subtitle1" lineHeight={3} gutterBottom>
+          <Typography variant="subtitle1" lineHeight={3} gutterBottom sx={{ '@media (max-width: 768px)': { fontSize: "14px" } }}>
             {article.date.toLocaleDateString()}
           </Typography>
           <Typography variant="body1" lineHeight={2} gutterBottom>
