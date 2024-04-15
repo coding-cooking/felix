@@ -6,6 +6,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Stack from '@mui/material/Stack';
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -28,8 +29,7 @@ type CardListProps = {
 export default function CardList({ articles, q }: CardListProps) {
   const [searchedArticles, setSearchedArticles] = useState<ArticleInterface[]>(articles);
   const [page, setPage] = useState<number>(1);
-  const [loading, setLoading] = useState<boolean>(true);
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   function paginate(articles: ArticleInterface[], page: number, pageSize: number) {
     const startIndex = (page - 1) * pageSize;
@@ -40,7 +40,7 @@ export default function CardList({ articles, q }: CardListProps) {
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false);
+      setIsLoading(false);
     }, 400)
   }, [])
 
@@ -72,7 +72,7 @@ export default function CardList({ articles, q }: CardListProps) {
             return (
               <Card key={article.title} sx={{ width: 345 }}>
                 <CardActionArea>
-                  {loading ? <Skeleton variant="rectangular" width="100%" height={140} animation="wave" />
+                  {isLoading ? <Skeleton variant="rectangular" width="100%" height={140} animation="wave" />
                     : <CardMedia
                       component="img"
                       height="140"
@@ -81,16 +81,17 @@ export default function CardList({ articles, q }: CardListProps) {
                     />}
 
                   <CardContent>
-                    {loading ? <Skeleton variant="text" width="60%" height={30} animation="wave" />
-                      : <Typography gutterBottom variant="h5" component="div">
+                    {isLoading ? <Skeleton variant="text" width="60%" height={32} animation="wave"/>
+                      : <Typography variant="h5" component="div" gutterBottom>
                         {article.title}
                       </Typography>}
-                    {loading ? (
-                      <React.Fragment>
-                        <Skeleton variant="text" width="100%" height={18} animation="wave" />
-                        <Skeleton variant="text" width="100%" height={18} animation="wave" />
-                        <Skeleton variant="text" width="60%" height={18} animation="wave" />
-                      </React.Fragment>
+                    {isLoading ? (
+                      <Stack sx={{padding:"4px 0"}}>
+                        <Skeleton variant="text" width="100%" height={20} animation="wave"/>
+                        <Skeleton variant="text" width="100%" height={20} animation="wave" />
+                        <Skeleton variant="text" width="100%" height={20} animation="wave" />
+                        <Skeleton variant="text" width="20%" height={20} animation="wave" />
+                      </Stack>
                     )
                       : <Typography variant="body2" color="text.secondary" height={80}>
                         {`${article.content.slice(0, 70)}...`}
