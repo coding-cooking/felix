@@ -32,8 +32,9 @@ export default function CardList({ articles, q }: CardListProps) {
   function paginate(articles: ArticleInterface[], page: number, pageSize: number) {
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize - 1;
-    const pageItems = articles.slice(startIndex, endIndex + 1);
-    return pageItems;
+    const sortedArticles = articles.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.parsedName) - Number(a.parsedName));
+    return sortedArticles.slice(startIndex, endIndex + 1);
+     
   }
 
   useEffect(() => {
@@ -59,8 +60,7 @@ export default function CardList({ articles, q }: CardListProps) {
           marginBottom: "30px",
         }}
       >
-        {paginate(searchedArticles, page, 9)?.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.parsedName) - Number(a.parsedName))
-          .map((article) => {
+        {paginate(searchedArticles, page, 9)?.map((article) => {
             return (
               <Card key={article.title} sx={{ maxWidth: 345 }}>
                 <CardActionArea>
