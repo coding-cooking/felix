@@ -33,8 +33,8 @@ export default function CardList({ articles, q }: CardListProps) {
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize - 1;
     const sortedArticles = articles.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.parsedName) - Number(a.parsedName));
-    const pageItems = sortedArticles.slice(startIndex, endIndex + 1);
-    return pageItems;
+    return sortedArticles.slice(startIndex, endIndex + 1);
+     
   }
 
   useEffect(() => {
