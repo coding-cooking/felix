@@ -39,10 +39,11 @@ export default function CardList({ articles, q }: CardListProps) {
   }
 
   useEffect(() => {
+    setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 400)
-  }, [])
+    }, 100)
+  }, [articles])
 
   useEffect(() => {
     const _articles = q
