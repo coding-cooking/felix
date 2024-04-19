@@ -1,17 +1,14 @@
 "use client"
-import * as React from 'react';
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import Stack from '@mui/material/Stack';
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import PaginationCard from "./PagenationCard";
-import Skeleton from '@mui/material/Skeleton';
+import { CardImage } from "./CardImage";
 
 export type ArticleInterface = {
   title: string,
@@ -29,7 +26,6 @@ type CardListProps = {
 export default function CardList({ articles, q }: CardListProps) {
   const [searchedArticles, setSearchedArticles] = useState<ArticleInterface[]>(articles);
   const [page, setPage] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   function paginate(articles: ArticleInterface[], page: number, pageSize: number) {
     const startIndex = (page - 1) * pageSize;
@@ -37,13 +33,6 @@ export default function CardList({ articles, q }: CardListProps) {
     const pageItems = articles.slice(startIndex, endIndex + 1);
     return pageItems;
   }
-
-  useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 100)
-  }, [articles])
 
   useEffect(() => {
     const _articles = q
@@ -73,30 +62,14 @@ export default function CardList({ articles, q }: CardListProps) {
             return (
               <Card key={article.title} sx={{ width: 345 }}>
                 <CardActionArea>
-                  {isLoading ? <Skeleton variant="rectangular" width="100%" height={140} animation="wave" />
-                    : <CardMedia
-                      component="img"
-                      height="140"
-                      image={article.images[0]}
-                      alt="green iguana"
-                    />}
-
+                  <CardImage article={article} />
                   <CardContent>
-                    {isLoading ? <Skeleton variant="text" width="60%" height={32} animation="wave"/>
-                      : <Typography variant="h5" component="div" gutterBottom>
-                        {article.title}
-                      </Typography>}
-                    {isLoading ? (
-                      <Stack sx={{padding:"4px 0"}}>
-                        <Skeleton variant="text" width="100%" height={20} animation="wave"/>
-                        <Skeleton variant="text" width="100%" height={20} animation="wave" />
-                        <Skeleton variant="text" width="100%" height={20} animation="wave" />
-                        <Skeleton variant="text" width="20%" height={20} animation="wave" />
-                      </Stack>
-                    )
-                      : <Typography variant="body2" color="text.secondary" height={80}>
-                        {`${article.content.slice(0, 70)}...`}
-                      </Typography>}
+                    <Typography variant="h5" component="div" gutterBottom>
+                      {article.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" height={80}>
+                      {`${article.content.slice(0, 70)}...`}
+                    </Typography>
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
@@ -110,10 +83,8 @@ export default function CardList({ articles, q }: CardListProps) {
               </Card>
             );
           })}
-
       </Box>
       <PaginationCard searchedArticles={searchedArticles} page={page} setPage={setPage} />
-
     </Container>
   );
 }

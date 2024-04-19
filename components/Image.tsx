@@ -33,21 +33,18 @@ interface StyledImageProps {
 export const StyledImage: React.FC<StyledImageProps> = ({ article }) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    useEffect(() => {
-        setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-        },100)
-    },[article])
-
     return (
         <StyledStack>
             {article.images.map((imageUrl: string, index: number) => (
                 <StyledImageWrapper key={index}>
-                    {isLoading
-                        ? <Skeleton variant="rectangular" width="100%" height="100%" animation="wave" />
-                        : <Image src={imageUrl} alt="" fill />
-                    }
+                    <Image
+                        src={imageUrl}
+                        alt=""
+                        fill
+                        loading="eager"
+                        onLoadingComplete={() => setIsLoading(false)}
+                    />
+                    {isLoading && <Skeleton variant="rectangular" width="100%" height="100%" animation="wave" />}
                 </StyledImageWrapper>
             ))}
         </StyledStack>
