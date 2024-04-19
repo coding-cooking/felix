@@ -44,7 +44,6 @@ export default function CardList({ articles, q }: CardListProps) {
     setSearchedArticles(_articles);
   }, [q, articles])
 
-
   return (
     <Container maxWidth="xl">
       <Box
