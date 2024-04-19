@@ -26,11 +26,11 @@ const StyledImageWrapper = styled.div`
   }
 `;
 
-interface StyledImageProps {
+type ArticleImageProps = {
     article: ArticleInterface;
 }
 
-export const StyledImage: React.FC<StyledImageProps> = ({ article }) => {
+export const ArticleImage: React.FC<ArticleImageProps> = ({ article }) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     return (

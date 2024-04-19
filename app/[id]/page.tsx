@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { notFound } from "next/navigation";
 import ReactMarkdown from 'react-markdown';
-import { StyledImage } from "@/components/Image";
+import { ArticleImage } from "@/components/ArticleImage";
 
 export default async function Article({ params }: { params: { id: string } }) {
   "use server";
@@ -15,7 +15,7 @@ export default async function Article({ params }: { params: { id: string } }) {
 
   return (
     <Stack>
-      <StyledImage article={article} />
+      <ArticleImage article={article} />
       <Container maxWidth="lg" sx={{ width: "100%" }}>
         <Box
           sx={{
