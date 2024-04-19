@@ -3,14 +3,12 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import PaginationCard from "./PagenationCard";
-// import { sendGTMEvent } from '@next/third-parties/google'
-
+import { CardImage } from "./CardImage";
 
 export type ArticleInterface = {
   title: string,
@@ -47,7 +45,6 @@ export default function CardList({ articles, q }: CardListProps) {
     setSearchedArticles(_articles);
   }, [q, articles])
 
-
   return (
     <Container maxWidth="xl">
       <Box
@@ -62,16 +59,11 @@ export default function CardList({ articles, q }: CardListProps) {
       >
         {paginate(searchedArticles, page, 9)?.map((article) => {
             return (
-              <Card key={article.title} sx={{ maxWidth: 345 }}>
+              <Card key={article.title} sx={{ width: 345 }}>
                 <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={article.images[0]}
-                    alt="green iguana"
-                  />
+                  <CardImage article={article} />
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography variant="h5" component="div" gutterBottom>
                       {article.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" height={80}>
@@ -90,10 +82,8 @@ export default function CardList({ articles, q }: CardListProps) {
               </Card>
             );
           })}
-
       </Box>
       <PaginationCard searchedArticles={searchedArticles} page={page} setPage={setPage} />
-
     </Container>
   );
 }
