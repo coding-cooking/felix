@@ -9,6 +9,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import PaginationCard from "./PagenationCard";
 import { CardImage } from "./CardImage";
+// import { sendGTMEvent } from '@next/third-parties/google'
+import { TwitterShareButton } from "react-share";
 
 export type ArticleInterface = {
   title: string,
@@ -32,7 +34,7 @@ export default function CardList({ articles, q }: CardListProps) {
     const endIndex = startIndex + pageSize - 1;
     const sortedArticles = articles.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.parsedName) - Number(a.parsedName));
     return sortedArticles.slice(startIndex, endIndex + 1);
-     
+
   }
 
   useEffect(() => {
