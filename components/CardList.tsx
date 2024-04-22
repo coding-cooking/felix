@@ -10,7 +10,6 @@ import { useEffect, useRef, useState } from "react";
 import PaginationCard from "./PagenationCard";
 import { CardImage } from "./CardImage";
 import { ShareButtons } from "./ShareButtons";
-import { CardMedia } from '@mui/material';
 
 export type ArticleInterface = {
   title: string,
@@ -81,12 +80,7 @@ export default function CardList({ articles, q }: CardListProps) {
           return (
             <Card key={article.title} sx={{ maxWidth: 345 }}>
               <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={article.images[0]}
-                  alt="green iguana"
-                />
+                <CardImage article={article}/>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {article.title}
