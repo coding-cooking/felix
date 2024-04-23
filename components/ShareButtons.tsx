@@ -1,9 +1,27 @@
 import styled from "@emotion/styled";
 import { FacebookIcon, FacebookShareButton, TwitterShareButton, WeiboIcon, WeiboShareButton, WhatsappIcon, WhatsappShareButton, XIcon } from "react-share";
 import { ArticleInterface } from "./CardList";
-import { Dispatch, SetStateAction } from "react";
+import { keyframes } from '@emotion/react'
 
-const Container = styled.div`
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+const Container = styled.div<{show: boolean}>`
   position: absolute;
   top: -14px; 
   left: 0;
@@ -11,24 +29,20 @@ const Container = styled.div`
   justify-content: space-between;
   width: 100px;
   height: 40px;
+  opacity: ${({ show }) => (show ? 1 : 0)};
+  animation: ${({ show }) => (show ? fadeIn : fadeOut)} 0.3s ease-in-out;
 `
 
 type ShareButtonsProps = {
     article: ArticleInterface,
-    setShowShareButtons: Dispatch<SetStateAction<boolean>>,
-    index: number,
-    setHoveredIndex: Dispatch<SetStateAction<number>>,
+    onMouseEnter: () => void,
+    onMouseLeave: () => void,
+    show: boolean,
 }
 
-export const ShareButtons = ({ article, setShowShareButtons, index, setHoveredIndex }: ShareButtonsProps) => {
-
-    const handleMouseEnter = (index: number) => {
-        setHoveredIndex(index);
-        setShowShareButtons(true);
-    };
-
+export const ShareButtons = ({ article, onMouseEnter, onMouseLeave, show }: ShareButtonsProps) => {
     return (
-        <Container onMouseEnter={() => handleMouseEnter(index)}>
+        <Container onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} show={show}>
             <TwitterShareButton
                 url={`https://felix-one.vercel.app/${article.parsedName}`}
                 title={`${article.content.slice(0, 70)}...`}
