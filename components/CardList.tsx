@@ -29,7 +29,7 @@ export default function CardList({ articles, q }: CardListProps) {
   const [page, setPage] = useState<number>(1);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [showShareButtons, setShowShareButtons] = useState(false);
-  const shareButtonsTimeout = useRef<NodeJS.Timeout | null > (null);
+  const shareButtonsTimeout = useRef<NodeJS.Timeout | null>(null);
 
   function paginate(articles: ArticleInterface[], page: number, pageSize: number) {
     const startIndex = (page - 1) * pageSize;
@@ -47,10 +47,10 @@ export default function CardList({ articles, q }: CardListProps) {
       : articles;
     setSearchedArticles(_articles);
   }, [q, articles])
-  
+
 
   const handleMouseEnter = (index: number) => {
-    if (shareButtonsTimeout.current){
+    if (shareButtonsTimeout.current) {
       clearTimeout(shareButtonsTimeout.current);
     }
     setHoveredIndex(index);
@@ -61,7 +61,7 @@ export default function CardList({ articles, q }: CardListProps) {
     shareButtonsTimeout.current = setTimeout(() => {
       setHoveredIndex(-1);
       setShowShareButtons(false);
-    }, 1000); 
+    }, 400);
   };
 
   return (
@@ -76,11 +76,11 @@ export default function CardList({ articles, q }: CardListProps) {
           marginBottom: "30px",
         }}
       >
-        {paginate(searchedArticles, page, 9)?.map((article,index) => {
+        {paginate(searchedArticles, page, 9)?.map((article, index) => {
           return (
             <Card key={article.title} sx={{ maxWidth: 345 }}>
               <CardActionArea>
-                <CardImage article={article}/>
+                <CardImage article={article} />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {article.title}
@@ -98,7 +98,13 @@ export default function CardList({ articles, q }: CardListProps) {
                   onMouseLeave={handleMouseLeave}>
                   Share
                 </Button>
-                {showShareButtons && hoveredIndex === index && <ShareButtons article={article} setShowShareButtons={setShowShareButtons} index={index} setHoveredIndex={setHoveredIndex} />}
+                {showShareButtons && hoveredIndex === index &&
+                  <ShareButtons
+                    article={article}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={handleMouseLeave}
+                    show={showShareButtons && hoveredIndex === index}
+                  />}
                 <Link href={`/${article.parsedName}`}>
                   <Button size="small">Learn More</Button>
                 </Link>
