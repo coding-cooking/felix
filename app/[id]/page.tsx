@@ -19,7 +19,6 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 
   // optionally access and extend (rather than replace) parent metadata
   // const previousImages = (await parent).openGraph?.images || []
-
   return {
     title: article.title,
     openGraph: {
