@@ -13,7 +13,7 @@ import { ShareButtons } from "./ShareButtons";
 
 export type ArticleInterface = {
   title: string,
-  date: string,
+  date: Date,
   content: string,
   images: Array<string>,
   parsedName?: string,
