@@ -29,7 +29,6 @@ export default function RootLayout({
     <html lang="en">
       <GoogleTagManager gtmId="GTM-TTVSHND3" />
       <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
-
       <body className={inter.className}>
         <AppRouterCacheProvider options={{ key: "fei" }}>
           <HeaderBar />
@@ -45,7 +44,6 @@ export default function RootLayout({
               </main>
               <Footer />
             </>
-
           )}
         </AppRouterCacheProvider>
       </body>
