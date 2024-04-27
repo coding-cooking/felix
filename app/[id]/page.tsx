@@ -18,13 +18,13 @@ export default async function Article({ params }: { params: { id: string } }) {
   return (
     <>
       <Head>
-        {/* <title>{article.title}</title>
-        <meta name="description" content={`${article.content.slice(0, 70)}...`} /> */}
-        <meta property="og:type" content="article" />
+        <title>{article.title}</title>
+        <meta name="description" content={`${article.content.slice(0, 70)}...`} />
+        {/* <meta property="og:type" content="article" />
         <meta property="og:image" content={article.images[0]} />
         <meta property="og:title" content={article.title} />
         <meta property="og:description" content={`${article.content.slice(0, 70)}...`} />
-        <meta property="og:url" content={`https://felix-one.vercel.app/${article.parsedName}`} />
+        <meta property="og:url" content={`https://felix-one.vercel.app/${article.parsedName}`} /> */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@felixzhang" />
         <meta name="twitter:title" content={article.title} />
