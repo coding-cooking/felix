@@ -18,13 +18,13 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
   const article: ArticleInterface = await fetchArticleById(id);
 
   // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
+  // const previousImages = (await parent).openGraph?.images || []
 
   return {
     title: article.title,
     openGraph: {
       type: 'website',
-      images: [`${article.images[0]}`, ...previousImages],
+      images: [{ url: `${article.images[0]}` }],
       url: `https://felix-one.vercel.app/${article.parsedName}`,
     },
     twitter: {
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
       site: '@felixzhang',
       title: `${article.title}`,
       description: `${article.content.slice(0, 70)}...`,
-      images: [`${article.images[0]}`, ...previousImages]
+      images: [{ url: `${article.images[0]}` }],
     },
   }
 }
