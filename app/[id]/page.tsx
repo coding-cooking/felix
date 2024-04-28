@@ -16,7 +16,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = params.id;
   const article: ArticleInterface = await fetchArticleById(id);
-  const shareDescription = article.content.slice(0, 70) + '...';
+  const shareDescription = article.content.slice(0, 150) + '...';
   const shareImageUrl = article.images[0];
   const shareUrl = `https://felix-one.vercel.app/${article.parsedName}`;
 
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: article.title,
     description: shareDescription,
     openGraph: {
-      type: 'website',
+      type: 'article',
       title: article.title,
       description: shareDescription,
       images: [
