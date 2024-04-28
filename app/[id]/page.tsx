@@ -23,15 +23,17 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
     title: article.title,
     openGraph: {
       type: 'website',
-      images: [{ url: `${article.images[0]}` }],
+      title: article.title,
+      description: article.content.slice(0, 70) + '...',
+      images: [{ url: article.images[0] }],
       url: `https://felix-one.vercel.app/${article.parsedName}`,
     },
     twitter: {
       card: 'summary_large_image',
       site: '@felixzhang',
-      title: `${article.title}`,
-      description: `${article.content.slice(0, 70)}...`,
-      images: [{ url: `${article.images[0]}` }],
+      title: article.title,
+      description: article.content.slice(0, 70) + '...',
+      images: [{ url: article.images[0] }],
     },
   }
 }
