@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { FacebookIcon, FacebookShareButton, TwitterShareButton, WeiboIcon, WeiboShareButton, WhatsappIcon, WhatsappShareButton, XIcon } from "react-share";
 import { ArticleInterface } from "./CardList";
-import { keyframes } from '@emotion/react'
+import { keyframes } from '@emotion/react';
 
 const fadeIn = keyframes`
   from {
@@ -21,7 +21,7 @@ const fadeOut = keyframes`
   }
 `;
 
-const Container = styled.div<{show: boolean}>`
+const Container = styled.div<{ show: boolean }>`
   position: absolute;
   top: -14px; 
   left: 0;
@@ -34,33 +34,44 @@ const Container = styled.div<{show: boolean}>`
 `
 
 type ShareButtonsProps = {
-    article: ArticleInterface,
-    onMouseEnter: () => void,
-    onMouseLeave: () => void,
-    show: boolean,
+  article: ArticleInterface,
+  onMouseEnter: () => void,
+  onMouseLeave: () => void,
+  show: boolean,
+}
+
+const iconStyle = {
+  width: "22px",
+  height: "22px"
 }
 
 export const ShareButtons = ({ article, onMouseEnter, onMouseLeave, show }: ShareButtonsProps) => {
-    return (
-        <Container onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} show={show}>
-            <TwitterShareButton
-                url={`https://felix-one.vercel.app/${article.parsedName}`}
-                title={`${article.content.slice(0, 70)}...`}
-            ><XIcon style={{ width: "22px", height: "22px" }} />
-            </TwitterShareButton	>
-            <FacebookShareButton
-                url={`https://felix-one.vercel.app/${article.parsedName}`}
-            ><FacebookIcon style={{ width: "22px", height: "22px" }} />
-            </FacebookShareButton>
-            <WhatsappShareButton
-                url={`https://felix-one.vercel.app/${article.parsedName}`}
-            ><WhatsappIcon style={{ width: "22px", height: "22px" }} />
-            </WhatsappShareButton>
-            <WeiboShareButton
-                url={`https://felix-one.vercel.app/${article.parsedName}`}
-                title={`${article.content.slice(0, 70)}...`}
-            ><WeiboIcon style={{ width: "22px", height: "22px" }} />
-            </WeiboShareButton>
-        </Container>
-    )
+  const shareUrl = `https://felix-one.vercel.app/${article.parsedName}`;
+  const shareTitle = `${article.content.slice(0, 70)}...`;
+  return (
+    <Container onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} show={show}>
+      <TwitterShareButton
+        url={shareUrl}
+        title={shareTitle}
+      >
+        <XIcon style={iconStyle} />
+      </TwitterShareButton	>
+      <FacebookShareButton
+        url={shareUrl}
+      >
+        <FacebookIcon style={iconStyle} />
+      </FacebookShareButton>
+      <WhatsappShareButton
+        url={shareUrl}
+      >
+        <WhatsappIcon style={iconStyle} />
+      </WhatsappShareButton>
+      <WeiboShareButton
+        url={shareUrl}
+        title={shareTitle}
+      >
+        <WeiboIcon style={iconStyle} />
+      </WeiboShareButton>
+    </Container>
+  )
 }

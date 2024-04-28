@@ -7,39 +7,41 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from 'react-markdown';
 import { ArticleImage } from "@/components/ArticleImage";
 import { ArticleInterface } from "@/components/CardList";
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata } from 'next';
 
 type Props = {
   params: { id: string }
 }
 
-export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-  const id = params.id
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = params.id;
   const article: ArticleInterface = await fetchArticleById(id);
+  const shareDescription = article.content.slice(0, 70) + '...';
+  const shareImageUrl = article.images[0];
+  const shareUrl = `https://felix-one.vercel.app/${article.parsedName}`;
 
-  // optionally access and extend (rather than replace) parent metadata
-  // const previousImages = (await parent).openGraph?.images || []
   return {
     title: article.title,
+    description: shareDescription,
     openGraph: {
       type: 'website',
       title: article.title,
-      description: article.content.slice(0, 70) + '...',
+      description: shareDescription,
       images: [
         { 
-          url: article.images[0],
+          url: shareImageUrl,
           width: 1200,
           height: 630,
           alt: article.title,
       }],
-      url: `https://felix-one.vercel.app/${article.parsedName}`,
+      url: shareUrl,
     },
     twitter: {
       card: 'summary_large_image',
       site: '@felixzhang',
       title: article.title,
-      description: article.content.slice(0, 70) + '...',
-      images: [{ url: article.images[0] }],
+      description: shareDescription,
+      images: [{ url: shareImageUrl }],
     },
   }
 }
