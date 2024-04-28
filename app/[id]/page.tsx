@@ -25,7 +25,13 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
       type: 'website',
       title: article.title,
       description: article.content.slice(0, 70) + '...',
-      images: [{ url: article.images[0] }],
+      images: [
+        { 
+          url: article.images[0],
+          width: 1200,
+          height: 630,
+          alt: article.title,
+      }],
       url: `https://felix-one.vercel.app/${article.parsedName}`,
     },
     twitter: {
