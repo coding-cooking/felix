@@ -18,7 +18,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article: ArticleInterface = await fetchArticleById(id);
   const shareDescription = article.content.slice(0, 150) + '...';
   const shareImageUrl = article.images[0] || 'https://images.pexels.com/photos/21300075/pexels-photo-21300075/free-photo-of-sydney-sea.jpeg';
-  const shareUrl = article.parsedName ? `https://felix-one.vercel.app/${article.parsedName}` : 'https://felix-one.vercel.app';
 
   return {
     title: article.title,
@@ -34,7 +33,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           height: 630,
           alt: article.title,
       }],
-      // url: shareUrl,
     },
     twitter: {
       card: 'summary_large_image',
