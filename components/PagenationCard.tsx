@@ -15,7 +15,7 @@ export default function PaginationCard({ searchedArticles, page, setPage }: Pagi
     const count = (searchedArticles.length) % NUM_PER_PAGE === 0 ? (searchedArticles.length) / NUM_PER_PAGE : parseInt((searchedArticles.length / NUM_PER_PAGE).toString()) + 1;
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
-        window.scrollTo({ top: 0 });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     return <Box
