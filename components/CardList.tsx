@@ -78,7 +78,7 @@ export default function CardList({ articles, q }: CardListProps) {
       >
         {paginate(searchedArticles, page, 9)?.map((article, index) => {
           return (
-            <Card key={article.title} sx={{ maxWidth: 345 }}>
+            <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardImage article={article} />
                 <CardContent>
