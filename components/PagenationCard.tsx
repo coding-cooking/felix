@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Pagination from '@mui/material/Pagination';
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { ArticleInterface } from "./CardList";
 
 const NUM_PER_PAGE = 9;
@@ -15,6 +15,7 @@ export default function PaginationCard({ searchedArticles, page, setPage }: Pagi
     const count = (searchedArticles.length) % NUM_PER_PAGE === 0 ? (searchedArticles.length) / NUM_PER_PAGE : parseInt((searchedArticles.length / NUM_PER_PAGE).toString()) + 1;
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
+        window.scrollTo({ top: 0 });
     };
 
     return <Box
