@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from "@emotion/styled";
 import Stack from '@mui/material/Stack';
 import Image from 'next/image';
@@ -21,8 +21,9 @@ const StyledImageWrapper = styled.div`
     object-fit: cover;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     margin-top: -0.5em;
+    aspect-ratio: 1/1;
   }
 `;
 
