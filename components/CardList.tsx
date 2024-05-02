@@ -22,17 +22,18 @@ export type ArticleInterface = {
 type CardListProps = {
   articles: ArticleInterface[],
   q: string,
+  initialPage: string,
 };
 
-export default function CardList({ articles, q }: CardListProps) {
+export default function CardList({ articles, q, initialPage }: CardListProps) {
   const [searchedArticles, setSearchedArticles] = useState<ArticleInterface[]>(articles);
-  const [page, setPage] = useState<number>(1);
+  // const [page, setPage] = useState<number>(initialPage);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [showShareButtons, setShowShareButtons] = useState(false);
   const shareButtonsTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  function paginate(articles: ArticleInterface[], page: number, pageSize: number) {
-    const startIndex = (page - 1) * pageSize;
+  function paginate(articles: ArticleInterface[], page: string, pageSize: number) {
+    const startIndex = (Number(page) - 1) * pageSize;
     const endIndex = startIndex + pageSize - 1;
     const sortedArticles = articles.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.parsedName) - Number(a.parsedName));
     return sortedArticles.slice(startIndex, endIndex + 1);
@@ -76,7 +77,7 @@ export default function CardList({ articles, q }: CardListProps) {
           marginBottom: "30px",
         }}
       >
-        {paginate(searchedArticles, page, 9)?.map((article, index) => {
+        {paginate(searchedArticles, initialPage, 9).map((article, index) => {
           return (
             <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
               <CardActionArea>
@@ -113,7 +114,7 @@ export default function CardList({ articles, q }: CardListProps) {
           );
         })}
       </Box>
-      <PaginationCard searchedArticles={searchedArticles} page={page} setPage={setPage} />
+      <PaginationCard searchedArticles={searchedArticles} page={initialPage}/>
     </Container>
   );
 }
