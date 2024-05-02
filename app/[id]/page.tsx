@@ -63,10 +63,10 @@ export default async function Article({ params }: { params: { id: string } }) {
             flexWrap: "wrap",
           }}
         >
-          <Typography variant="h4" lineHeight={2} gutterBottom sx={{ '@media (max-width: 768px)': { fontSize: "24px", fontWeight: "400" } }}>
+          <Typography variant="h4" lineHeight={2} gutterBottom sx={{ "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>
             {article.title}
           </Typography>
-          <Typography variant="subtitle1" lineHeight={3} gutterBottom sx={{ '@media (max-width: 768px)': { fontSize: "14px" } }}>
+          <Typography variant="subtitle1" lineHeight={3} gutterBottom sx={{ color:"rgba(106, 101, 104, 1)","@media (max-width: 768px)": { fontSize: "14px" } }}>
             {article.date.toLocaleDateString()}
           </Typography>
           <Typography variant="body1" lineHeight={2} gutterBottom>

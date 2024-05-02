@@ -87,7 +87,7 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
                     {article.title}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" height={80}>
-                    {`${article.content.slice(0, 70)}...`}
+                    {`${article.content.slice(0, 60)}...`}
                   </Typography>
                 </CardContent>
               </CardActionArea>
