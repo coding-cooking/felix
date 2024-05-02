@@ -37,18 +37,20 @@ export const metadata: Metadata = {
 type HomepageProps = {
   searchParams: {
     q: string,
+    page: string,
   }
 }
 
 export default async function Homepage({ searchParams }: HomepageProps) {
   const q = searchParams?.q;
-  const articles = await fetchArticles();
+  const initialPage = searchParams?.page || "1";
+  const articles = await fetchArticles(q, initialPage);
 
   return (
     <>
       <GoogleTagManager gtmId="GTM-TTVSHND3" />
       <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
-      <CardList articles={articles} q={q}/>
+      <CardList articles={articles} q={q} initialPage={initialPage} />
       <Subscription />
     </>
   );

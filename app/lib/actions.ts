@@ -6,8 +6,8 @@ import { notFound } from "next/navigation";
 const contentDir = path.join(process.cwd(), "/md");
 const files = fs.readdirSync(contentDir);
 
-export const fetchArticles = async () => {
-  if(files){
+export const fetchArticles = async (q: string, page: string) => {
+  if (files) {
     const articles = files.map(file => {
       const filePath = path.join(contentDir, file);
       const fileContents = fs.readFileSync(filePath, "utf-8");
