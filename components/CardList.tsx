@@ -32,7 +32,7 @@ const PaginationWrapper = styled(Box)`
     }
 `
 
-const LoadButton = styled(Button) <{ noMoreArticles:boolean }>`
+const LoadButton = styled(Button) <{ noMoreArticles: boolean }>`
   display: none;
   @media (max-width: 768px) {
         display: ${({ noMoreArticles }) => (noMoreArticles ? 'none' : 'block')};
@@ -81,7 +81,7 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
   };
 
   const loadMore = () => {
-    setPageSize(18);
+    setPageSize(prev => prev + 9);
   }
 
   const noMoreArticles = pageSize >= articles.length;
