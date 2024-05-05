@@ -7,9 +7,10 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import PaginationCard from "./PagenationCard";
+import PaginationCard from "./PaginationCard";
 import { CardImage } from "./CardImage";
 import { ShareButtons } from "./ShareButtons";
+import styled from "@emotion/styled";
 
 export type ArticleInterface = {
   title: string,
@@ -25,11 +26,25 @@ type CardListProps = {
   initialPage: string,
 };
 
+const PaginationWrapper = styled(Box)`
+  @media (max-width: 768px) {
+      display: none;
+    }
+`
+
+const LoadButton = styled(Button) <{ noMoreArticles: boolean }>`
+  display: none;
+  @media (max-width: 768px) {
+        display: ${({ noMoreArticles }) => (noMoreArticles ? 'none' : 'block')};
+        margin: 20px auto;
+      }
+`
+
 export default function CardList({ articles, q, initialPage }: CardListProps) {
   const [searchedArticles, setSearchedArticles] = useState<ArticleInterface[]>(articles);
-  // const [page, setPage] = useState<number>(initialPage);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
-  const [showShareButtons, setShowShareButtons] = useState(false);
+  const [showShareButtons, setShowShareButtons] = useState<boolean>(false);
+  const [pageSize, setPageSize] = useState<number>(9)
   const shareButtonsTimeout = useRef<NodeJS.Timeout | null>(null);
 
   function paginate(articles: ArticleInterface[], page: string, pageSize: number) {
@@ -65,6 +80,12 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
     }, 400);
   };
 
+  const loadMore = () => {
+    setPageSize(prev => prev + 9);
+  }
+
+  const noMoreArticles = pageSize >= articles.length;
+
   return (
     <Container maxWidth="xl">
       <Box
@@ -77,7 +98,7 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
           marginBottom: "30px",
         }}
       >
-        {paginate(searchedArticles, initialPage, 9).map((article, index) => {
+        {paginate(searchedArticles, initialPage, pageSize).map((article, index) => {
           return (
             <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
               <CardActionArea>
@@ -114,7 +135,10 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
           );
         })}
       </Box>
-      <PaginationCard searchedArticles={searchedArticles} page={initialPage}/>
+      <PaginationWrapper>
+        <PaginationCard searchedArticles={searchedArticles} page={initialPage} />
+      </PaginationWrapper>
+      <LoadButton variant="contained" onClick={loadMore} noMoreArticles={noMoreArticles}>Load More</LoadButton>
     </Container>
   );
 }

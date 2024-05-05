@@ -55,7 +55,8 @@ export default function SearchBar() {
         const params = new URLSearchParams(searchParams);
 
         if (e.target.value) {
-            params.set("page", "1");
+            // params.set("page", "1");
+            params.delete("page");
             params.set("q", e.target.value);
         } else {
             params.delete("q");
