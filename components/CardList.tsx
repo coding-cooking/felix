@@ -26,6 +26,21 @@ type CardListProps = {
   initialPage: string,
 };
 
+const StyledBoxContainer = styled(Box)`
+  display: grid;
+  grid-template-columns: auto;
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+  @media screen and (min-width: 768px) {
+      grid-template-columns: auto auto;
+  }
+  @media screen and (min-width: 1028px) {
+      grid-template-columns: auto auto auto;
+  }
+`;
+
 const PaginationWrapper = styled(Box)`
   @media (max-width: 768px) {
       display: none;
@@ -88,16 +103,7 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
 
   return (
     <Container maxWidth="xl">
-      <Box
-        sx={{
-          gap: 4,
-          flexGrow: 1,
-          display: "flex",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          marginBottom: "30px",
-        }}
-      >
+      <StyledBoxContainer>
         {paginate(searchedArticles, initialPage, pageSize).map((article, index) => {
           return (
             <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
@@ -134,7 +140,7 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
             </Card>
           );
         })}
-      </Box>
+      </StyledBoxContainer>
       <PaginationWrapper>
         <PaginationCard searchedArticles={searchedArticles} page={initialPage} />
       </PaginationWrapper>
