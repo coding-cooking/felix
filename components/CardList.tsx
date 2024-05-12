@@ -25,7 +25,6 @@ type CardListProps = {
   q: string,
   initialPage: string,
 };
-
 const StyledBoxContainer = styled(Box)`
   display: grid;
   grid-template-columns: auto;
