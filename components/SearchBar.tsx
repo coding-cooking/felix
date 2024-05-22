@@ -3,6 +3,8 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDebouncedCallback } from "use-debounce";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -51,6 +53,14 @@ export default function SearchBar() {
     const pathname = usePathname();
     const { replace } = useRouter();
 
+    const top100Films = [
+        { label: 'The Shawshank Redemption', year: 1994 },
+        { label: 'The Godfather', year: 1972 },
+        { label: 'The Godfather: Part II', year: 1974 },
+        { label: 'The Dark Knight', year: 2008 },
+        { label: '12 Angry Men', year: 1957 },
+    ]
+
     const handleSearch = useDebouncedCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const params = new URLSearchParams(searchParams);
 
@@ -69,11 +79,28 @@ export default function SearchBar() {
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
+            {/* <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
                 onChange={handleSearch}
+            /> */}
+            <Autocomplete
+                freeSolo
+                id="free-solo-2-demo"
+                disableClearable
+                options={top100Films.map((option) => option.label)}
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        label=""
+                        InputProps={{
+                            ...params.InputProps,
+                            type: 'search',
+                        }}
+                    />
+                )}
             />
+            
         </Search>
     )
 }

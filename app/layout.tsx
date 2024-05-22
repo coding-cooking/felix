@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import { GoogleTagManager } from '@next/third-parties/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { usePathname } from 'next/navigation';
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
