@@ -5,6 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useDebouncedCallback } from "use-debounce";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import InputAdornment from '@mui/material/InputAdornment';
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -15,6 +16,8 @@ const Search = styled("div")(({ theme }) => ({
     },
     marginLeft: 0,
     width: "100%",
+    display: "flex",
+    alignItems: "center",
     [theme.breakpoints.up("sm")]: {
         marginLeft: theme.spacing(1),
         width: "auto",
@@ -88,19 +91,30 @@ export default function SearchBar() {
                 freeSolo
                 id="free-solo-2-demo"
                 disableClearable
+                sx={{ flexGrow: 1 }}
                 options={top100Films.map((option) => option.label)}
                 renderInput={(params) => (
                     <TextField
                         {...params}
                         label=""
+                        sx={{
+                            '& .MuiInputBase-input': {
+                                color: "white", 
+                            },
+                        }}
                         InputProps={{
                             ...params.InputProps,
                             type: 'search',
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon sx={{ visibility: 'hidden' }} />
+                                </InputAdornment>
+                            ),
                         }}
                     />
                 )}
             />
-            
+
         </Search>
     )
 }
