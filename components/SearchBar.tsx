@@ -99,9 +99,13 @@ export default function SearchBar() {
                         label=""
                         sx={{
                             '& .MuiInputBase-input': {
-                                color: "white", 
+                                color: "white",
+                            },
+                            '& .MuiOutlinedInput-root': {
+                                height: "40px",
                             },
                         }}
+
                         InputProps={{
                             ...params.InputProps,
                             type: 'search',
@@ -113,6 +117,11 @@ export default function SearchBar() {
                         }}
                     />
                 )}
+            // PaperComponent={({ children }) => (
+            //     <Box sx={{ '& .MuiAutocomplete-listbox': { maxHeight: 200 } }}>
+            //         {children}
+            //     </Box>
+            // )}
             />
 
         </Search>
