@@ -52,11 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-type SearchBarProps = {
-    articles: ArticleInterface[],
-}
-
-export default function SearchBar({ articles }: SearchBarProps) {
+export default function SearchBar( ) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
