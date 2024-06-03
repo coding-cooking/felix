@@ -3,6 +3,10 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDebouncedCallback } from "use-debounce";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import InputAdornment from '@mui/material/InputAdornment';
+import { ArticleInterface } from "./CardList";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -13,6 +17,8 @@ const Search = styled("div")(({ theme }) => ({
     },
     marginLeft: 0,
     width: "100%",
+    display: "flex",
+    alignItems: "center",
     [theme.breakpoints.up("sm")]: {
         marginLeft: theme.spacing(1),
         width: "auto",
@@ -46,10 +52,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function SearchBar() {
+export default function SearchBar( ) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
+
+    const top100Films = [
+        { label: 'The Shawshank Redemption', year: 1994 },
+        { label: 'The Godfather', year: 1972 },
+        { label: 'The Godfather: Part II', year: 1974 },
+        { label: 'The Dark Knight', year: 2008 },
+        { label: '12 Angry Men', year: 1957 },
+    ]
 
     const handleSearch = useDebouncedCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const params = new URLSearchParams(searchParams);
@@ -69,11 +83,48 @@ export default function SearchBar() {
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
+            {/* <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
                 onChange={handleSearch}
+            /> */}
+            <Autocomplete
+                freeSolo
+                id="free-solo-2-demo"
+                disableClearable
+                sx={{ flexGrow: 1 }}
+                options={top100Films}
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        label=""
+                        // sx={{
+                        //     '& .MuiInputBase-input': {
+                        //         color: "white",
+                        //     },
+                        //     '& .MuiOutlinedInput-root': {
+                        //         height: "40px",
+                        //     },
+                        // }}
+
+                        InputProps={{
+                            ...params.InputProps,
+                            type: 'search',
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon sx={{ visibility: 'hidden' }} />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                )}
+            // PaperComponent={({ children }) => (
+            //     <Box sx={{ '& .MuiAutocomplete-listbox': { maxHeight: 200 } }}>
+            //         {children}
+            //     </Box>
+            // )}
             />
+
         </Search>
     )
 }
