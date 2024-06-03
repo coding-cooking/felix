@@ -6,6 +6,7 @@ import { useDebouncedCallback } from "use-debounce";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
+import { ArticleInterface } from "./CardList";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -51,7 +52,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function SearchBar() {
+type SearchBarProps = {
+    articles: ArticleInterface[],
+}
+
+export default function SearchBar({ articles }: SearchBarProps) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
@@ -92,19 +97,19 @@ export default function SearchBar() {
                 id="free-solo-2-demo"
                 disableClearable
                 sx={{ flexGrow: 1 }}
-                options={top100Films.map((option) => option.label)}
+                options={top100Films}
                 renderInput={(params) => (
                     <TextField
                         {...params}
                         label=""
-                        sx={{
-                            '& .MuiInputBase-input': {
-                                color: "white",
-                            },
-                            '& .MuiOutlinedInput-root': {
-                                height: "40px",
-                            },
-                        }}
+                        // sx={{
+                        //     '& .MuiInputBase-input': {
+                        //         color: "white",
+                        //     },
+                        //     '& .MuiOutlinedInput-root': {
+                        //         height: "40px",
+                        //     },
+                        // }}
 
                         InputProps={{
                             ...params.InputProps,
