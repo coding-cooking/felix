@@ -50,7 +50,8 @@ export default async function Homepage({ searchParams }: HomepageProps) {
     <>
       <GoogleTagManager gtmId="GTM-TTVSHND3" />
       <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
-      <CardList articles={articles} q={q} initialPage={initialPage} />
+      {/* <CardList articles={articles} q={q} initialPage={initialPage} /> */}
+      <CardList />
       <Subscription />
     </>
   );

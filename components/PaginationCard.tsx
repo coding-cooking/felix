@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Pagination from '@mui/material/Pagination';
-import { ArticleInterface } from "./CardList";
+import { ArticleInterface } from "@/app/context/ArticleContext";
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const NUM_PER_PAGE = 9;

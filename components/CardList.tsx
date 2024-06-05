@@ -6,25 +6,13 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import PaginationCard from "./PaginationCard";
 import { CardImage } from "./CardImage";
 import { ShareButtons } from "./ShareButtons";
 import styled from "@emotion/styled";
+import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
 
-export type ArticleInterface = {
-  title: string,
-  date: Date,
-  content: string,
-  images: Array<string>,
-  parsedName?: string,
-}
-
-type CardListProps = {
-  articles: ArticleInterface[],
-  q: string,
-  initialPage: string,
-};
 const StyledBoxContainer = styled(Box)`
   display: grid;
   grid-template-columns: auto;
@@ -54,12 +42,20 @@ const LoadButton = styled(Button) <{ noMoreArticles: boolean }>`
       }
 `
 
-export default function CardList({ articles, q, initialPage }: CardListProps) {
+type CardListProps = {
+  articles: ArticleInterface[],
+  q: string,
+  initialPage: string,
+};
+
+export default function CardList() {
+  const articles: ArticleInterface[] = useContext(ArticleContext);
   const [searchedArticles, setSearchedArticles] = useState<ArticleInterface[]>(articles);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [showShareButtons, setShowShareButtons] = useState<boolean>(false);
   const [pageSize, setPageSize] = useState<number>(9)
   const shareButtonsTimeout = useRef<NodeJS.Timeout | null>(null);
+  const initialPage ="1";
 
   function paginate(articles: ArticleInterface[], page: string, pageSize: number) {
     const startIndex = (Number(page) - 1) * pageSize;
@@ -68,15 +64,15 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
     return sortedArticles.slice(startIndex, endIndex + 1);
   }
 
-  useEffect(() => {
-    const _articles = q
-      ? articles.filter(
-        (article: ArticleInterface) =>
-          article.title.toLowerCase().includes(q.toLowerCase()) || article.content.toLowerCase().includes(q.toLowerCase())
-      )
-      : articles;
-    setSearchedArticles(_articles);
-  }, [q, articles])
+  // useEffect(() => {
+  //   const _articles = q
+  //     ? articles.filter(
+  //       (article: ArticleInterface) =>
+  //         article.title.toLowerCase().includes(q.toLowerCase()) || article.content.toLowerCase().includes(q.toLowerCase())
+  //     )
+  //     : articles;
+  //   setSearchedArticles(_articles);
+  // }, [q, articles])
 
 
   const handleMouseEnter = (index: number) => {
@@ -103,7 +99,7 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
   return (
     <Container maxWidth="xl">
       <StyledBoxContainer>
-        {paginate(searchedArticles, initialPage, pageSize).map((article, index) => {
+        {articles.map((article, index) => {
           return (
             <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
               <CardActionArea>
@@ -145,5 +141,50 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
       </PaginationWrapper>
       <LoadButton variant="contained" onClick={loadMore} noMoreArticles={noMoreArticles}>Load More</LoadButton>
     </Container>
+
+    // <Container maxWidth="xl">
+    //   <StyledBoxContainer>
+    //     {paginate(searchedArticles, initialPage, pageSize).map((article, index) => {
+    //       return (
+    //         <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
+    //           <CardActionArea>
+    //             <CardImage article={article} />
+    //             <CardContent>
+    //               <Typography gutterBottom variant="h5" component="div">
+    //                 {article.title}
+    //               </Typography>
+    //               <Typography variant="body2" color="text.secondary" height={80}>
+    //                 {`${article.content.slice(0, 60)}...`}
+    //               </Typography>
+    //             </CardContent>
+    //           </CardActionArea>
+    //           <CardActions sx={{ position: "relative", paddingTop: "10px" }}>
+    //             <Button
+    //               size="small"
+    //               color="primary"
+    //               onMouseEnter={() => handleMouseEnter(index)}
+    //               onMouseLeave={handleMouseLeave}>
+    //               Share
+    //             </Button>
+    //             {showShareButtons && hoveredIndex === index &&
+    //               <ShareButtons
+    //                 article={article}
+    //                 onMouseEnter={() => handleMouseEnter(index)}
+    //                 onMouseLeave={handleMouseLeave}
+    //                 show={showShareButtons && hoveredIndex === index}
+    //               />}
+    //             <Link href={`/${article.parsedName}`}>
+    //               <Button size="small">Learn More</Button>
+    //             </Link>
+    //           </CardActions>
+    //         </Card>
+    //       );
+    //     })}
+    //   </StyledBoxContainer>
+    //   <PaginationWrapper>
+    //     <PaginationCard searchedArticles={searchedArticles} page={initialPage} />
+    //   </PaginationWrapper>
+    //   <LoadButton variant="contained" onClick={loadMore} noMoreArticles={noMoreArticles}>Load More</LoadButton>
+    // </Container>
   );
 }
