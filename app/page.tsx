@@ -42,16 +42,15 @@ type HomepageProps = {
 }
 
 export default async function Homepage({ searchParams }: HomepageProps) {
-  const q = searchParams?.q;
+  // const q = searchParams?.q;
   const initialPage = searchParams?.page || "1";
-  const articles = await fetchArticles(q, initialPage);
+  // const articles = await fetchArticles(q, initialPage);
 
   return (
     <>
       <GoogleTagManager gtmId="GTM-TTVSHND3" />
       <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
-      {/* <CardList articles={articles} q={q} initialPage={initialPage} /> */}
-      <CardList />
+      <CardList initialPage={initialPage} />
       <Subscription />
     </>
   );

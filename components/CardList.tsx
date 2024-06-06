@@ -43,19 +43,17 @@ const LoadButton = styled(Button) <{ noMoreArticles: boolean }>`
 `
 
 type CardListProps = {
-  articles: ArticleInterface[],
-  q: string,
+  // articles: ArticleInterface[],
+  // q: string,
   initialPage: string,
 };
 
-export default function CardList() {
+export default function CardList({ initialPage }: CardListProps) {
   const articles: ArticleInterface[] = useContext(ArticleContext);
-  const [searchedArticles, setSearchedArticles] = useState<ArticleInterface[]>(articles);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [showShareButtons, setShowShareButtons] = useState<boolean>(false);
   const [pageSize, setPageSize] = useState<number>(9)
   const shareButtonsTimeout = useRef<NodeJS.Timeout | null>(null);
-  const initialPage ="1";
 
   function paginate(articles: ArticleInterface[], page: string, pageSize: number) {
     const startIndex = (Number(page) - 1) * pageSize;
@@ -73,7 +71,6 @@ export default function CardList() {
   //     : articles;
   //   setSearchedArticles(_articles);
   // }, [q, articles])
-
 
   const handleMouseEnter = (index: number) => {
     if (shareButtonsTimeout.current) {
@@ -99,7 +96,7 @@ export default function CardList() {
   return (
     <Container maxWidth="xl">
       <StyledBoxContainer>
-        {articles.map((article, index) => {
+        {paginate(articles, initialPage, pageSize).map((article, index) => {
           return (
             <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
               <CardActionArea>
@@ -137,54 +134,9 @@ export default function CardList() {
         })}
       </StyledBoxContainer>
       <PaginationWrapper>
-        <PaginationCard searchedArticles={searchedArticles} page={initialPage} />
+        <PaginationCard page={initialPage} />
       </PaginationWrapper>
       <LoadButton variant="contained" onClick={loadMore} noMoreArticles={noMoreArticles}>Load More</LoadButton>
     </Container>
-
-    // <Container maxWidth="xl">
-    //   <StyledBoxContainer>
-    //     {paginate(searchedArticles, initialPage, pageSize).map((article, index) => {
-    //       return (
-    //         <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
-    //           <CardActionArea>
-    //             <CardImage article={article} />
-    //             <CardContent>
-    //               <Typography gutterBottom variant="h5" component="div">
-    //                 {article.title}
-    //               </Typography>
-    //               <Typography variant="body2" color="text.secondary" height={80}>
-    //                 {`${article.content.slice(0, 60)}...`}
-    //               </Typography>
-    //             </CardContent>
-    //           </CardActionArea>
-    //           <CardActions sx={{ position: "relative", paddingTop: "10px" }}>
-    //             <Button
-    //               size="small"
-    //               color="primary"
-    //               onMouseEnter={() => handleMouseEnter(index)}
-    //               onMouseLeave={handleMouseLeave}>
-    //               Share
-    //             </Button>
-    //             {showShareButtons && hoveredIndex === index &&
-    //               <ShareButtons
-    //                 article={article}
-    //                 onMouseEnter={() => handleMouseEnter(index)}
-    //                 onMouseLeave={handleMouseLeave}
-    //                 show={showShareButtons && hoveredIndex === index}
-    //               />}
-    //             <Link href={`/${article.parsedName}`}>
-    //               <Button size="small">Learn More</Button>
-    //             </Link>
-    //           </CardActions>
-    //         </Card>
-    //       );
-    //     })}
-    //   </StyledBoxContainer>
-    //   <PaginationWrapper>
-    //     <PaginationCard searchedArticles={searchedArticles} page={initialPage} />
-    //   </PaginationWrapper>
-    //   <LoadButton variant="contained" onClick={loadMore} noMoreArticles={noMoreArticles}>Load More</LoadButton>
-    // </Container>
   );
 }
