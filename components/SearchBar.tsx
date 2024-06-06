@@ -9,7 +9,8 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useContext } from "react";
-import  ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
+import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
+import Link from "next/link";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",

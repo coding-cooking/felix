@@ -36,15 +36,12 @@ export const metadata: Metadata = {
 
 type HomepageProps = {
   searchParams: {
-    q: string,
     page: string,
   }
 }
 
 export default async function Homepage({ searchParams }: HomepageProps) {
-  // const q = searchParams?.q;
   const initialPage = searchParams?.page || "1";
-  // const articles = await fetchArticles(q, initialPage);
 
   return (
     <>
