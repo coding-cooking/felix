@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { notFound } from "next/navigation";
 import ReactMarkdown from 'react-markdown';
 import { ArticleImage } from "@/components/ArticleImage";
-import { ArticleInterface } from "@/components/CardList";
+import { ArticleInterface } from "../context/ArticleContext";
 import type { Metadata } from 'next';
 
 type Props = {

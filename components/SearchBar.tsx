@@ -1,6 +1,6 @@
 "use client"
 
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { usePathname, useSearchParams, useRouter, redirect } from "next/navigation";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
@@ -8,7 +8,7 @@ import { useDebouncedCallback } from "use-debounce";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
-import { useContext } from "react";
+import { ReactElement, useContext, useRef, useState } from "react";
 import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
 import Link from "next/link";
 
@@ -61,6 +61,7 @@ export default function SearchBar() {
     const pathname = usePathname();
     const { replace } = useRouter();
     const articles: ArticleInterface[] = useContext(ArticleContext);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleSearch = useDebouncedCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const params = new URLSearchParams(searchParams);
@@ -75,11 +76,15 @@ export default function SearchBar() {
         replace(`${pathname}?${params}`)
     }, 100)
 
+    const handleOptionClick = () => {
+        inputRef.current?.blur()
+    }
+
     return (
         <Search sx={{ flexGrow: 1 }}>
-            <SearchIconWrapper>
+            {/* <SearchIconWrapper>
                 <SearchIcon />
-            </SearchIconWrapper>
+            </SearchIconWrapper> */}
             {/* <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
@@ -90,30 +95,55 @@ export default function SearchBar() {
                 id="free-solo-2-demo"
                 disableClearable
                 sx={{ flexGrow: 1 }}
-                options={articles.map(article => article.title)}
+                options={articles}
+                getOptionLabel={(option: string | ArticleInterface) => (option as ArticleInterface).title }
+                onChange={(event, value) => {
+                    if (value) {
+                        handleOptionClick();
+                    }
+                }}
                 renderInput={(params) => (
                     <TextField
                         {...params}
+                        inputRef={inputRef}
                         label=""
-                        // sx={{
-                        //     '& .MuiInputBase-input': {
-                        //         color: "white",
-                        //     },
-                        //     '& .MuiOutlinedInput-root': {
-                        //         height: "40px",
-                        //     },
-                        // }}
-
                         InputProps={{
                             ...params.InputProps,
                             type: 'search',
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <SearchIcon sx={{ visibility: 'hidden' }} />
+                                    <SearchIcon sx={{ visibility: 'block', color: 'white' }} />
                                 </InputAdornment>
                             ),
+                            sx: {
+                                '& .MuiInputBase-input': {
+                                    color: 'white',  
+                                    fontSize: '16px',  
+                                },
+                            },
+                        }}
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                height: '50px',  
+                                '& fieldset': {
+                                    borderColor: 'blue',  
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: 'green',  
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: 'gray',  
+                                },
+                            },
                         }}
                     />
+                )}
+                renderOption={(props, option: ArticleInterface) => (
+                    <li {...props} key={option.title}>
+                        <Link href={`/${option.parsedName}`} passHref style={{ textDecoration: 'none', color: 'inherit', display: 'block', width: '100%'}} >
+                            {option.title}
+                        </Link>
+                    </li>
                 )}
             // PaperComponent={({ children }) => (
             //     <Box sx={{ '& .MuiAutocomplete-listbox': { maxHeight: 200 } }}>
