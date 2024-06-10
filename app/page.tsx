@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import CardList from "@/components/CardList";
-import { fetchArticles } from "./lib/actions";
 import Subscription from "@/components/Subscription";
 import { GoogleTagManager } from '@next/third-parties/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
@@ -36,21 +35,18 @@ export const metadata: Metadata = {
 
 type HomepageProps = {
   searchParams: {
-    q: string,
     page: string,
   }
 }
 
 export default async function Homepage({ searchParams }: HomepageProps) {
-  const q = searchParams?.q;
   const initialPage = searchParams?.page || "1";
-  const articles = await fetchArticles(q, initialPage);
 
   return (
     <>
       <GoogleTagManager gtmId="GTM-TTVSHND3" />
       <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
-      <CardList articles={articles} q={q} initialPage={initialPage} />
+      <CardList initialPage={initialPage} />
       <Subscription />
     </>
   );

@@ -1,4 +1,3 @@
-import { fetchArticleById } from "@/app/lib/actions";
 import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -6,8 +5,10 @@ import Typography from "@mui/material/Typography";
 import { notFound } from "next/navigation";
 import ReactMarkdown from 'react-markdown';
 import { ArticleImage } from "@/components/ArticleImage";
-import { ArticleInterface } from "@/components/CardList";
+import { ArticleInterface } from "../context/ArticleContext";
 import type { Metadata } from 'next';
+import { useEffect, useState } from 'react';
+import { fetchArticleById } from '../lib/actions';
 
 type Props = {
   params: { id: string }
@@ -47,6 +48,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Article({ params }: { params: { id: string } }) {
   "use server";
   const { id } = params;
+  // const [article, setArticle] = useState<ArticleInterface>()
+  // useEffect(() => {
+  //   const fetchArticle = async() => {
+  //     const res = await fetch("api/articles/${id}");
+  //     const data = await res.json();
+  //     setArticle(data);
+  //   }
+  //   fetchArticle() 
+  // })
   const article: ArticleInterface = await fetchArticleById(id);
   if (!article) return notFound();
 

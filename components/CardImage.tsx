@@ -1,8 +1,8 @@
 import Image from "next/image"
-import { ArticleInterface } from "./CardList"
 import { useState } from "react"
 import Skeleton from '@mui/material/Skeleton';
 import styled from "@emotion/styled";
+import { ArticleInterface } from "@/app/context/ArticleContext";
 
 const StyledImage = styled(Image)`
     object-fit: cover;

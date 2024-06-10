@@ -6,25 +6,13 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import PaginationCard from "./PaginationCard";
 import { CardImage } from "./CardImage";
 import { ShareButtons } from "./ShareButtons";
 import styled from "@emotion/styled";
+import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
 
-export type ArticleInterface = {
-  title: string,
-  date: Date,
-  content: string,
-  images: Array<string>,
-  parsedName?: string,
-}
-
-type CardListProps = {
-  articles: ArticleInterface[],
-  q: string,
-  initialPage: string,
-};
 const StyledBoxContainer = styled(Box)`
   display: grid;
   grid-template-columns: auto;
@@ -53,9 +41,12 @@ const LoadButton = styled(Button) <{ noMoreArticles: boolean }>`
         margin: 20px auto;
       }
 `
+type CardListProps = {
+  initialPage: string,
+};
 
-export default function CardList({ articles, q, initialPage }: CardListProps) {
-  const [searchedArticles, setSearchedArticles] = useState<ArticleInterface[]>(articles);
+export default function CardList({ initialPage }: CardListProps) {
+  const articles: ArticleInterface[] = useContext(ArticleContext);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [showShareButtons, setShowShareButtons] = useState<boolean>(false);
   const [pageSize, setPageSize] = useState<number>(9)
@@ -67,17 +58,6 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
     const sortedArticles = articles.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.parsedName) - Number(a.parsedName));
     return sortedArticles.slice(startIndex, endIndex + 1);
   }
-
-  useEffect(() => {
-    const _articles = q
-      ? articles.filter(
-        (article: ArticleInterface) =>
-          article.title.toLowerCase().includes(q.toLowerCase()) || article.content.toLowerCase().includes(q.toLowerCase())
-      )
-      : articles;
-    setSearchedArticles(_articles);
-  }, [q, articles])
-
 
   const handleMouseEnter = (index: number) => {
     if (shareButtonsTimeout.current) {
@@ -103,7 +83,7 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
   return (
     <Container maxWidth="xl">
       <StyledBoxContainer>
-        {paginate(searchedArticles, initialPage, pageSize).map((article, index) => {
+        {paginate(articles, initialPage, pageSize).map((article, index) => {
           return (
             <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
               <CardActionArea>
@@ -141,7 +121,7 @@ export default function CardList({ articles, q, initialPage }: CardListProps) {
         })}
       </StyledBoxContainer>
       <PaginationWrapper>
-        <PaginationCard searchedArticles={searchedArticles} page={initialPage} />
+        <PaginationCard page={initialPage} />
       </PaginationWrapper>
       <LoadButton variant="contained" onClick={loadMore} noMoreArticles={noMoreArticles}>Load More</LoadButton>
     </Container>

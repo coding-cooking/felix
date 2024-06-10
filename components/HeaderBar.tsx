@@ -24,7 +24,7 @@ const StyledLink = styled(Link)`
   color: var(--white);
 `;
 
-function HeaderBar() {
+function HeaderBar( ) {
   return (
     <StyledAppBar position="fixed" elevation={3}>
       <Container maxWidth="xl">
@@ -32,7 +32,7 @@ function HeaderBar() {
           <StyledLink href="/">
             <LogoSvg width={60} height={35} />
           </StyledLink>
-          <Suspense><SearchBar /></Suspense>
+          <Suspense><SearchBar/></Suspense>
           <Stack sx={{ flexDirection:"row", flexGrow: 1, textAlign: "right", gap: 2, justifyContent: "end"}}>
             <StyledLink href="mailto:felixzhang.rocinante@gmail.com">
               <MailOutlineIcon />

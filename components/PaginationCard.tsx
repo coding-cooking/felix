@@ -1,23 +1,24 @@
 import Box from "@mui/material/Box";
 import Pagination from '@mui/material/Pagination';
-import { ArticleInterface } from "./CardList";
+import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useContext } from "react";
 
 const NUM_PER_PAGE = 9;
 
 type PaginationProps = {
-    searchedArticles: ArticleInterface[],
     page: string,
 }
 
-export default function PaginationCard({ searchedArticles, page }: PaginationProps) {
+export default function PaginationCard({ page }: PaginationProps) {
+    const articles: ArticleInterface[] = useContext(ArticleContext);
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace, push } = useRouter();
 
     const params = new URLSearchParams(searchParams);
 
-    const count = (searchedArticles.length) % NUM_PER_PAGE === 0 ? (searchedArticles.length) / NUM_PER_PAGE : parseInt((searchedArticles.length / NUM_PER_PAGE).toString()) + 1;
+    const count = (articles.length) % NUM_PER_PAGE === 0 ? (articles.length) / NUM_PER_PAGE : parseInt((articles.length / NUM_PER_PAGE).toString()) + 1;
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         if (value === 1) {
             params.delete("page");
