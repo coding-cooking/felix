@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import CardList from "@/components/CardList";
-import { fetchArticles } from "./lib/actions";
 import Subscription from "@/components/Subscription";
 import { GoogleTagManager } from '@next/third-parties/google'
 import { GoogleAnalytics } from '@next/third-parties/google'

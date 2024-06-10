@@ -32,7 +32,6 @@ export default function RootLayout({
     const fetchArticles = async (page=1) => {
       try {
         const res = await fetch(`/api/articles`);
-        console.log('res is', res)
         const data = await res.json();
         setArticles(data);
       } catch (error) {

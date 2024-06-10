@@ -41,10 +41,7 @@ const LoadButton = styled(Button) <{ noMoreArticles: boolean }>`
         margin: 20px auto;
       }
 `
-
 type CardListProps = {
-  // articles: ArticleInterface[],
-  // q: string,
   initialPage: string,
 };
 
@@ -61,16 +58,6 @@ export default function CardList({ initialPage }: CardListProps) {
     const sortedArticles = articles.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.parsedName) - Number(a.parsedName));
     return sortedArticles.slice(startIndex, endIndex + 1);
   }
-
-  // useEffect(() => {
-  //   const _articles = q
-  //     ? articles.filter(
-  //       (article: ArticleInterface) =>
-  //         article.title.toLowerCase().includes(q.toLowerCase()) || article.content.toLowerCase().includes(q.toLowerCase())
-  //     )
-  //     : articles;
-  //   setSearchedArticles(_articles);
-  // }, [q, articles])
 
   const handleMouseEnter = (index: number) => {
     if (shareButtonsTimeout.current) {
