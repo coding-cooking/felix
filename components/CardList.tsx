@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import PaginationCard from "./PaginationCard";
 import { CardImage } from "./CardImage";
 import { ShareButtons } from "./ShareButtons";
@@ -86,17 +86,19 @@ export default function CardList({ initialPage }: CardListProps) {
         {paginate(articles, initialPage, pageSize).map((article, index) => {
           return (
             <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardImage article={article} />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {article.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" height={80}>
-                    {`${article.content.slice(0, 60)}...`}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+              <Link href={`/${article.parsedName}`} style={{ textDecoration: 'none', color: 'black' }}>
+                <CardActionArea>
+                  <CardImage article={article} />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {article.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" height={80}>
+                      {`${article.content.slice(0, 60)}...`}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Link>
               <CardActions sx={{ position: "relative", paddingTop: "10px" }}>
                 <Button
                   size="small"
