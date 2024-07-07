@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDebouncedCallback } from "use-debounce";
 import TextField from '@mui/material/TextField';
@@ -10,22 +10,24 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useContext, useRef } from "react";
 import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
 import Link from "next/link";
+import ClearIcon from '@mui/icons-material/Clear';
 
 const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing(1),
-        width: "auto",
-    },
+    // width: "300px",
+    // position: "relative",
+    // borderRadius: theme.shape.borderRadius,
+    // backgroundColor: alpha(theme.palette.common.white, 0.15),
+    // "&:hover": {
+    //     backgroundColor: alpha(theme.palette.common.white, 0.25),
+    // },
+    // marginLeft: 0,
+    // width: "100%",
+    // display: "flex",
+    // alignItems: "center",
+    // [theme.breakpoints.up("sm")]: {
+    //     marginLeft: theme.spacing(1),
+    //     width: "auto",
+    // },
 }));
 
 export default function SearchBar() {
@@ -66,6 +68,11 @@ export default function SearchBar() {
                         handleOptionClick();
                     }
                 }}
+                // clearIcon={
+                //     <ClearIcon
+                //         style={{ color: 'white', fontSize: '16px' }}
+                //     />
+                // }
                 renderInput={(params) => (
                     <TextField
                         {...params}
@@ -84,13 +91,15 @@ export default function SearchBar() {
                                     color: 'white',
                                     fontSize: '16px',
                                 },
+                                height: '50px',
+                                display: 'flex',
+                                alignItems: 'center'
                             },
                         }}
                         sx={{
                             '& .MuiOutlinedInput-root': {
-                                height: '50px',
                                 '& fieldset': {
-                                    borderColor: 'blue',
+                                    borderColor: 'gray',
                                 },
                                 '&:hover fieldset': {
                                     borderColor: 'green',
