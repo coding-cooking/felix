@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import { ArticleImage } from "@/components/ArticleImage";
 import { ArticleInterface } from "../../context/ArticleContext";
 import { Metadata } from 'next';
+require("dotenv").config();
 
 type Props = {
   params: { id: string }
@@ -14,7 +15,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = params.id;
-  const data = await fetch(`http://localhost:3000/api/articles/${id}`);
+  const data = await fetch(`${process.env.BASE_URL}/api/articles/${id}`);
   const article: ArticleInterface = await data.json();
   const shareDescription = article.content.slice(0, 150) + '...';
   const shareImageUrl = article.images[0] || 'https://images.pexels.com/photos/21300075/pexels-photo-21300075/free-photo-of-sydney-sea.jpeg';
@@ -48,12 +49,11 @@ export default async function Article({ params }: { params: { id: string } }) {
   "use server";
   const { id } = params;
   try {
-    const response = await fetch(`http://localhost:3000/api/articles/${id}`);
+    const response = await fetch(`${process.env.BASE_URL}/api/articles/${id}`);
     if (!response.ok) {
       return notFound();
     }
     const article: ArticleInterface = await response.json();
-    console.log(article.date)
     if(!article) return notFound();
 
     const articleDate = new Date();
