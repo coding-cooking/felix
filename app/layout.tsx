@@ -10,6 +10,7 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { usePathname } from 'next/navigation';
 import ArticleContext, { ArticleInterface } from "./context/ArticleContext";
+import { connectDB } from "@/config/dbConnect";
 
 const inter = Inter({ subsets: ["latin"] });
 
