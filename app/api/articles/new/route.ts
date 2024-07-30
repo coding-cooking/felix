@@ -3,10 +3,9 @@ import { connectDB } from "@/config/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
-    const { title, content, tags } = await req.json();
-    console.log(title, content, tags)
+    const { title, bannerImageUrl,content, tags } = await req.json();
 
-    if (!title || !content || !tags) {
+    if (!title || !bannerImageUrl || !content || !tags) {
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 400 })
     }
     try {
@@ -14,6 +13,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
         const newArticle = await Article.create({
             title,
+            bannerImageUrl,
             content,
             tags
         });

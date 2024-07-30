@@ -25,15 +25,17 @@
       "@/*": [
         "./*"
       ]
-    }
+    },
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "docs/types/**/*.ts"
-, "model/Article.js"  ],
+    "docs/types/**/*.ts",
+    "model/Article.js",
+    "scripts/migratemd.js"
+, "config/dbConnect.js"  ],
   "exclude": [
     "node_modules"
   ]
