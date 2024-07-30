@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, models, model } from "mongoose";
 
 const contentBlockSchema = new Schema({
 	type: {
@@ -24,17 +24,20 @@ const contentBlockSchema = new Schema({
 	},
 });
 
-const articleSchema = new mongoose.Schema({
+const articleSchema = new Schema({
 	title: {
 		type: String,
 		required: true,
 	},
+	bannerImageUrl: String,
 	publishedDate: {
 		type: Date,
+		default: Date.now,
 		required: true,
 	},
 	content: [contentBlockSchema],
 	tags: [String]
 });
 
-const Article = mongoose.model("Article", articleSchema);
+const Article = models.Article || model("Article", articleSchema);
+export default Article;
