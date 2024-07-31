@@ -13,13 +13,28 @@ type MdArticle = {
     content: string;
 }
 
+type ContentBlock = {
+    type: string;
+    content?: string;
+    imageUrl?: string;
+    caption?: string;
+}
+
+type DbArticle = {
+    title: string;
+    publishedDate: Date;
+    bannerImageUrl: string[];
+    content: ContentBlock[];
+    tags: string[];
+}
+
 export const POST = async (req: NextRequest, res: NextResponse) => {
     try {
         await connectDB();
         const contentDir = path.join(process.cwd(), "md");
         const files = await fs.readdir(contentDir);
 
-        const migratedArticles: MdArticle[] = [];
+        const migratedArticles: DbArticle[] = [];
 
         for (const file of files) {
             try {
@@ -34,12 +49,11 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
                     content: [
                         {
                             type: "paragraph",
-                            paragraph: content,
+                            content: content,
                         },
                     ],
                     tags: data.tags || [],
                 };
-
                 const newArticle = await Article.create(article);
                 migratedArticles.push(newArticle);
                 return new Response(JSON.stringify(newArticle), {
