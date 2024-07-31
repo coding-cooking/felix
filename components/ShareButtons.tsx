@@ -46,7 +46,7 @@ const iconStyle = {
 }
 
 export const ShareButtons = ({ article, onMouseEnter, onMouseLeave, show }: ShareButtonsProps) => {
-  const shareUrl = `https://felix-one.vercel.app/${article.parsedName}`;
+  const shareUrl = `https://felix-one.vercel.app/${article._id}`;
   const shareTitle = `${article.content.slice(0, 70)}...`;
   return (
     <Container onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} show={show}>

@@ -16,7 +16,7 @@ export const CardImage = ({ article }: CardImageProps) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     return <>
         <StyledImage
-            src={article.images[0]}
+            src={article.bannerImageUrl}
             width={345}
             height={isLoading ? 0 : 140}
             alt=''

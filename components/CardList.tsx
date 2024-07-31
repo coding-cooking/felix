@@ -33,7 +33,6 @@ const PaginationWrapper = styled(Box)`
       display: none;
     }
 `
-
 const LoadButton = styled(Button) <{ noMoreArticles: boolean }>`
   display: none;
   @media (max-width: 768px) {
@@ -55,7 +54,7 @@ export default function CardList({ initialPage }: CardListProps) {
   function paginate(articles: ArticleInterface[], page: string, pageSize: number) {
     const startIndex = (Number(page) - 1) * pageSize;
     const endIndex = startIndex + pageSize - 1;
-    const sortedArticles = articles.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.parsedName) - Number(a.parsedName));
+    const sortedArticles = articles.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.publishedDate) - Number(a.publishedDate));
     return sortedArticles.slice(startIndex, endIndex + 1);
   }
 
@@ -86,7 +85,7 @@ export default function CardList({ initialPage }: CardListProps) {
         {paginate(articles, initialPage, pageSize).map((article, index) => {
           return (
             <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
-              <Link href={`/article/${article.parsedName}`} style={{ textDecoration: 'none', color: 'black' }}>
+              <Link href={`/article/${article._id}`} style={{ textDecoration: 'none', color: 'black' }}>
                 <CardActionArea>
                   <CardImage article={article} />
                   <CardContent>
@@ -94,7 +93,7 @@ export default function CardList({ initialPage }: CardListProps) {
                       {article.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" height={80}>
-                      {`${article.content.slice(0, 60)}...`}
+                      {article.content[0]?.content?.slice(0, 60)}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -114,7 +113,7 @@ export default function CardList({ initialPage }: CardListProps) {
                     onMouseLeave={handleMouseLeave}
                     show={showShareButtons && hoveredIndex === index}
                   />}
-                <Link href={`/article/${article.parsedName}`}>
+                <Link href={`/article/${article._id}`}>
                   <Button size="small">Learn More</Button>
                 </Link>
               </CardActions>

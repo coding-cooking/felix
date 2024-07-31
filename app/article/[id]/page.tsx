@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await fetch(`${process.env.BASE_URL}/api/articles/${id}`);
   const article: ArticleInterface = await data.json();
   const shareDescription = article.content.slice(0, 150) + '...';
-  const shareImageUrl = article.images[0] || 'https://images.pexels.com/photos/21300075/pexels-photo-21300075/free-photo-of-sydney-sea.jpeg';
+  const shareImageUrl = article.bannerImageUrl || 'https://images.pexels.com/photos/21300075/pexels-photo-21300075/free-photo-of-sydney-sea.jpeg';
 
   return {
     title: article.title,
@@ -81,7 +81,7 @@ export default async function Article({ params }: { params: { id: string } }) {
               {articleDate.toLocaleDateString()}
             </Typography>
             <Typography variant="body1" lineHeight={2} gutterBottom>
-              <ReactMarkdown>{article.content}</ReactMarkdown>
+              <ReactMarkdown>{article.content[0].content}</ReactMarkdown>
             </Typography>
           </Box>
         </Container>
