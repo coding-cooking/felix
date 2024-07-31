@@ -54,16 +54,20 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
                     ],
                     tags: data.tags || [],
                 };
-                const newArticle = await Article.create(article);
-                migratedArticles.push(newArticle);
-                return new Response(JSON.stringify(newArticle), {
-                    status: 201,
-                });
+
+                const existingArticle = await Article.findOne({ title: article.title });
+
+                if (!existingArticle) {
+                    const newArticle = await Article.create(article);
+                    migratedArticles.push(newArticle);
+                } else {
+                    console.log(`Article with title "${article.title}" already exists.`);
+                }
+                
             } catch (fileError) {
                 return NextResponse.json({ error: `Error processing file ${file}:`, fileError }, { status: 500 })
             }
         }
-
         console.log("Migration completed successfully");
         return new Response(JSON.stringify(migratedArticles), {
             status: 201,
