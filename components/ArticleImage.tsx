@@ -36,18 +36,16 @@ export const ArticleImage: React.FC<ArticleImageProps> = ({ article }) => {
 
     return (
         <StyledStack>
-            {article.images.map((imageUrl: string, index: number) => (
-                <StyledImageWrapper key={index}>
-                    <Image
-                        src={imageUrl}
-                        alt=""
-                        fill
-                        loading="eager"
-                        onLoadingComplete={() => setIsLoading(false)}
-                    />
-                    {isLoading && <Skeleton variant="rectangular" width="100%" height="100%" animation="wave" />}
-                </StyledImageWrapper>
-            ))}
+            <StyledImageWrapper>
+                <Image
+                    src={article.bannerImageUrl}
+                    alt=""
+                    fill
+                    loading="eager"
+                    onLoadingComplete={() => setIsLoading(false)}
+                />
+                {isLoading && <Skeleton variant="rectangular" width="100%" height="100%" animation="wave" />}
+            </StyledImageWrapper>
         </StyledStack>
     );
 };

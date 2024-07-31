@@ -2,13 +2,21 @@
 
 import { createContext } from "react";
 
+type ContentBlock = {
+    type: string;
+    content?: string;
+    imageUrl?: string;
+    caption?: string;
+}
 
 export type ArticleInterface = {
-    title: string,
-    date: Date,
-    content: string,
-    images: Array<string>,
-    parsedName?: string,
+    _id: string;
+    title: string;
+    publishedDate: Date;
+    bannerImageUrl: string;
+    id: string;
+    content: ContentBlock[];
+    tags: string;
 }
 const ArticleContext = createContext<ArticleInterface[]>([]);
 

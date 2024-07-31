@@ -23,7 +23,7 @@ type ContentBlock = {
 type DbArticle = {
     title: string;
     publishedDate: Date;
-    bannerImageUrl: string[];
+    bannerImageUrl: string;
     content: ContentBlock[];
     tags: string[];
 }
