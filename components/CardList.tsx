@@ -33,7 +33,6 @@ const PaginationWrapper = styled(Box)`
       display: none;
     }
 `
-
 const LoadButton = styled(Button) <{ noMoreArticles: boolean }>`
   display: none;
   @media (max-width: 768px) {
