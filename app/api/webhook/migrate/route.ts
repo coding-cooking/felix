@@ -13,13 +13,28 @@ type MdArticle = {
     content: string;
 }
 
+type ContentBlock = {
+    type: string;
+    content?: string;
+    imageUrl?: string;
+    caption?: string;
+}
+
+type DbArticle = {
+    title: string;
+    publishedDate: Date;
+    bannerImageUrl: string[];
+    content: ContentBlock[];
+    tags: string[];
+}
+
 export const POST = async (req: NextRequest, res: NextResponse) => {
     try {
         await connectDB();
         const contentDir = path.join(process.cwd(), "md");
         const files = await fs.readdir(contentDir);
 
-        const migratedArticles: MdArticle[] = [];
+        const migratedArticles: DbArticle[] = [];
 
         for (const file of files) {
             try {
@@ -34,22 +49,25 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
                     content: [
                         {
                             type: "paragraph",
-                            paragraph: content,
+                            content: content,
                         },
                     ],
                     tags: data.tags || [],
                 };
 
-                const newArticle = await Article.create(article);
-                migratedArticles.push(newArticle);
-                return new Response(JSON.stringify(newArticle), {
-                    status: 201,
-                });
+                const existingArticle = await Article.findOne({ title: article.title });
+
+                if (!existingArticle) {
+                    const newArticle = await Article.create(article);
+                    migratedArticles.push(newArticle);
+                } else {
+                    console.log(`Article with title "${article.title}" already exists.`);
+                }
+                
             } catch (fileError) {
                 return NextResponse.json({ error: `Error processing file ${file}:`, fileError }, { status: 500 })
             }
         }
-
         console.log("Migration completed successfully");
         return new Response(JSON.stringify(migratedArticles), {
             status: 201,
