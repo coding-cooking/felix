@@ -113,7 +113,7 @@ export default function SearchBar() {
                 )}
                 renderOption={(props, option: ArticleInterface) => (
                     <li {...props} key={option.title}>
-                        <Link href={`/${option.parsedName}`} passHref style={{ textDecoration: 'none', color: 'inherit', display: 'block', width: '100%' }} >
+                        <Link href={`/${option._id}`} passHref style={{ textDecoration: 'none', color: 'inherit', display: 'block', width: '100%' }} >
                             {option.title}
                         </Link>
                     </li>
