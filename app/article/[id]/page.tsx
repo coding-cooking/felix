@@ -56,13 +56,10 @@ export default async function Article({ params }: { params: { id: string } }) {
     const article: ArticleInterface = await response.json();
     if(!article) return notFound();
 
-    const articleDate = new Date();
+    const articleDate = new Date(article.publishedDate);
 
     return (
       <Stack>
-        {/* <div>{article.title}</div>
-        <div>{article.date}</div>
-        <div>{article.content}</div> */}
         <ArticleImage article={article} />
         <Container maxWidth="lg" sx={{ width: "100%" }}>
           <Box
