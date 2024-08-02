@@ -3,7 +3,7 @@ import Article from "@/model/Article";
 
 export async function GET(request: Request) {
     try {
-        const articles = await Article.find({});
+        const articles = await Article.find({}).lean();
         if (articles.length === 0) return NextResponse.json({ message: "No articles found!" }, { status: 204 });
         return NextResponse.json(articles, { status: 200 });
     } catch (err) {
