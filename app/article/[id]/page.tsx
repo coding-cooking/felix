@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = params.id;
   const data = await fetch(`${process.env.BASE_URL}/api/articles/${id}`);
   const article: ArticleInterface = await data.json();
-  const shareDescription = article.content.slice(0, 150) + '...';
+  const shareDescription = article.content.find(con => con.type === 'paragraph')?.content?.slice(0, 150) + '...';
   const shareImageUrl = article.bannerImageUrl || 'https://images.pexels.com/photos/21300075/pexels-photo-21300075/free-photo-of-sydney-sea.jpeg';
 
   return {
