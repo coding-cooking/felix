@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectDB } from "@/config/dbConnect";
+import connectDB from "@/config/dbConnect";
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
@@ -63,7 +63,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
                 } else {
                     console.log(`Article with title "${article.title}" already exists.`);
                 }
-                
+
             } catch (fileError) {
                 return NextResponse.json({ error: `Error processing file ${file}:`, fileError }, { status: 500 })
             }

@@ -1,5 +1,5 @@
 import Article from "../../../../model/Article";
-import { connectDB } from "@/config/dbConnect";
+import connectDB from "@/config/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
