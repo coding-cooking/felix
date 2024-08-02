@@ -9,5 +9,6 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     if (!article) {
         return NextResponse.json({ message: 'Not found' }, { status: 404 });
     }
+        
     return NextResponse.json(article, { status: 201 });
 }
