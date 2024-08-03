@@ -54,7 +54,11 @@ export default function CardList({ initialPage }: CardListProps) {
   function paginate(articles: ArticleInterface[], page: string, pageSize: number) {
     const startIndex = (Number(page) - 1) * pageSize;
     const endIndex = startIndex + pageSize - 1;
-    const sortedArticles = articles.sort((a: ArticleInterface, b: ArticleInterface) => Number(b.publishedDate) - Number(a.publishedDate));
+    const sortedArticles = articles.sort((a: ArticleInterface, b: ArticleInterface) => {
+      const dateA = new Date(a.publishedDate);
+      const dateB = new Date(b.publishedDate);
+      return dateB.getTime() - dateA.getTime();
+    });
     return sortedArticles.slice(startIndex, endIndex + 1);
   }
 
