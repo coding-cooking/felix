@@ -99,14 +99,19 @@ export default function SearchBar() {
                         sx={{
                             '& .MuiOutlinedInput-root': {
                                 '& fieldset': {
-                                    borderColor: 'gray',
+                                    borderTop: 'none',
+                                    borderLeft: 'none',
+                                    borderRight: 'none',
+                                    borderRadius: 0,
+                                    borderBottomColor: 'white',
                                 },
                                 '&:hover fieldset': {
-                                    borderColor: 'green',
+                                    borderBottomColor: 'white',
                                 },
-                                '&.Mui-focused fieldset': {
-                                    borderColor: 'gray',
-                                },
+                                // '&.Mui-focused fieldset': {
+                                //     // backgroundColor: 'white',
+                                //     borderBottomColor: 'gray',
+                                // },
                             },
                         }}
                     />
