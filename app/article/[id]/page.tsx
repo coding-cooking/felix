@@ -54,14 +54,18 @@ export default async function Article({ params }: { params: { id: string } }) {
       return notFound();
     }
     const article: ArticleInterface = await response.json();
-    if(!article) return notFound();
+    if (!article) return notFound();
 
     const articleDate = new Date(article.publishedDate);
 
     return (
       <Stack>
         <ArticleImage article={article} />
-        <Container maxWidth="lg" sx={{ width: "100%" }}>
+        <Container maxWidth="lg" sx={{
+          width: "100%",
+          display: "flex",
+          gap: "60px"
+        }}>
           <Box
             sx={{
               mb: 4,
@@ -69,6 +73,7 @@ export default async function Article({ params }: { params: { id: string } }) {
               display: "flex",
               flexDirection: "column",
               flexWrap: "wrap",
+              flex: 3,
             }}
           >
             <Typography variant="h4" lineHeight={2} gutterBottom sx={{ "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>
@@ -80,6 +85,12 @@ export default async function Article({ params }: { params: { id: string } }) {
             <Typography variant="body1" lineHeight={2} gutterBottom>
               <ReactMarkdown>{article.content[0].content}</ReactMarkdown>
             </Typography>
+          </Box>
+          <Box sx={{ flex: 1}}>
+            <Typography variant="h5" lineHeight={2} sx={{ "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>
+            </Typography>
+
+
           </Box>
         </Container>
       </Stack>
