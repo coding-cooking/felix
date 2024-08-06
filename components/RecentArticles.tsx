@@ -62,7 +62,7 @@ export const RecentArticles = () => {
             </Typography>
             {articles?.map(article => {
                 return (
-                    <Box>
+                    <Box key={`${article._id}-${article.title}`}>
                         <StyledLink href={`/article/${article._id}`}>
                             <StyledAnchor>
                                 <span>
