@@ -10,6 +10,10 @@ import styled from "@emotion/styled";
 const StyledBox = styled(Box)`
 `
 
+const StyledTypography = styled(Typography)`
+    color: #26316e; 
+`
+
 const StyledLink = styled(Link)`
     text-decoration: none;
     cursor: pointer;
@@ -17,27 +21,22 @@ const StyledLink = styled(Link)`
 
 const StyledAnchor = styled.a`
     font-size: 20;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 2;
     color: #000000;
     
     span {
         display: inline-block;
+        text-align: center;
         transition: transform 0.3s ease;
     }
-
 
     &:focus {
         background: #bae498;
     }
 
     &:hover {
-        background: #cdfeaa;
-    }
-
-    &:active {
-        background: #6900ff;
-        color: #cdfeaa;
+        background: #687ded;
     }
 
     &:hover span {
@@ -57,9 +56,9 @@ export const RecentArticles = () => {
 
     return (
         <StyledBox>
-            <Typography variant="h5" lineHeight={2} sx={{ color: "#26316e", "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>
+            <StyledTypography variant="h5" lineHeight={2}>
                 Recent Articles
-            </Typography>
+            </StyledTypography>
             {articles?.map(article => {
                 return (
                     <Box key={`${article._id}-${article.title}`}>
