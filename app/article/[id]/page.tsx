@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import { ArticleImage } from "@/components/ArticleImage";
 import { ArticleInterface } from "../../context/ArticleContext";
 import { Metadata } from 'next';
+import { RecentArticles } from '@/components/RecentArticles';
 require("dotenv").config();
 
 type Props = {
@@ -64,7 +65,7 @@ export default async function Article({ params }: { params: { id: string } }) {
         <Container maxWidth="lg" sx={{
           width: "100%",
           display: "flex",
-          gap: "60px"
+          gap: "60px",
         }}>
           <Box
             sx={{
@@ -86,11 +87,8 @@ export default async function Article({ params }: { params: { id: string } }) {
               <ReactMarkdown>{article.content[0].content}</ReactMarkdown>
             </Typography>
           </Box>
-          <Box sx={{ flex: 1}}>
-            <Typography variant="h5" lineHeight={2} sx={{ "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>
-            </Typography>
-
-
+          <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
+            <RecentArticles />
           </Box>
         </Container>
       </Stack>
