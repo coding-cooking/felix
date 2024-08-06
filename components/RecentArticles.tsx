@@ -44,10 +44,15 @@ const StyledAnchor = styled.a`
     }
 `
 
+type RecentArticlesProps = {
+    id: string
 
-export const RecentArticles = () => {
+}
+
+
+export const RecentArticles = ({id}: RecentArticlesProps) => {
     const articles: ArticleInterface[] = useContext(ArticleContext);
-    const sortedArticles = articles.sort((a, b) => {
+    const sortedArticles = articles?.filter(article => article._id !== id).sort((a, b) => {
         const dateA = new Date(a.publishedDate);
         const dateB = new Date(b.publishedDate);
         return dateB.getTime() - dateA.getTime();
@@ -59,7 +64,7 @@ export const RecentArticles = () => {
             <StyledTypography variant="h5" lineHeight={2}>
                 Recent Articles
             </StyledTypography>
-            {articles?.map(article => {
+            {sortedArticles?.map(article => {
                 return (
                     <Box key={`${article._id}-${article.title}`}>
                         <StyledLink href={`/article/${article._id}`}>

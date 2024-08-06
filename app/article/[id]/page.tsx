@@ -88,7 +88,7 @@ export default async function Article({ params }: { params: { id: string } }) {
             </Typography>
           </Box>
           <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
-            <RecentArticles />
+            <RecentArticles id={id}/>
           </Box>
         </Container>
       </Stack>
