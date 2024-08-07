@@ -43,6 +43,7 @@ export const ArticleImage: React.FC<ArticleImageProps> = ({ article }) => {
                     fill
                     loading="eager"
                     onLoad={() => setIsLoading(false)}
+                    quality={75}
                 />
                 {isLoading && <Skeleton variant="rectangular" width="100%" height="100%" animation="wave" />}
             </StyledImageWrapper>

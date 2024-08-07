@@ -20,6 +20,8 @@ export const CardImage = ({ article }: CardImageProps) => {
             width={345}
             height={isLoading ? 0 : 140}
             alt=''
+            loading="lazy"
+            quality={75}
             onLoad={() => setIsLoading(true)}
             onLoadingComplete={() => setIsLoading(false)}
         />
