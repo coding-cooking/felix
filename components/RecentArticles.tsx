@@ -46,9 +46,7 @@ const StyledAnchor = styled.a`
 
 type RecentArticlesProps = {
     id: string
-
 }
-
 
 export const RecentArticles = ({id}: RecentArticlesProps) => {
     const articles: ArticleInterface[] = useContext(ArticleContext);
@@ -57,7 +55,6 @@ export const RecentArticles = ({id}: RecentArticlesProps) => {
         const dateB = new Date(b.publishedDate);
         return dateB.getTime() - dateA.getTime();
     })
-    console.log(articles);
 
     return (
         <StyledBox>

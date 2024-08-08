@@ -8,6 +8,7 @@ import { ArticleImage } from "@/components/ArticleImage";
 import { ArticleInterface } from "../../context/ArticleContext";
 import { Metadata } from 'next';
 import { RecentArticles } from '@/components/RecentArticles';
+import { ArticleContent } from '@/components/ArticleContent';
 require("dotenv").config();
 
 type Props = {
@@ -83,9 +84,12 @@ export default async function Article({ params }: { params: { id: string } }) {
             <Typography variant="subtitle1" lineHeight={3} gutterBottom sx={{ color: "rgba(106, 101, 104, 1)", "@media (max-width: 768px)": { fontSize: "14px" } }}>
               {articleDate.toLocaleDateString()}
             </Typography>
-            <Typography variant="body1" lineHeight={2} gutterBottom>
-              <ReactMarkdown>{article.content[0].content}</ReactMarkdown>
-            </Typography>
+            <Box>
+              <ArticleContent article={article} />
+            </Box>
+            {/* <Typography variant="body1" lineHeight={2} gutterBottom>
+              <ArticleContent article={article}/>
+            </Typography> */}
           </Box>
           <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
             <RecentArticles id={id}/>
