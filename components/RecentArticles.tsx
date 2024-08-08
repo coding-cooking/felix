@@ -18,8 +18,7 @@ const StyledLink = styled(Link)`
     font-size: 20;
     font-weight: 400;
     line-height: 2;
-    color: #000000;
-    text-decoration: none;
+    color: rgba(38, 49, 110, .7);
     cursor: pointer;
 
     span {
@@ -28,16 +27,14 @@ const StyledLink = styled(Link)`
         transition: transform 0.3s ease;
     }
 
-    &:focus {
+    &:focus-visible {
         background: #bae498;
-    }
-
-    &:hover {
-        background: #687ded;
     }
 
     &:hover span {
         transform: translateX(2px) translatey(-2px);
+        text-decoration: underline;
+        text-underline-offset: 4px;
     }
 `
 
