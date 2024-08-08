@@ -33,10 +33,10 @@ const PaginationWrapper = styled(Box)`
       display: none;
     }
 `
-const LoadButton = styled(Button) <{ noMoreArticles: boolean }>`
+const LoadButton = styled(Button) <{ nomorearticles: boolean }>`
   display: none;
   @media (max-width: 768px) {
-        display: ${({ noMoreArticles }) => (noMoreArticles ? 'none' : 'block')};
+        display: ${({ nomorearticles }) => (nomorearticles ? 'none' : 'block')};
         margin: 20px auto;
       }
 `
@@ -81,7 +81,7 @@ export default function CardList({ initialPage }: CardListProps) {
     setPageSize(prev => prev + 9);
   }
 
-  const noMoreArticles = pageSize >= articles.length;
+  const nomorearticles = pageSize >= articles.length;
 
   return (
     <Container maxWidth="xl">
@@ -128,7 +128,7 @@ export default function CardList({ initialPage }: CardListProps) {
       <PaginationWrapper>
         <PaginationCard page={initialPage} />
       </PaginationWrapper>
-      <LoadButton variant="contained" onClick={loadMore} noMoreArticles={noMoreArticles}>Load More</LoadButton>
+      <LoadButton variant="contained" onClick={loadMore} nomorearticles={nomorearticles}>Load More</LoadButton>
     </Container>
   );
 }

@@ -15,16 +15,13 @@ const StyledTypography = styled(Typography)`
 `
 
 const StyledLink = styled(Link)`
-    text-decoration: none;
-    cursor: pointer;
-`
-
-const StyledAnchor = styled.a`
     font-size: 20;
     font-weight: 400;
     line-height: 2;
     color: #000000;
-    
+    text-decoration: none;
+    cursor: pointer;
+
     span {
         display: inline-block;
         text-align: center;
@@ -48,7 +45,7 @@ type RecentArticlesProps = {
     id: string
 }
 
-export const RecentArticles = ({id}: RecentArticlesProps) => {
+export const RecentArticles = ({ id }: RecentArticlesProps) => {
     const articles: ArticleInterface[] = useContext(ArticleContext);
     const sortedArticles = articles?.filter(article => article._id !== id).sort((a, b) => {
         const dateA = new Date(a.publishedDate);
@@ -65,11 +62,9 @@ export const RecentArticles = ({id}: RecentArticlesProps) => {
                 return (
                     <Box key={`${article._id}-${article.title}`}>
                         <StyledLink href={`/article/${article._id}`}>
-                            <StyledAnchor>
-                                <span>
-                                    {article.title}
-                                </span>
-                            </StyledAnchor>
+                            <span>
+                                {article.title}
+                            </span>
                         </StyledLink>
                     </Box>
                 )
