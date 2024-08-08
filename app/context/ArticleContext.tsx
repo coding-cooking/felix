@@ -16,7 +16,7 @@ export type ArticleInterface = {
     bannerImageUrl: string;
     id: string;
     content: ContentBlock[];
-    tags: string;
+    tags: string[];
 }
 const ArticleContext = createContext<ArticleInterface[]>([]);
 

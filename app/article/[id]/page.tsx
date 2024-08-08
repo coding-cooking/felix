@@ -87,9 +87,12 @@ export default async function Article({ params }: { params: { id: string } }) {
             <Box>
               <ArticleContent article={article} />
             </Box>
-            {/* <Typography variant="body1" lineHeight={2} gutterBottom>
-              <ArticleContent article={article}/>
-            </Typography> */}
+            <Typography variant="body1" lineHeight={2} gutterBottom>
+              Tags : 
+              {article.tags.map((tag, index) => {
+                return <span key={index}> {tag}</span>
+              })}
+            </Typography>
           </Box>
           <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
             <RecentArticles id={id}/>
