@@ -31,8 +31,14 @@ export const ArticleContent = ({ article }: ArticleContentInterface) => {
                         <Image
                             src={con.imageUrl || default_image}
                             alt={con.caption || "Image"}
+                            sizes="100vw"
+                            style={{
+                                width: '100%',
+                                height: 'auto',
+                            }}
                             width={600}
-                            height={400} />
+                            height={400} 
+                            />
                         <StyledCaption>{con.caption}</StyledCaption>
                     </div>
             })}
