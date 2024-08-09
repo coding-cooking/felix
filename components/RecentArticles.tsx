@@ -11,7 +11,7 @@ const StyledBox = styled(Box)`
 `
 
 const StyledTypography = styled(Typography)`
-    color: #26316e; 
+    color: rgba(38, 49, 110, 1);
 `
 
 const StyledLink = styled(Link)`

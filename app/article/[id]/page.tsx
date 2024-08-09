@@ -3,13 +3,13 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { notFound } from "next/navigation";
-import ReactMarkdown from 'react-markdown';
 import { ArticleImage } from "@/components/ArticleImage";
 import { ArticleInterface } from "../../context/ArticleContext";
 import { Metadata } from 'next';
 import { RecentArticles } from '@/components/RecentArticles';
 import { ArticleContent } from '@/components/ArticleContent';
 require("dotenv").config();
+
 
 type Props = {
   params: { id: string }
@@ -85,14 +85,14 @@ export default async function Article({ params }: { params: { id: string } }) {
               {articleDate.toLocaleDateString()}
             </Typography>
             <Box>
+              <Typography variant="body1" lineHeight={2} gutterBottom>
+                Tags: 
+                {article.tags.map((tag, index) => {
+                  return <span key={index} style={{ color: "rgba(252,252,252,1)", backgroundColor: "rgba(38, 49, 110, .7)", margin: "4px", padding: "2px", borderRadius: "4px", cursor: "pointer" }}> {tag}</span>
+                })}
+              </Typography>
               <ArticleContent article={article} />
             </Box>
-            <Typography variant="body1" lineHeight={2} gutterBottom>
-              Tags : 
-              {article.tags.map((tag, index) => {
-                return <span key={index}> {tag}</span>
-              })}
-            </Typography>
           </Box>
           <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
             <RecentArticles id={id}/>
