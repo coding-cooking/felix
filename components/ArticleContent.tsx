@@ -33,7 +33,7 @@ export const ArticleContent = ({ article }: ArticleContentInterface) => {
                             alt={con.caption || "Image"}
                             sizes="100vw"
                             style={{
-                                width: '100%',
+                                width: '80%',
                                 height: 'auto',
                             }}
                             width={600}
