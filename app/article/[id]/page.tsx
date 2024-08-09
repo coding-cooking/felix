@@ -88,7 +88,20 @@ export default async function Article({ params }: { params: { id: string } }) {
               <Typography variant="body1" lineHeight={2} gutterBottom>
                 Tags: 
                 {article.tags.map((tag, index) => {
-                  return <span key={index} style={{ color: "rgba(252,252,252,1)", backgroundColor: "rgba(38, 49, 110, .7)", margin: "4px", padding: "2px", borderRadius: "4px", cursor: "pointer" }}> {tag}</span>
+                  return <span
+                    key={index}
+                    style={{
+                      color: "rgba(252,252,252,1)",
+                      backgroundColor: "rgba(38, 49, 110, .7)",
+                      padding: "0 2px",
+                      margin: "0 4px",
+                      lineHeight: 1.5,
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                      display: "inline-block"
+                    }}>
+                    {tag}
+                  </span>
                 })}
               </Typography>
               <ArticleContent article={article} />
