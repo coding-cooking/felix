@@ -53,7 +53,7 @@ export default function TagsArticleList({ searchParams, params }: TagsArticleLis
     const articles: ArticleInterface[] = useContext(ArticleContext);
     const articlesWithTag = articles.filter(article => {
         let processedtags = article.tags.map(tag => tag.toLowerCase())
-        return processedtags.includes(params.tag)
+        return processedtags.includes(params.tag.toLowerCase())
     });
     const [hoveredIndex, setHoveredIndex] = useState(-1);
     const [showShareButtons, setShowShareButtons] = useState<boolean>(false);
