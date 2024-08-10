@@ -8,6 +8,7 @@ import { ArticleInterface } from "../../context/ArticleContext";
 import { Metadata } from 'next';
 import { RecentArticles } from '@/components/RecentArticles';
 import { ArticleContent } from '@/components/ArticleContent';
+import Link from 'next/link';
 require("dotenv").config();
 
 
@@ -86,29 +87,31 @@ export default async function Article({ params }: { params: { id: string } }) {
             </Typography>
             <Box>
               <Typography variant="body1" lineHeight={2} gutterBottom>
-                Tags: 
+                Tags:
                 {article.tags.map((tag, index) => {
-                  return <span
-                    key={index}
-                    style={{
-                      color: "rgba(252,252,252,1)",
-                      backgroundColor: "rgba(38, 49, 110, .7)",
-                      padding: "0 2px",
-                      margin: "0 4px",
-                      lineHeight: 1.5,
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                      display: "inline-block"
-                    }}>
-                    {tag}
-                  </span>
+                  return <Link href={`/article/category/${tag}`}>
+                    <span
+                      key={index}
+                      style={{
+                        color: "rgba(252,252,252,1)",
+                        backgroundColor: "rgba(38, 49, 110, .7)",
+                        padding: "0 2px",
+                        margin: "0 4px",
+                        lineHeight: 1.5,
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        display: "inline-block"
+                      }}>
+                      {tag}
+                    </span>
+                  </Link>
                 })}
               </Typography>
               <ArticleContent article={article} />
             </Box>
           </Box>
           <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
-            <RecentArticles id={id}/>
+            <RecentArticles id={id} />
           </Box>
         </Container>
       </Stack>
