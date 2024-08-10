@@ -89,7 +89,8 @@ export default async function Article({ params }: { params: { id: string } }) {
               <Typography variant="body1" lineHeight={2} gutterBottom>
                 Tags:
                 {article.tags.map((tag, index) => {
-                  return <Link href={`/article/category/${tag}`} key={`${index}-${tag}`}>
+                  const lowercaseTag = tag.toLowerCase();
+                  return <Link href={`/article/category/${lowercaseTag}`} key={`${index}-${tag}`}>
                     <span
                       style={{
                         color: "rgba(252,252,252,1)",
