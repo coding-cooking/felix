@@ -1,17 +1,16 @@
 import Box from "@mui/material/Box";
 import Pagination from '@mui/material/Pagination';
-import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
+import { ArticleInterface } from "@/app/context/ArticleContext";
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useContext } from "react";
 
 const NUM_PER_PAGE = 9;
 
 type PaginationProps = {
     page: string,
+    articles: ArticleInterface[],
 }
 
-export default function PaginationCard({ page }: PaginationProps) {
-    const articles: ArticleInterface[] = useContext(ArticleContext);
+export default function PaginationCard({ page, articles }: PaginationProps) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace, push } = useRouter();

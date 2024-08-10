@@ -62,6 +62,8 @@ export default function CardList({ initialPage }: CardListProps) {
     return sortedArticles.slice(startIndex, endIndex + 1);
   }
 
+  console.log()
+
   const handleMouseEnter = (index: number) => {
     if (shareButtonsTimeout.current) {
       clearTimeout(shareButtonsTimeout.current);
@@ -126,7 +128,7 @@ export default function CardList({ initialPage }: CardListProps) {
         })}
       </StyledBoxContainer>
       <PaginationWrapper>
-        <PaginationCard page={initialPage} />
+        <PaginationCard page={initialPage} articles={articles}/>
       </PaginationWrapper>
       <LoadButton variant="contained" onClick={loadMore} nomorearticles={nomorearticles}>Load More</LoadButton>
     </Container>
