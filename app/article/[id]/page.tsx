@@ -109,6 +109,10 @@ export default async function Article({ params }: { params: { id: string } }) {
               </Typography>
               <ArticleContent article={article} />
             </Box>
+            <Box>
+              <script defer src="https://cdn.commento.io/js/commento.js"></script>
+              <div id="commento"></div>
+            </Box>
           </Box>
           <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
             <RecentArticles id={id} />
@@ -116,7 +120,6 @@ export default async function Article({ params }: { params: { id: string } }) {
         </Container>
       </Stack>
     );
-
   } catch (err) {
     console.error("Error fetching article:", err);
     return notFound();
