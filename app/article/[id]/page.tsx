@@ -89,9 +89,8 @@ export default async function Article({ params }: { params: { id: string } }) {
               <Typography variant="body1" lineHeight={2} gutterBottom>
                 Tags:
                 {article.tags.map((tag, index) => {
-                  return <Link href={`/article/category/${tag}`}>
+                  return <Link href={`/article/category/${tag}`} key={`${index}-${tag}`}>
                     <span
-                      key={index}
                       style={{
                         color: "rgba(252,252,252,1)",
                         backgroundColor: "rgba(38, 49, 110, .7)",
