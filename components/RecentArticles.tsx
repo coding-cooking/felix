@@ -57,10 +57,10 @@ export const RecentArticles = ({ id }: RecentArticlesProps) => {
             </StyledTypography>
             {sortedArticles?.map(article => {
                 return (
-                    <Box key={`${article._id}-${article.title}`}>
+                    <Box key={`${article._id}-${article.englishTitle}`}>
                         <StyledLink href={`/article/${article._id}`}>
                             <span>
-                                {article.title}
+                                {article.englishTitle}
                             </span>
                         </StyledLink>
                     </Box>

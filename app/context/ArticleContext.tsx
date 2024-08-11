@@ -4,14 +4,17 @@ import { createContext } from "react";
 
 type ContentBlock = {
     type: string;
-    content?: string;
+    chineseContent: string;
+    englishContent: string;
     imageUrl?: string;
-    caption?: string;
+    englishCaption?: string;
+    chineseCaption?: string;
 }
 
 export type ArticleInterface = {
     _id: string;
-    title: string;
+    chineseTitle: string;
+    englishTitle: string;
     publishedDate: Date;
     bannerImageUrl: string;
     id: string;
