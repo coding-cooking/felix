@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { FacebookIcon, FacebookShareButton, TwitterShareButton, WeiboIcon, WeiboShareButton, WhatsappIcon, WhatsappShareButton, XIcon } from "react-share";
 import { keyframes } from '@emotion/react';
 import { ArticleInterface } from "@/app/context/ArticleContext";
+import { useLangContext } from "@/app/context/LangContext";
 
 const fadeIn = keyframes`
   from {
@@ -46,8 +47,11 @@ const iconStyle = {
 }
 
 export const ShareButtons = ({ article, onMouseEnter, onMouseLeave, show }: ShareButtonsProps) => {
+  const { lang } = useLangContext();
   const shareUrl = `https://felix-one.vercel.app/article/${article._id}`;
-  const shareTitle = `${article.content.find(con => con.type === 'paragraph')?.englishContent?.slice(0, 120)}...`;
+  const shareTitle = 
+    lang === "EN" ? `${article.content.find(con => con.type === 'paragraph')?.englishContent?.slice(0, 120)}...` 
+    : `${article.content.find(con => con.type === 'paragraph')?.chineseContent?.slice(0, 70)}...`;
   return (
     <Container onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} show={show}>
       <TwitterShareButton

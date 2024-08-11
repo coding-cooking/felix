@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { useContext } from "react";
 import styled from "@emotion/styled";
+import { useLangContext } from "@/app/context/LangContext";
 
 const StyledBox = styled(Box)`
 `
@@ -52,18 +53,19 @@ export const RecentArticles = ({ id }: RecentArticlesProps) => {
         const dateB = new Date(b.publishedDate);
         return dateB.getTime() - dateA.getTime();
     })
+    const { lang } = useLangContext();
 
     return (
         <StyledBox>
             <StyledTypography variant="h5" lineHeight={2}>
-                Recent Articles
+                {lang === "EN" ? "Recent Articles" : "近期文章"}
             </StyledTypography>
             {sortedArticles?.map(article => {
                 return (
                     <Box key={`${article._id}-${article.englishTitle}`}>
                         <StyledLink href={`/article/${article._id}`}>
                             <span>
-                                {article.englishTitle}
+                                {lang === "EN" ? article.englishTitle : article.chineseTitle}
                             </span>
                         </StyledLink>
                     </Box>

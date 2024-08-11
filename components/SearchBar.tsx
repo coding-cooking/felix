@@ -10,7 +10,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useContext, useRef } from "react";
 import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
 import Link from "next/link";
-import ClearIcon from '@mui/icons-material/Clear';
+import { useLangContext } from "@/app/context/LangContext";
 
 const Search = styled("div")(({ theme }) => ({
     // width: "300px",
@@ -36,6 +36,7 @@ export default function SearchBar() {
     const { replace } = useRouter();
     const articles: ArticleInterface[] = useContext(ArticleContext);
     const inputRef = useRef<HTMLInputElement>(null);
+    const { lang } = useLangContext();
 
     const handleSearch = useDebouncedCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const params = new URLSearchParams(searchParams);
@@ -62,7 +63,9 @@ export default function SearchBar() {
                 disableClearable
                 sx={{ flexGrow: 1 }}
                 options={articles}
-                getOptionLabel={(option: string | ArticleInterface) => (option as ArticleInterface).englishTitle}
+                getOptionLabel={(option: string | ArticleInterface) => {
+                    return lang === "EN" ? (option as ArticleInterface).englishTitle : (option as ArticleInterface).chineseTitle
+                }}
                 onChange={(event, value) => {
                     if (value) {
                         handleOptionClick();
@@ -119,7 +122,7 @@ export default function SearchBar() {
                 renderOption={(props, option: ArticleInterface) => (
                     <li {...props} key={option.englishTitle}>
                         <Link href={`/article/${option._id}`} passHref style={{ textDecoration: 'none', color: 'inherit', display: 'block', width: '100%' }} >
-                            {option.englishTitle}
+                            {lang === "EN" ? option.englishTitle : option.chineseTitle}
                         </Link>
                     </li>
                 )}

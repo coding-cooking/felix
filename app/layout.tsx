@@ -10,6 +10,7 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { usePathname } from 'next/navigation';
 import ArticleContext, { ArticleInterface } from "./context/ArticleContext";
+import LangContext from "./context/LangContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
   const [windowHeight, setWindowHeight] = useState(0);
   const pathname = usePathname();
   const [articles, setArticles] = useState<ArticleInterface[]>([]);
+  const [lang, setLang] = useState<"CH" | "EN">("EN");
 
   useEffect(() => {
     if (window) {
@@ -47,23 +49,24 @@ export default function RootLayout({
       <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
       <body className={inter.className}>
         <AppRouterCacheProvider options={{ key: "fei" }}>
-          <ArticleContext.Provider value={articles}>
-            <HeaderBar />
-            {windowHeight && (
-              <>
-                <main
-                  style={{
-                    minHeight: `${windowHeight}px`,
-                    marginTop: pathname === '/' ? '6rem' : '4rem',
-                  }}
-                >
-                  {children}
-                </main>
-                <Footer />
-              </>
-            )}
-          </ArticleContext.Provider>
-
+          <LangContext.Provider value={{lang, setLang}}>
+            <ArticleContext.Provider value={articles}>
+              <HeaderBar />
+              {windowHeight && (
+                <>
+                  <main
+                    style={{
+                      minHeight: `${windowHeight}px`,
+                      marginTop: pathname === '/' ? '6rem' : '4rem',
+                    }}
+                  >
+                    {children}
+                  </main>
+                  <Footer />
+                </>
+              )}
+            </ArticleContext.Provider>
+          </LangContext.Provider>
         </AppRouterCacheProvider>
       </body>
     </html>

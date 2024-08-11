@@ -12,6 +12,7 @@ import { CardImage } from "./CardImage";
 import { ShareButtons } from "./ShareButtons";
 import styled from "@emotion/styled";
 import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
+import { useLangContext } from "@/app/context/LangContext";
 
 const StyledBoxContainer = styled(Box)`
   display: grid;
@@ -50,6 +51,7 @@ export default function CardList({ initialPage }: CardListProps) {
   const [showShareButtons, setShowShareButtons] = useState<boolean>(false);
   const [pageSize, setPageSize] = useState<number>(9)
   const shareButtonsTimeout = useRef<NodeJS.Timeout | null>(null);
+  const { lang } = useLangContext();
 
   function paginate(articles: ArticleInterface[], page: string, pageSize: number) {
     const startIndex = (Number(page) - 1) * pageSize;
@@ -96,10 +98,10 @@ export default function CardList({ initialPage }: CardListProps) {
                   <CardImage article={article} />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      {article.englishTitle}
+                      {lang === "EN" ? article.englishTitle : article.chineseTitle}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" height={80}>
-                      {article.content[0]?.englishContent?.slice(0, 120)}
+                      {lang === "EN" ? article.content[0]?.englishContent?.slice(0, 120) : article.content[0]?.chineseContent?.slice(0, 70)}
                     </Typography>
                   </CardContent>
                 </CardActionArea>

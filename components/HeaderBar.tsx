@@ -29,6 +29,8 @@ const StyledLink = styled(Link)`
 function HeaderBar( ) {
   const { lang, setLang } = useLangContext();
 
+  console.log(lang)
+
   return (
     <StyledAppBar position="fixed" elevation={3}>
       <Container maxWidth="xl">
@@ -38,7 +40,7 @@ function HeaderBar( ) {
           </StyledLink>
           <Suspense><SearchBar/></Suspense>
           <Stack sx={{ flexDirection:"row", flexGrow: 1, textAlign: "right", gap: 2, justifyContent: "end"}}>
-            <GTranslateIcon sx={{ cursor: "pointer"}}/>
+            <GTranslateIcon sx={{ cursor: "pointer"}} onClick={() => {setLang(prev => prev === "EN" ? "CH" : "EN")}}/>
             <StyledLink href="mailto:felixzhang.rocinante@gmail.com">
               <MailOutlineIcon />
             </StyledLink>

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import styled from "@emotion/styled";
 import default_image from "../public/default_image.jpg"
+import { useLangContext } from '@/app/context/LangContext';
 
 type ArticleContentInterface = {
     article: ArticleInterface;
@@ -22,15 +23,19 @@ const StyledCaption = styled.p`
 `
 
 export const ArticleContent = ({ article }: ArticleContentInterface) => {
+    const { lang } = useLangContext();
+
     return (
         <>
             {article.content.map((con, index) => {
                 return con.type === "paragraph" ?
-                    <StyledReactMarkdown key={index}>{con.englishContent}</StyledReactMarkdown>
+                    <StyledReactMarkdown key={index}>
+                        {lang === "EN" ? con.englishContent : con.chineseContent}
+                    </StyledReactMarkdown>
                     : <div key={index} style={{ position: 'relative', width: '100%', height: 'auto' }}>
                         <Image
                             src={con.imageUrl || default_image}
-                            alt={con.englishCaption || "Image"}
+                            alt={lang === "EN" ? con.englishCaption || "Image" : con.chineseCaption || "Image"}
                             sizes="100vw"
                             style={{
                                 width: '80%',
@@ -39,7 +44,7 @@ export const ArticleContent = ({ article }: ArticleContentInterface) => {
                             width={600}
                             height={400} 
                             />
-                        <StyledCaption>{con.englishCaption}</StyledCaption>
+                        <StyledCaption>{lang === "EN" ? con.englishCaption : con.chineseCaption}</StyledCaption>
                     </div>
             })}
         </>
