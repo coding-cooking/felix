@@ -6,7 +6,13 @@ const contentBlockSchema = new Schema({
 		enum: ["paragraph", "image"],
 		required: true,
 	},
-	content: {
+	chineseContent: {
+		type: String,
+		required: function () {
+			return this.type === "paragraph";
+		},
+	},
+	englishContent: {
 		type: String,
 		required: function () {
 			return this.type === "paragraph";
@@ -18,7 +24,11 @@ const contentBlockSchema = new Schema({
 			return this.type === "image";
 		},
 	},
-	caption: {
+	chineseCaption: {
+		type: String,
+		required: false,
+	},
+	englishCaption: {
 		type: String,
 		required: false,
 	},
