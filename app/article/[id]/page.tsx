@@ -11,7 +11,6 @@ import { ArticleContent } from '@/components/ArticleContent';
 import Link from 'next/link';
 require("dotenv").config();
 
-
 type Props = {
   params: { id: string }
 }
@@ -108,10 +107,6 @@ export default async function Article({ params }: { params: { id: string } }) {
                 })}
               </Typography>
               <ArticleContent article={article} />
-            </Box>
-            <Box>
-              <script defer src="https://cdn.commento.io/js/commento.js"></script>
-              <div id="commento"></div>
             </Box>
           </Box>
           <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
