@@ -15,7 +15,7 @@ const StyledTypography = styled(Typography)`
 `
 
 const StyledLink = styled(Link)`
-    font-size: 20;
+    font-size: 16;
     font-weight: 400;
     line-height: 2;
     color: rgba(38, 49, 110, .7);
@@ -23,8 +23,11 @@ const StyledLink = styled(Link)`
 
     span {
         display: inline-block;
-        text-align: center;
+        text-align: start;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         transition: transform 0.3s ease;
+
     }
 
     &:focus-visible {
@@ -57,10 +60,10 @@ export const RecentArticles = ({ id }: RecentArticlesProps) => {
             </StyledTypography>
             {sortedArticles?.map(article => {
                 return (
-                    <Box key={`${article._id}-${article.title}`}>
+                    <Box key={`${article._id}-${article.englishTitle}`}>
                         <StyledLink href={`/article/${article._id}`}>
                             <span>
-                                {article.title}
+                                {article.englishTitle}
                             </span>
                         </StyledLink>
                     </Box>

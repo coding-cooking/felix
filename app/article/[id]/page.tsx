@@ -19,28 +19,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = params.id;
   const data = await fetch(`${process.env.BASE_URL}/api/articles/${id}`);
   const article: ArticleInterface = await data.json();
-  const shareDescription = article.content.find(con => con.type === 'paragraph')?.content?.slice(0, 150) + '...';
+  const shareDescription = article.content.find(con => con.type === 'paragraph')?.englishContent?.slice(0, 150) + '...';
   const shareImageUrl = article.bannerImageUrl || 'https://images.pexels.com/photos/21300075/pexels-photo-21300075/free-photo-of-sydney-sea.jpeg';
 
   return {
-    title: article.title,
+    title: article.englishTitle,
     description: shareDescription,
     openGraph: {
       type: 'article',
-      title: article.title,
+      title: article.englishTitle,
       description: shareDescription,
       images: [
         {
           url: shareImageUrl,
           width: 1200,
           height: 630,
-          alt: article.title,
+          alt: article.englishTitle,
         }],
     },
     twitter: {
       card: 'summary_large_image',
       site: '@felixzhang',
-      title: article.title,
+      title: article.englishTitle,
       description: shareDescription,
       images: [{ url: shareImageUrl }],
     },
@@ -79,7 +79,7 @@ export default async function Article({ params }: { params: { id: string } }) {
             }}
           >
             <Typography variant="h4" lineHeight={2} gutterBottom sx={{ "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>
-              {article.title}
+              {article.englishTitle}
             </Typography>
             <Typography variant="subtitle1" lineHeight={3} gutterBottom sx={{ color: "rgba(106, 101, 104, 1)", "@media (max-width: 768px)": { fontSize: "14px" } }}>
               {articleDate.toLocaleDateString()}

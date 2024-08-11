@@ -90,16 +90,16 @@ export default function CardList({ initialPage }: CardListProps) {
       <StyledBoxContainer>
         {paginate(articles, initialPage, pageSize).map((article, index) => {
           return (
-            <Card key={`${article.title}-${index}`} sx={{ maxWidth: 345 }}>
+            <Card key={`${article.englishTitle}-${index}`} sx={{ maxWidth: 345 }}>
               <Link href={`/article/${article._id}`} style={{ textDecoration: 'none', color: 'black' }}>
                 <CardActionArea>
                   <CardImage article={article} />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      {article.title}
+                      {article.englishTitle}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" height={80}>
-                      {article.content[0]?.content?.slice(0, 60)}
+                      {article.content[0]?.englishContent?.slice(0, 120)}
                     </Typography>
                   </CardContent>
                 </CardActionArea>

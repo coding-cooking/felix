@@ -62,7 +62,7 @@ export default function SearchBar() {
                 disableClearable
                 sx={{ flexGrow: 1 }}
                 options={articles}
-                getOptionLabel={(option: string | ArticleInterface) => (option as ArticleInterface).title}
+                getOptionLabel={(option: string | ArticleInterface) => (option as ArticleInterface).englishTitle}
                 onChange={(event, value) => {
                     if (value) {
                         handleOptionClick();
@@ -117,9 +117,9 @@ export default function SearchBar() {
                     />
                 )}
                 renderOption={(props, option: ArticleInterface) => (
-                    <li {...props} key={option.title}>
+                    <li {...props} key={option.englishTitle}>
                         <Link href={`/article/${option._id}`} passHref style={{ textDecoration: 'none', color: 'inherit', display: 'block', width: '100%' }} >
-                            {option.title}
+                            {option.englishTitle}
                         </Link>
                     </li>
                 )}

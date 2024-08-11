@@ -26,11 +26,11 @@ export const ArticleContent = ({ article }: ArticleContentInterface) => {
         <>
             {article.content.map((con, index) => {
                 return con.type === "paragraph" ?
-                    <StyledReactMarkdown key={index}>{con.content}</StyledReactMarkdown>
+                    <StyledReactMarkdown key={index}>{con.englishContent}</StyledReactMarkdown>
                     : <div key={index} style={{ position: 'relative', width: '100%', height: 'auto' }}>
                         <Image
                             src={con.imageUrl || default_image}
-                            alt={con.caption || "Image"}
+                            alt={con.englishCaption || "Image"}
                             sizes="100vw"
                             style={{
                                 width: '80%',
@@ -39,7 +39,7 @@ export const ArticleContent = ({ article }: ArticleContentInterface) => {
                             width={600}
                             height={400} 
                             />
-                        <StyledCaption>{con.caption}</StyledCaption>
+                        <StyledCaption>{con.englishCaption}</StyledCaption>
                     </div>
             })}
         </>
