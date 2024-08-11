@@ -11,7 +11,6 @@ import { ArticleContent } from '@/components/ArticleContent';
 import Link from 'next/link';
 require("dotenv").config();
 
-
 type Props = {
   params: { id: string }
 }
