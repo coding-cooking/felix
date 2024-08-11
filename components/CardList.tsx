@@ -99,7 +99,7 @@ export default function CardList({ initialPage }: CardListProps) {
                       {article.englishTitle}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" height={80}>
-                      {article.content[0]?.englishContent?.slice(0, 60)}
+                      {article.content[0]?.englishContent?.slice(0, 120)}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
