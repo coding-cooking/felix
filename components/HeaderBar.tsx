@@ -11,6 +11,7 @@ import { LogoSvg } from "./Icon";
 import SearchBar from "./SearchBar";
 import { Suspense } from "react";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import GTranslateIcon from '@mui/icons-material/GTranslate';
 
 const StyledAppBar = styled(AppBar)`
   background-color: rgb(var(--header-bg));
@@ -34,6 +35,7 @@ function HeaderBar( ) {
           </StyledLink>
           <Suspense><SearchBar/></Suspense>
           <Stack sx={{ flexDirection:"row", flexGrow: 1, textAlign: "right", gap: 2, justifyContent: "end"}}>
+            <GTranslateIcon sx={{ cursor: "pointer"}}/>
             <StyledLink href="mailto:felixzhang.rocinante@gmail.com">
               <MailOutlineIcon />
             </StyledLink>
