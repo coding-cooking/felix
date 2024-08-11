@@ -35,7 +35,11 @@ const contentBlockSchema = new Schema({
 });
 
 const articleSchema = new Schema({
-	title: {
+	chineseTitle: {
+		type: String,
+		required: true,
+	},
+	englishTitle: {
 		type: String,
 		required: true,
 	},
