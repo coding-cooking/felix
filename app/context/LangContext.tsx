@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, createContext, useContext } from "react";
 
 type LangInterface = {
-    lang: "ch" | "en",
+    lang: "CH" | "EN",
     setLang: Dispatch<SetStateAction<'CH' | 'EN'>>
 }
 const LangContext = createContext<LangInterface>({
-    lang: "en",
+    lang: "EN",
     setLang: () => {}
 });
 
