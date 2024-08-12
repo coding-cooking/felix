@@ -50,7 +50,8 @@ const articleSchema = new Schema({
 		required: true,
 	},
 	content: [contentBlockSchema],
-	tags: [String]
+	englishTags: [String],
+	chineseTags: [String],
 });
 
 const Article = models.Article || model("Article", articleSchema);

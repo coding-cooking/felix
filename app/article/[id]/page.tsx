@@ -11,6 +11,7 @@ import { ArticleContent } from '@/components/ArticleContent';
 import Link from 'next/link';
 import { useLangContext } from '@/app/context/LangContext';
 import { ArticleTitle } from '@/components/ArticleTitle';
+import { ArticleTag } from '@/components/ArticleTag';
 require("dotenv").config();
 
 type Props = {
@@ -88,25 +89,7 @@ export default async function Article({ params }: { params: { id: string } }) {
             </Typography>
             <Box>
               <Typography variant="body1" lineHeight={2} gutterBottom>
-                Tags:
-                {article.tags.map((tag, index) => {
-                  const lowercaseTag = tag.toLowerCase();
-                  return <Link href={`/article/category/${lowercaseTag}`} key={`${index}-${tag}`}>
-                    <span
-                      style={{
-                        color: "rgba(252,252,252,1)",
-                        backgroundColor: "rgba(38, 49, 110, .7)",
-                        padding: "0 2px",
-                        margin: "0 4px",
-                        lineHeight: 1.5,
-                        borderRadius: "4px",
-                        cursor: "pointer",
-                        display: "inline-block"
-                      }}>
-                      {tag}
-                    </span>
-                  </Link>
-                })}
+                <ArticleTag article={article}/>
               </Typography>
               <ArticleContent article={article} />
             </Box>
