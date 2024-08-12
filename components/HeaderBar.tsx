@@ -29,8 +29,6 @@ const StyledLink = styled(Link)`
 function HeaderBar( ) {
   const { lang, setLang } = useLangContext();
 
-  console.log(lang)
-
   return (
     <StyledAppBar position="fixed" elevation={3}>
       <Container maxWidth="xl">

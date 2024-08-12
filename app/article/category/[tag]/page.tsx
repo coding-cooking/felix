@@ -52,16 +52,16 @@ type TagsArticleListProps = {
 
 export default function TagsArticleList({ searchParams, params }: TagsArticleListProps) {
     const articles: ArticleInterface[] = useContext(ArticleContext);
+    const { lang } = useLangContext();
     const articlesWithTag = articles.filter(article => {
-        let processedtags = article.tags.map(tag => tag.toLowerCase())
-        return processedtags.includes(params.tag.toLowerCase())
+        let processedtags = lang === "EN" ? article.englishTags.map(tag => tag.toLowerCase()) : article.chineseTags.map(tag => tag);
+        return lang === "EN" ? processedtags.includes(params.tag.toLowerCase()) : processedtags.includes(decodeURIComponent(params.tag));
     });
     const [hoveredIndex, setHoveredIndex] = useState(-1);
     const [showShareButtons, setShowShareButtons] = useState<boolean>(false);
     const [pageSize, setPageSize] = useState<number>(9)
     const shareButtonsTimeout = useRef<NodeJS.Timeout | null>(null);
     const initialPage = searchParams?.page || "1";
-    const { lang } = useLangContext();
 
     function paginate(articles: ArticleInterface[], page: string, pageSize: number) {
         const startIndex = (Number(page) - 1) * pageSize;
