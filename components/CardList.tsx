@@ -60,11 +60,11 @@ const LoadButton = styled(Button) <{ nomorearticles: boolean }>`
       }
 `
 type CardListProps = {
+  articles: ArticleInterface[],
   initialPage: string,
 };
 
-export default function CardList({ initialPage }: CardListProps) {
-  const articles: ArticleInterface[] = useContext(ArticleContext);
+export default function CardList({ articles,initialPage }: CardListProps) {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [showShareButtons, setShowShareButtons] = useState<boolean>(false);
   const [pageSize, setPageSize] = useState<number>(9)

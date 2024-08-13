@@ -3,6 +3,8 @@ import CardList from "@/components/CardList";
 import Subscription from "@/components/Subscription";
 import { GoogleTagManager } from '@next/third-parties/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { ArticleList } from "@/components/ArticleList";
+import { ArticleInterface } from "./context/ArticleContext";
 
 export const metadata: Metadata = {
   title: "Fei Zhang | Felix | Software | Blog | Web Development | felix-one.vercel.app",
@@ -46,7 +48,8 @@ export default async function Homepage({ searchParams }: HomepageProps) {
     <>
       <GoogleTagManager gtmId="GTM-TTVSHND3" />
       <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
-      <CardList initialPage={initialPage} />
+      <ArticleList initialPage={initialPage} />
+      {/* <CardList initialPage={initialPage} /> */}
       <Subscription />
     </>
   );
