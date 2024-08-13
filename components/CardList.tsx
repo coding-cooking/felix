@@ -29,6 +29,24 @@ const StyledBoxContainer = styled(Box)`
   }
 `;
 
+const StyledTitle = styled(Typography)`
+  overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+  height: 66px;
+  line-height: 1.4;
+`
+
+const StyledContent = styled(Typography)`
+  overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+  height: 60px;
+  line-height: 1.4;
+`
+
 const PaginationWrapper = styled(Box)`
   @media (max-width: 768px) {
       display: none;
@@ -64,8 +82,6 @@ export default function CardList({ initialPage }: CardListProps) {
     return sortedArticles.slice(startIndex, endIndex + 1);
   }
 
-  console.log()
-
   const handleMouseEnter = (index: number) => {
     if (shareButtonsTimeout.current) {
       clearTimeout(shareButtonsTimeout.current);
@@ -97,12 +113,12 @@ export default function CardList({ initialPage }: CardListProps) {
                 <CardActionArea>
                   <CardImage article={article} />
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <StyledTitle gutterBottom variant="h5">
                       {lang === "EN" ? article.englishTitle : article.chineseTitle}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" height={80}>
-                      {lang === "EN" ? article.content[0]?.englishContent?.slice(0, 120) : article.content[0]?.chineseContent?.slice(0, 70)}
-                    </Typography>
+                    </StyledTitle>
+                    <StyledContent variant="body2" color="text.secondary" height={80}>
+                      {lang === "EN" ? article.content[0]?.englishContent : article.content[0]?.chineseContent}
+                    </StyledContent>
                   </CardContent>
                 </CardActionArea>
               </Link>
@@ -130,7 +146,7 @@ export default function CardList({ initialPage }: CardListProps) {
         })}
       </StyledBoxContainer>
       <PaginationWrapper>
-        <PaginationCard page={initialPage} articles={articles}/>
+        <PaginationCard page={initialPage} articles={articles} />
       </PaginationWrapper>
       <LoadButton variant="contained" onClick={loadMore} nomorearticles={nomorearticles}>Load More</LoadButton>
     </Container>
