@@ -41,40 +41,41 @@ type ShareButtonsProps = {
   show: boolean,
 }
 
-const iconStyle = {
-  width: "22px",
-  height: "22px"
+const bgStyle = {
+  fill: "#fafbfc",
+  stroke: "#0a0a0a",
+  strokeWidth: '4'
 }
 
 export const ShareButtons = ({ article, onMouseEnter, onMouseLeave, show }: ShareButtonsProps) => {
   const { lang } = useLangContext();
   const shareUrl = `https://felix-one.vercel.app/article/${article._id}`;
-  const shareTitle = 
-    lang === "EN" ? `${article.content.find(con => con.type === 'paragraph')?.englishContent?.slice(0, 120)}...` 
-    : `${article.content.find(con => con.type === 'paragraph')?.chineseContent?.slice(0, 70)}...`;
+  const shareTitle =
+    lang === "EN" ? `${article.content.find(con => con.type === 'paragraph')?.englishContent?.slice(0, 120)}...`
+      : `${article.content.find(con => con.type === 'paragraph')?.chineseContent?.slice(0, 70)}...`;
   return (
     <Container onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} show={show}>
       <TwitterShareButton
         url={shareUrl}
         title={shareTitle}
       >
-        <XIcon style={iconStyle} />
+        <XIcon size={24} bgStyle={bgStyle} iconFillColor="#26316e" />
       </TwitterShareButton	>
       <FacebookShareButton
         url={shareUrl}
       >
-        <FacebookIcon style={iconStyle} />
+        <FacebookIcon size={24} bgStyle={bgStyle} iconFillColor="#26316e" />
       </FacebookShareButton>
       <WhatsappShareButton
         url={shareUrl}
       >
-        <WhatsappIcon style={iconStyle} />
+        <WhatsappIcon size={24} bgStyle={bgStyle} iconFillColor="#26316e" />
       </WhatsappShareButton>
       <WeiboShareButton
         url={shareUrl}
         title={shareTitle}
       >
-        <WeiboIcon style={iconStyle} />
+        <WeiboIcon size={24} bgStyle={bgStyle} iconFillColor="#26316e" />
       </WeiboShareButton>
     </Container>
   )
