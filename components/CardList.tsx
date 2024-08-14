@@ -29,13 +29,22 @@ const StyledBoxContainer = styled(Box)`
   }
 `;
 
+const StyledCard = styled(Card)`
+  max-width: 345px;
+  @media (max-width: 768px) {
+      max-width: 100%;
+    }
+`
+
 const StyledTitle = styled(Typography)`
-  overflow: hidden;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2;
-  height: 66px;
-  line-height: 1.4;
+  @media (min-width: 768px) {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      height: 66px;
+      line-height: 1.4;
+    }
 `
 
 const StyledContent = styled(Typography)`
@@ -108,7 +117,7 @@ export default function CardList({ articles,initialPage }: CardListProps) {
       <StyledBoxContainer>
         {paginate(articles, initialPage, pageSize).map((article, index) => {
           return (
-            <Card key={`${article.englishTitle}-${index}`} sx={{ maxWidth: 345 }}>
+            <StyledCard key={`${article.englishTitle}-${index}`} sx={{ maxWidth: 345 }}>
               <Link href={`/article/${article._id}`} style={{ textDecoration: 'none', color: 'black' }}>
                 <CardActionArea>
                   <CardImage article={article} />
@@ -141,7 +150,7 @@ export default function CardList({ articles,initialPage }: CardListProps) {
                   <Button size="small">Learn More</Button>
                 </Link>
               </CardActions>
-            </Card>
+            </StyledCard>
           );
         })}
       </StyledBoxContainer>
