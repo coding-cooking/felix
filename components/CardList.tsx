@@ -6,12 +6,12 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import Link from "next/link";
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import PaginationCard from "./PaginationCard";
 import { CardImage } from "./CardImage";
 import { ShareButtons } from "./ShareButtons";
 import styled from "@emotion/styled";
-import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
+import { ArticleInterface } from "@/app/context/ArticleContext";
 import { useLangContext } from "@/app/context/LangContext";
 
 const StyledBoxContainer = styled(Box)`
