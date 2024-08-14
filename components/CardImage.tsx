@@ -6,7 +6,11 @@ import { ArticleInterface } from "@/app/context/ArticleContext";
 
 const StyledImage = styled(Image)`
     object-fit: cover;
-`;
+    @media (max-width: 768px) {
+      width: 100%;
+      height: 100%;
+    }
+`
 
 type CardImageProps = {
     article: ArticleInterface,
