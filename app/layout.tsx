@@ -58,6 +58,7 @@ export default function RootLayout({
                     style={{
                       minHeight: `${windowHeight}px`,
                       marginTop: pathname === '/' ? '6rem' : '4rem',
+                      ...(window.innerWidth < 768 && { marginTop: pathname === '/' ? '10rem' : '6rem' })
                     }}
                   >
                     {children}
