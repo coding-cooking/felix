@@ -14,6 +14,12 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import GTranslateIcon from '@mui/icons-material/GTranslate';
 import { useLangContext } from "@/app/context/LangContext";
 
+const StyledContainer = styled(Container)`
+  @media (max-width: 768px) {
+          margin-bottom: 10px;
+        }
+`
+
 const StyledAppBar = styled(AppBar)`
   background-color: rgb(var(--header-bg));
 `;
@@ -26,19 +32,40 @@ const StyledLink = styled(Link)`
   color: var(--white);
 `;
 
-function HeaderBar( ) {
+const TableSeachBar = styled(Container)`
+  width: 40%;
+  @media (max-width: 768px) {
+        display: none;
+      }
+`
+
+const MobileSeachBar = styled(Container)`
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+`
+
+function HeaderBar() {
   const { lang, setLang } = useLangContext();
 
   return (
     <StyledAppBar position="fixed" elevation={3}>
-      <Container maxWidth="xl">
+      <StyledContainer maxWidth="xl">
         <StyledToolBar disableGutters>
           <StyledLink href="/">
             <LogoSvg width={60} height={35} />
           </StyledLink>
-          <Suspense><SearchBar/></Suspense>
-          <Stack sx={{ flexDirection:"row", flexGrow: 1, textAlign: "right", gap: 2, justifyContent: "end"}}>
-            <GTranslateIcon sx={{ cursor: "pointer"}} onClick={() => {setLang(prev => prev === "EN" ? "CH" : "EN")}}/>
+
+          <TableSeachBar>
+            <Suspense><SearchBar /></Suspense>
+          </TableSeachBar>
+
+          <Stack sx={{ flexDirection: "row", flexGrow: 1, textAlign: "right", gap: 2, justifyContent: "end" }}>
+            <GTranslateIcon sx={{ cursor: "pointer" }} onClick={() => { setLang(prev => prev === "EN" ? "CH" : "EN") }} />
             <StyledLink href="mailto:felixzhang.rocinante@gmail.com">
               <MailOutlineIcon />
             </StyledLink>
@@ -50,7 +77,10 @@ function HeaderBar( ) {
             </StyledLink>
           </Stack>
         </StyledToolBar>
-      </Container>
+        <MobileSeachBar>
+          <Suspense><SearchBar /></Suspense>
+        </MobileSeachBar>
+      </StyledContainer>
     </StyledAppBar>
   );
 }
