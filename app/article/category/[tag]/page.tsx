@@ -4,6 +4,7 @@ import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext"
 import { useLangContext } from "@/app/context/LangContext"
 import CardList from "@/components/CardList"
 import { useContext } from "react"
+import Container from "@mui/material/Container"
 
 type TagsArticleListProps = {
     searchParams: {
@@ -20,11 +21,12 @@ export default function TagsArticleList({ searchParams, params }: TagsArticleLis
     const initialPage = searchParams?.page || "1";
 
     const articlesWithTag = articles.filter(article => {
-            let processedtags = lang === "EN" ? article.englishTags.map(tag => tag.toLowerCase()) : article.chineseTags.map(tag => tag);
-            return lang === "EN" ? processedtags.includes(params.tag.toLowerCase()) : processedtags.includes(decodeURIComponent(params.tag));
-        });
+        let processedtags = lang === "EN" ? article.englishTags.map(tag => tag.toLowerCase()) : article.chineseTags.map(tag => tag);
+        return lang === "EN" ? processedtags.includes(params.tag.toLowerCase()) : processedtags.includes(decodeURIComponent(params.tag));
+    });
     return (
-        <CardList articles={articlesWithTag} initialPage={initialPage}/>
+        <Container sx={{ paddingTop: "2em" }}>
+            <CardList articles={articlesWithTag} initialPage={initialPage} />
+        </Container>
     )
-
 }
