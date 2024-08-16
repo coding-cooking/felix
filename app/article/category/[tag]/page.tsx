@@ -5,6 +5,7 @@ import { useLangContext } from "@/app/context/LangContext"
 import CardList from "@/components/CardList"
 import { useContext } from "react"
 import Container from "@mui/material/Container"
+import { tagMap } from "@/components/ArticleTag"
 
 type TagsArticleListProps = {
     searchParams: {
@@ -21,8 +22,9 @@ export default function TagsArticleList({ searchParams, params }: TagsArticleLis
     const initialPage = searchParams?.page || "1";
 
     const articlesWithTag = articles.filter(article => {
+        const transformedTag = Object.keys(tagMap).find(key => tagMap[key].toLowerCase() === params.tag.toLowerCase());
         let processedtags = lang === "EN" ? article.englishTags.map(tag => tag.toLowerCase()) : article.chineseTags.map(tag => tag);
-        return lang === "EN" ? processedtags.includes(params.tag.toLowerCase()) : processedtags.includes(decodeURIComponent(params.tag));
+        return lang === "EN" ? processedtags.includes(params.tag.toLowerCase()) : processedtags.includes(decodeURIComponent(transformedTag));
     });
     return (
         <Container sx={{ paddingTop: "2em" }}>

@@ -8,6 +8,23 @@ type ArticleTagProps = {
     article: ArticleInterface;
 }
 
+export const tagMap = {
+    "文化": "culture",
+    "电影": "movie",
+    "悉尼": "Sydney",
+    "中国": "China",
+    "天气": "weather",
+    "互联网": "internet",
+    "生活": "life",
+    "旅行": "travel",
+    "园艺": "gardening",
+    "咖啡": "coffee",
+    "动物": "animal",
+    "健身": "exercise",
+    "财经": "finance",
+    "英语": "English"
+}
+
 export const ArticleTag = ({ article }: ArticleTagProps) => {
     const { lang } = useLangContext();
 
@@ -33,8 +50,8 @@ export const ArticleTag = ({ article }: ArticleTagProps) => {
                 </Link>
             })
             : article.chineseTags.map((tag, index) => {
-                const lowercaseTag = tag.toLowerCase();
-                return <Link href={`/article/category/${lowercaseTag}`} key={`${index}-${tag}`}>
+                const transformedTag = tagMap[tag];
+                return <Link href={`/article/category/${transformedTag}`} key={`${index}-${tag}`}>
                     <span
                         style={{
                             color: "rgba(252,252,252,1)",
