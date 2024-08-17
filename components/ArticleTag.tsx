@@ -8,7 +8,7 @@ type ArticleTagProps = {
     article: ArticleInterface;
 }
 
-export const tagMap = {
+export const tagMap: { [key: string]: string } = {
     "文化": "culture",
     "电影": "movie",
     "悉尼": "Sydney",
@@ -23,7 +23,7 @@ export const tagMap = {
     "健身": "exercise",
     "财经": "finance",
     "英语": "English"
-}
+} 
 
 export const ArticleTag = ({ article }: ArticleTagProps) => {
     const { lang } = useLangContext();
@@ -49,7 +49,7 @@ export const ArticleTag = ({ article }: ArticleTagProps) => {
                     </span>
                 </Link>
             })
-            : article.chineseTags.map((tag, index) => {
+            : article.chineseTags.map((tag: keyof typeof tagMap, index) => {
                 const transformedTag = tagMap[tag];
                 return <Link href={`/article/category/${transformedTag}`} key={`${index}-${tag}`}>
                     <span

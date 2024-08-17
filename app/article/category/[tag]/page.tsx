@@ -22,9 +22,13 @@ export default function TagsArticleList({ searchParams, params }: TagsArticleLis
     const initialPage = searchParams?.page || "1";
 
     const articlesWithTag = articles.filter(article => {
-        const transformedTag = Object.keys(tagMap).find(key => tagMap[key].toLowerCase() === params.tag.toLowerCase());
-        let processedtags = lang === "EN" ? article.englishTags.map(tag => tag.toLowerCase()) : article.chineseTags.map(tag => tag);
-        return lang === "EN" ? processedtags.includes(params.tag.toLowerCase()) : processedtags.includes(decodeURIComponent(transformedTag));
+        const transformedTag = Object.keys(tagMap).find((key: keyof typeof tagMap) => tagMap[key].toLowerCase() === params.tag.toLowerCase());
+        if (!transformedTag) {
+            return false;
+        } else {
+            let processedtags = lang === "EN" ? article.englishTags.map(tag => tag.toLowerCase()) : article.chineseTags.map(tag => tag);
+            return lang === "EN" ? processedtags.includes(params.tag.toLowerCase()) : processedtags.includes(decodeURIComponent(transformedTag));
+        }
     });
     return (
         <Container sx={{ paddingTop: "2em" }}>
