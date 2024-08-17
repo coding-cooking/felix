@@ -117,7 +117,7 @@ export default function CardList({ articles,initialPage }: CardListProps) {
       <StyledBoxContainer>
         {paginate(articles, initialPage, pageSize).map((article, index) => {
           return (
-            <StyledCard key={`${article.englishTitle}-${index}`} sx={{ maxWidth: 345 }}>
+            <StyledCard key={`${article.englishTitle}-${index}`}>
               <Link href={`/article/${article._id}`} style={{ textDecoration: 'none', color: 'black' }}>
                 <CardActionArea>
                   <CardImage article={article} />
