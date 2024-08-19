@@ -3,19 +3,21 @@ import connectDB from "@/config/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
-    const { title, bannerImageUrl,content, tags } = await req.json();
+    const { chineseTitle, englishTitle, bannerImageUrl, content, englishTags, chineseTags } = await req.json();
 
-    if (!title || !bannerImageUrl || !content || !tags) {
+    if (!chineseTitle || !englishTitle || !bannerImageUrl || !content || !englishTags || !chineseTags) {
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 400 })
     }
     try {
         await connectDB();
 
         const newArticle = await Article.create({
-            title,
+            chineseTitle,
+            englishTitle,
             bannerImageUrl,
             content,
-            tags
+            englishTags,
+            chineseTags
         });
         return new Response(JSON.stringify(newArticle), {
             status: 201,
