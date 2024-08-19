@@ -9,6 +9,7 @@ import styled from "@emotion/styled";
 import { useLangContext } from "@/app/context/LangContext";
 
 const StyledBox = styled(Box)`
+    margin-top: 20px;
 `
 
 const StyledTypography = styled(Typography)`
