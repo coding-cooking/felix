@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import { Button } from '@mui/base/Button';
 import { useState } from "react";
+import { SelectChangeEvent } from '@mui/material';
 
 const StyledContainer = styled(Container)`
     margin-top: 100px;
@@ -24,17 +25,26 @@ const StyledForm = styled.form`
     gap: 10px;
 `
 
-export default function NewArticle() {
-    const [contentType, setContentType] = useState('paragraph');
-    const [contentBlocks, setContentBlocks] = useState([{ type: contentType }]);
+interface ContentBlock {
+    type: string;
+    chineseContent?: string;
+    englishContent?: string;
+    imageUrl?: string;
+    chineseCaption?: string;
+    englishCaption?: string;
+}
 
-    const handleTypeChange = (index, event) => {
+export default function NewArticle() {
+    const [contentType, setContentType] = useState<'paragraph' | 'image'>('paragraph');
+    const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([{ type: contentType }]);
+
+    const handleTypeChange = (index: number, event: SelectChangeEvent<string>) => {
         const newContentBlocks = [...contentBlocks];
         newContentBlocks[index].type = event.target.value;
         setContentBlocks(newContentBlocks);
     };
 
-    const handleInputChange = (index, key, event) => {
+    const handleInputChange = (index: number, key: keyof ContentBlock, event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const newContentBlocks = [...contentBlocks];
         newContentBlocks[index][key] = event.target.value;
         setContentBlocks(newContentBlocks);
@@ -52,7 +62,6 @@ export default function NewArticle() {
 
     return (
         <StyledContainer>
-            {/* <Stack gap={2}> */}
             <StyledForm onSubmit={handleSubmit}>
                 <InputLabel htmlFor="chineseTitle" required>Chinese Title</InputLabel>
                 <Input id="chineseTitle" />
@@ -128,10 +137,7 @@ export default function NewArticle() {
                 <Button type="submit">
                     Submit
                 </Button>
-
             </StyledForm>
-
-            {/* </Stack> */}
         </StyledContainer>
     )
 }
