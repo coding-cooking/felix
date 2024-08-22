@@ -11,6 +11,7 @@ import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import { Button } from '@mui/base/Button';
 import { useState } from "react";
 import { SelectChangeEvent } from '@mui/material';
+import { TagsInput } from "@/components/TagsInput";
 
 const StyledContainer = styled(Container)`
     margin-top: 100px;
@@ -36,10 +37,11 @@ interface ContentBlock {
 
 //提交后，content是空的
 //tags需要优化，类型是array，需要可以添加多个，也可以删除
-//
 export default function NewArticle() {
     const [contentType, setContentType] = useState<'paragraph' | 'image'>('paragraph');
     const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([{ type: contentType }]);
+    const [chineseTags, setChineseTags] = useState<string[]>([]);
+    const [englishTags, setEnglishTags] = useState<string[]>([]);
 
     const handleTypeChange = (index: number, event: SelectChangeEvent<string>) => {
         const newContentBlocks = [...contentBlocks];
@@ -66,8 +68,8 @@ export default function NewArticle() {
             englishTitle: formData.get('englishTitle') as string,
             bannerImageUrl: formData.get('bannerImageUrl') as string,
             content: [],
-            englishTags: (formData.get('englishTags') as string)?.split(',').map(tag => tag.trim()) || [],
-            chineseTags: (formData.get('chineseTags') as string)?.split(',').map(tag => tag.trim()) || [],
+            englishTags,
+            chineseTags,
         };
 
         // Process content blocks
@@ -193,10 +195,13 @@ export default function NewArticle() {
 
                 <Button color="primary" onClick={addContentBlock}>Add Content Block</Button>
 
-                <InputLabel htmlFor="chineseTags" required>Chinese Tags</InputLabel>
+                <TagsInput tags={chineseTags} setTags={setChineseTags} label="Chinese Tags" />
+                <TagsInput tags={englishTags} setTags={setEnglishTags} label="English Tags" />
+
+                {/* <InputLabel htmlFor="chineseTags" required>Chinese Tags</InputLabel>
                 <Input id="chineseTags" name="chineseTags"/>
                 <InputLabel htmlFor="englishTags" required>English Tags</InputLabel>
-                <Input id="englishTags" name="englishTags" />
+                <Input id="englishTags" name="englishTags" /> */}
                 <Button type="submit">
                     Submit
                 </Button>
