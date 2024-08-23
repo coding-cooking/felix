@@ -20,10 +20,13 @@ const StyledContainer = styled(Container)`
 
 const StyledForm = styled.form`
     margin: 0 auto;
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 4px;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
 `
 
 interface ContentBlock {
@@ -36,7 +39,6 @@ interface ContentBlock {
 }
 
 //提交后，content是空的
-//tags需要优化，类型是array，需要可以添加多个，也可以删除
 export default function NewArticle() {
     const [contentType, setContentType] = useState<'paragraph' | 'image'>('paragraph');
     const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([{ type: contentType }]);
@@ -62,44 +64,15 @@ export default function NewArticle() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        // Construct the form object
         const formObject: { [key: string]: any } = {
             chineseTitle: formData.get('chineseTitle') as string,
             englishTitle: formData.get('englishTitle') as string,
             bannerImageUrl: formData.get('bannerImageUrl') as string,
-            content: [],
+            content: contentBlocks,
             englishTags,
             chineseTags,
         };
-
-        // Process content blocks
-        const contentBlocks = JSON.parse(formData.get('contentBlocks') as string) || [];
-        formObject.content = contentBlocks.map((block: any) => {
-            const { type, chineseContent, englishContent, imageUrl, chineseCaption, englishCaption } = block;
-
-            if (type === 'paragraph') {
-                return {
-                    type: 'paragraph',
-                    chineseContent,
-                    englishContent,
-                };
-            } else if (type === 'image') {
-                return {
-                    type: 'image',
-                    imageUrl,
-                    chineseCaption,
-                    englishCaption,
-                };
-            }
-
-            return null; // Skip any unknown content types
-        }).filter(Boolean); // Remove any null entries
-
-        // Debugging: Log formObject to ensure it has the correct structure
-        console.log('FormObject:', formObject);
-
         try {
-            // Send a POST request to the API route
             const response = await fetch('/api/articles/new', {
                 method: 'POST',
                 headers: {
@@ -108,10 +81,8 @@ export default function NewArticle() {
                 body: JSON.stringify(formObject),
             });
             if (response.ok) {
-                // Handle success, e.g., redirect or show a success message
                 alert('Article created successfully!');
             } else {
-                // Handle error
                 alert('Failed to create article.');
             }
         }catch(error){
@@ -133,7 +104,7 @@ export default function NewArticle() {
                         <InputLabel id={`content-type-label-${index}`} required>Type</InputLabel>
                         <Select
                             labelId={`content-type-label-${index}`}
-                            style={{ width: "30%", height: "30px" }}
+                            style={{ width: "44%", height: "30px" }}
                             value={block.type}
                             name="type"
                             onChange={(event) => handleTypeChange(index, event)}
