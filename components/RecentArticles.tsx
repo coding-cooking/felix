@@ -44,12 +44,12 @@ const StyledLink = styled(Link)`
 `
 
 type RecentArticlesProps = {
-    id: string
+    handle: string
 }
 
-export const RecentArticles = ({ id }: RecentArticlesProps) => {
+export const RecentArticles = ({ handle }: RecentArticlesProps) => {
     const articles: ArticleInterface[] = useContext(ArticleContext);
-    const sortedArticles = articles?.filter(article => article._id !== id).sort((a, b) => {
+    const sortedArticles = articles?.filter(article => article.handle !== handle).sort((a, b) => {
         const dateA = new Date(a.publishedDate);
         const dateB = new Date(b.publishedDate);
         return dateB.getTime() - dateA.getTime();
@@ -63,8 +63,8 @@ export const RecentArticles = ({ id }: RecentArticlesProps) => {
             </StyledTypography>
             {sortedArticles?.map(article => {
                 return (
-                    <Box key={`${article._id}-${article.englishTitle}`}>
-                        <StyledLink href={`/article/${article._id}`}>
+                    <Box key={`${article.handle}-${article.englishTitle}`}>
+                        <StyledLink href={`/article/${article.handle}`}>
                             <span>
                                 {lang === "EN" ? article.englishTitle : article.chineseTitle}
                             </span>

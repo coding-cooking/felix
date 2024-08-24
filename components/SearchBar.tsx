@@ -121,7 +121,7 @@ export default function SearchBar() {
                 )}
                 renderOption={(props, option: ArticleInterface) => (
                     <li {...props} key={option.englishTitle}>
-                        <Link href={`/article/${option._id}`} passHref style={{ textDecoration: 'none', color: 'inherit', display: 'block', width: '100%' }} >
+                        <Link href={`/article/${option.handle}`} passHref style={{ textDecoration: 'none', color: 'inherit', display: 'block', width: '100%' }} >
                             {lang === "EN" ? option.englishTitle : option.chineseTitle}
                         </Link>
                     </li>

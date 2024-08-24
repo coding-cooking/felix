@@ -15,12 +15,12 @@ import { ArticleTag } from '@/components/ArticleTag';
 require("dotenv").config();
 
 type Props = {
-  params: { id: string }
+  params: { handle: string }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const id = params.id;
-  const data = await fetch(`${process.env.BASE_URL}/api/articles/${id}`);
+  const handle = params.handle;
+  const data = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`);
   const article: ArticleInterface = await data.json();
   const shareDescription = article.content?.find(con => con.type === 'paragraph')?.englishContent?.slice(0, 150) + '...';
   const shareImageUrl = article.bannerImageUrl || 'https://images.pexels.com/photos/21300075/pexels-photo-21300075/free-photo-of-sydney-sea.jpeg';
@@ -50,11 +50,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Article({ params }: { params: { id: string } }) {
+export default async function Article({ params }: { params: { handle: string } }) {
   "use server";
-  const { id } = params;
+  const { handle } = params;
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/articles/${id}`);
+    const response = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`);
     if (!response.ok) {
       return notFound();
     }
@@ -95,7 +95,7 @@ export default async function Article({ params }: { params: { id: string } }) {
             </Box>
           </Box>
           <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
-            <RecentArticles id={id} />
+            <RecentArticles handle={handle} />
           </Box>
         </Container>
       </Stack>

@@ -118,7 +118,7 @@ export default function CardList({ articles,initialPage }: CardListProps) {
         {paginate(articles, initialPage, pageSize).map((article, index) => {
           return (
             <StyledCard key={`${article.englishTitle}-${index}`}>
-              <Link href={`/article/${article._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+              <Link href={`/article/${article.handle}`} style={{ textDecoration: 'none', color: 'black' }}>
                 <CardActionArea>
                   <CardImage article={article} />
                   <CardContent>
@@ -146,7 +146,7 @@ export default function CardList({ articles,initialPage }: CardListProps) {
                     onMouseLeave={handleMouseLeave}
                     show={showShareButtons && hoveredIndex === index}
                   />}
-                <Link href={`/article/${article._id}`}>
+                <Link href={`/article/${article.handle}`}>
                   <Button size="small">Learn More</Button>
                 </Link>
               </CardActions>
