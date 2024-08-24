@@ -36,7 +36,7 @@
     "model/Article.js",
     "scripts/migratemd.js",
     "config/dbConnect.js"
-  ],
+, "generate-sitemap.js"  ],
   "exclude": [
     "node_modules"
   ]
