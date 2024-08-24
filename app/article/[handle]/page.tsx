@@ -65,7 +65,7 @@ export default async function Article({ params }: { params: { handle: string } }
     return (
       <>
         <Head>
-          <link rel="canonical" href={`/article/${article.handle}`} />
+          <link rel="canonical" href={`${process.env.BASE_URL}/article/${article.handle}`} />
         </Head>
         <Stack>
           <ArticleImage article={article} />
