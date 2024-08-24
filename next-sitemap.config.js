@@ -1,5 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
-export default {
+module.exports =  {
 	siteUrl: "https://felix-one.vercel.app",
 	generateRobotsTxt: true,
 	exclude: ["/article/new", "/article/new/*", "/api/*"],
