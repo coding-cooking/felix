@@ -3,6 +3,7 @@
 import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import "./globals.css";
+import { cache } from 'react'
 import HeaderBar from "@/components/HeaderBar";
 import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
@@ -31,15 +32,15 @@ export default function RootLayout({
   }, []);
 
   useEffect(() => {
-    const fetchArticles = async (page = 1) => {
+    const fetchArticles = cache(async () => {
       try {
-        const res = await fetch(`/api/articles`);
+        const res = await fetch(`/api/articles`, { cache: 'force-cache' });
         const data = await res.json();
         setArticles(data);
       } catch (error) {
         console.error('Error fetching articles:', error);
       }
-    }
+    })
     fetchArticles();
   }, [])
 

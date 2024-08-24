@@ -10,15 +10,16 @@ import { RecentArticles } from '@/components/RecentArticles';
 import { ArticleContent } from '@/components/ArticleContent';
 import { ArticleTitle } from '@/components/ArticleTitle';
 import { ArticleTag } from '@/components/ArticleTag';
+import { cache } from 'react';
 require("dotenv").config();
 
 type Props = {
   params: { handle: string }
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata ({ params }: Props): Promise<Metadata> {
   const handle = params.handle;
-  const data = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`);
+  const data = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
   const canonicalUrl = `${process.env.BASE_URL}/article/${handle}`;
   const article: ArticleInterface = await data.json();
   const shareDescription = article.content?.find(con => con.type === 'paragraph')?.englishContent?.slice(0, 150) + '...';
@@ -50,11 +51,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Article({ params }: { params: { handle: string } }) {
+export default async function Article ({ params }: { params: { handle: string } }){
   "use server";
   const { handle } = params;
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`);
+    const response = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
     if (!response.ok) {
       return notFound();
     }
@@ -106,3 +107,4 @@ export default async function Article({ params }: { params: { handle: string } }
   }
 
 }
+
