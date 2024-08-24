@@ -8,10 +8,9 @@ import { ArticleInterface } from "../../context/ArticleContext";
 import { Metadata } from 'next';
 import { RecentArticles } from '@/components/RecentArticles';
 import { ArticleContent } from '@/components/ArticleContent';
-import Link from 'next/link';
-import { useLangContext } from '@/app/context/LangContext';
 import { ArticleTitle } from '@/components/ArticleTitle';
 import { ArticleTag } from '@/components/ArticleTag';
+import Head from 'next/head';
 require("dotenv").config();
 
 type Props = {
@@ -64,41 +63,46 @@ export default async function Article({ params }: { params: { handle: string } }
     const articleDate = new Date(article.publishedDate);
 
     return (
-      <Stack>
-        <ArticleImage article={article} />
-        <Container maxWidth="lg" sx={{
-          width: "100%",
-          display: "flex",
-          gap: "60px",
-        }}>
-          <Box
-            sx={{
-              mb: 4,
-              flexGrow: 1,
-              display: "flex",
-              flexDirection: "column",
-              flexWrap: "wrap",
-              flex: 2,
-            }}
-          >
-            <Typography variant="h4" lineHeight={2} gutterBottom sx={{ "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>
-              <ArticleTitle article = {article}/>
-            </Typography>
-            <Typography variant="subtitle1" lineHeight={3} gutterBottom sx={{ color: "rgba(106, 101, 104, 1)", "@media (max-width: 768px)": { fontSize: "14px" } }}>
-              {articleDate.toLocaleDateString()}
-            </Typography>
-            <Box>
-              <Typography variant="body1" lineHeight={2} gutterBottom>
-                <ArticleTag article={article}/>
+      <>
+        <Head>
+          <link rel="canonical" href={`/article/${article.handle}`} />
+        </Head>
+        <Stack>
+          <ArticleImage article={article} />
+          <Container maxWidth="lg" sx={{
+            width: "100%",
+            display: "flex",
+            gap: "60px",
+          }}>
+            <Box
+              sx={{
+                mb: 4,
+                flexGrow: 1,
+                display: "flex",
+                flexDirection: "column",
+                flexWrap: "wrap",
+                flex: 3,
+              }}
+            >
+              <Typography variant="h4" lineHeight={2} gutterBottom sx={{ "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>
+                <ArticleTitle article={article} />
               </Typography>
-              <ArticleContent article={article} />
+              <Typography variant="subtitle1" lineHeight={3} gutterBottom sx={{ color: "rgba(106, 101, 104, 1)", "@media (max-width: 768px)": { fontSize: "14px" } }}>
+                {articleDate.toLocaleDateString()}
+              </Typography>
+              <Box>
+                <Typography variant="body1" lineHeight={2} gutterBottom>
+                  <ArticleTag article={article} />
+                </Typography>
+                <ArticleContent article={article} />
+              </Box>
             </Box>
-          </Box>
-          <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
-            <RecentArticles handle={handle} />
-          </Box>
-        </Container>
-      </Stack>
+            <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
+              <RecentArticles handle={handle} />
+            </Box>
+          </Container>
+        </Stack>
+      </>
     );
   } catch (err) {
     console.error("Error fetching article:", err);
