@@ -10,7 +10,6 @@ import { RecentArticles } from '@/components/RecentArticles';
 import { ArticleContent } from '@/components/ArticleContent';
 import { ArticleTitle } from '@/components/ArticleTitle';
 import { ArticleTag } from '@/components/ArticleTag';
-import Head from 'next/head';
 require("dotenv").config();
 
 type Props = {
@@ -20,6 +19,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const handle = params.handle;
   const data = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`);
+  const canonicalUrl = `${process.env.BASE_URL}/article/${handle}`;
   const article: ArticleInterface = await data.json();
   const shareDescription = article.content?.find(con => con.type === 'paragraph')?.englishContent?.slice(0, 150) + '...';
   const shareImageUrl = article.bannerImageUrl || 'https://images.pexels.com/photos/21300075/pexels-photo-21300075/free-photo-of-sydney-sea.jpeg';
@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: article.englishTitle,
     description: shareDescription,
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       type: 'article',
       title: article.englishTitle,
@@ -63,46 +64,41 @@ export default async function Article({ params }: { params: { handle: string } }
     const articleDate = new Date(article.publishedDate);
 
     return (
-      <>
-        <Head>
-          <link rel="canonical" href={`${process.env.BASE_URL}/article/${article.handle}`} />
-        </Head>
-        <Stack>
-          <ArticleImage article={article} />
-          <Container maxWidth="lg" sx={{
-            width: "100%",
-            display: "flex",
-            gap: "60px",
-          }}>
-            <Box
-              sx={{
-                mb: 4,
-                flexGrow: 1,
-                display: "flex",
-                flexDirection: "column",
-                flexWrap: "wrap",
-                flex: 3,
-              }}
-            >
-              <Typography variant="h4" lineHeight={2} gutterBottom sx={{ "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>
-                <ArticleTitle article={article} />
+      <Stack>
+        <ArticleImage article={article} />
+        <Container maxWidth="lg" sx={{
+          width: "100%",
+          display: "flex",
+          gap: "60px",
+        }}>
+          <Box
+            sx={{
+              mb: 4,
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: "column",
+              flexWrap: "wrap",
+              flex: 3,
+            }}
+          >
+            <Typography variant="h4" lineHeight={2} gutterBottom sx={{ "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>
+              <ArticleTitle article={article} />
+            </Typography>
+            <Typography variant="subtitle1" lineHeight={3} gutterBottom sx={{ color: "rgba(106, 101, 104, 1)", "@media (max-width: 768px)": { fontSize: "14px" } }}>
+              {articleDate.toLocaleDateString()}
+            </Typography>
+            <Box>
+              <Typography variant="body1" lineHeight={2} gutterBottom>
+                <ArticleTag article={article} />
               </Typography>
-              <Typography variant="subtitle1" lineHeight={3} gutterBottom sx={{ color: "rgba(106, 101, 104, 1)", "@media (max-width: 768px)": { fontSize: "14px" } }}>
-                {articleDate.toLocaleDateString()}
-              </Typography>
-              <Box>
-                <Typography variant="body1" lineHeight={2} gutterBottom>
-                  <ArticleTag article={article} />
-                </Typography>
-                <ArticleContent article={article} />
-              </Box>
+              <ArticleContent article={article} />
             </Box>
-            <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
-              <RecentArticles handle={handle} />
-            </Box>
-          </Container>
-        </Stack>
-      </>
+          </Box>
+          <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
+            <RecentArticles handle={handle} />
+          </Box>
+        </Container>
+      </Stack>
     );
   } catch (err) {
     console.error("Error fetching article:", err);
