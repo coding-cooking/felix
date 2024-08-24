@@ -78,7 +78,7 @@ export default async function Article({ params }: { params: { handle: string } }
               display: "flex",
               flexDirection: "column",
               flexWrap: "wrap",
-              flex: 3,
+              flex: 2,
             }}
           >
             <Typography variant="h4" lineHeight={2} gutterBottom sx={{ "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>

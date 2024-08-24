@@ -23,7 +23,7 @@ const StyledForm = styled.form`
     width: 50%;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
     @media (max-width: 768px) {
       width: 100%;
     }
@@ -67,6 +67,7 @@ export default function NewArticle() {
         const formObject: { [key: string]: any } = {
             chineseTitle: formData.get('chineseTitle') as string,
             englishTitle: formData.get('englishTitle') as string,
+            handle: formData.get('handle') as string,
             bannerImageUrl: formData.get('bannerImageUrl') as string,
             content: contentBlocks,
             englishTags,
@@ -97,6 +98,8 @@ export default function NewArticle() {
                 <Input id="chineseTitle" name="chineseTitle" />
                 <InputLabel htmlFor="englishTitle" required>English Title</InputLabel>
                 <Input id="englishTitle" name="englishTitle" />
+                <InputLabel htmlFor="handle" required>Handle</InputLabel>
+                <Input id="handle" name="handle" />
                 <InputLabel htmlFor="bannerImageUrl" required>Banner ImageUrl</InputLabel>
                 <Input id="bannerImageUrl" name="bannerImageUrl"/>
                 {contentBlocks.map((block, index) => (
