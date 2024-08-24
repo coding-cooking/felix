@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import Article from "@/model/Article";
 import dbConnect from "@/config/dbConnect";
 
+export const dynamic = 'force-static';
+
 export async function GET(req: NextRequest, { params }: { params: { handle: string } }) {
     await dbConnect();
     if (!params?.handle) {
