@@ -49,7 +49,7 @@ const bgStyle = {
 
 export const ShareButtons = ({ article, onMouseEnter, onMouseLeave, show }: ShareButtonsProps) => {
   const { lang } = useLangContext();
-  const shareUrl = `https://felix-one.vercel.app/article/${article._id}`;
+  const shareUrl = `https://felix-one.vercel.app/article/${article.handle}`;
   const shareTitle =
     lang === "EN" ? `${article.content.find(con => con.type === 'paragraph')?.englishContent?.slice(0, 120)}...`
       : `${article.content.find(con => con.type === 'paragraph')?.chineseContent?.slice(0, 70)}...`;

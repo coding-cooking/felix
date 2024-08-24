@@ -15,6 +15,7 @@ export type ArticleInterface = {
     _id: string;
     chineseTitle: string;
     englishTitle: string;
+    handle: string;
     publishedDate: Date;
     bannerImageUrl: string;
     id: string;

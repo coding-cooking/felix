@@ -43,6 +43,7 @@ const articleSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	handle: String,
 	bannerImageUrl: String,
 	publishedDate: {
 		type: Date,
