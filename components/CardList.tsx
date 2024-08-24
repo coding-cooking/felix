@@ -11,8 +11,8 @@ import PaginationCard from "./PaginationCard";
 import { CardImage } from "./CardImage";
 import { ShareButtons } from "./ShareButtons";
 import styled from "@emotion/styled";
-import { ArticleInterface } from "@/app/context/ArticleContext";
-import { useLangContext } from "@/app/context/LangContext";
+import { ArticleInterface } from "@/context/ArticleContext";
+import { useLangContext } from "@/context/LangContext";
 
 const StyledBoxContainer = styled(Box)`
   display: grid;
@@ -73,7 +73,7 @@ type CardListProps = {
   initialPage: string,
 };
 
-export default function CardList({ articles,initialPage }: CardListProps) {
+export default function CardList({ articles, initialPage }: CardListProps) {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [showShareButtons, setShowShareButtons] = useState<boolean>(false);
   const [pageSize, setPageSize] = useState<number>(9)

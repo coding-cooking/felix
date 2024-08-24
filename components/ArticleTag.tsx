@@ -1,7 +1,7 @@
 "use client"
 
-import { ArticleInterface } from "@/app/context/ArticleContext";
-import { useLangContext } from "@/app/context/LangContext";
+import { ArticleInterface } from "@/context/ArticleContext";
+import { useLangContext } from "@/context/LangContext";
 import Link from "next/link";
 
 type ArticleTagProps = {
@@ -23,7 +23,7 @@ export const tagMap: { [key: string]: string } = {
     "健身": "exercise",
     "财经": "finance",
     "英语": "English"
-} 
+}
 
 export const ArticleTag = ({ article }: ArticleTagProps) => {
     const { lang } = useLangContext();
@@ -67,6 +67,6 @@ export const ArticleTag = ({ article }: ArticleTagProps) => {
                     </span>
                 </Link>
             })
-    }
+        }
     </>
 }

@@ -1,7 +1,7 @@
 "use client"
 
-import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
-import CardList from "./CardList"
+import ArticleContext, { ArticleInterface } from "@/context/ArticleContext";
+import CardList from "./CardList";
 import { useContext } from "react";
 
 type ArticleListProps = {
@@ -11,6 +11,6 @@ type ArticleListProps = {
 export const ArticleList = ({ initialPage }: ArticleListProps) => {
     const articles: ArticleInterface[] = useContext(ArticleContext);
     return (
-        <CardList articles={articles} initialPage={initialPage}/>
+        <CardList articles={articles} initialPage={initialPage} />
     )
 }

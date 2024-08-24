@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { FacebookIcon, FacebookShareButton, TwitterShareButton, WeiboIcon, WeiboShareButton, WhatsappIcon, WhatsappShareButton, XIcon } from "react-share";
 import { keyframes } from '@emotion/react';
-import { ArticleInterface } from "@/app/context/ArticleContext";
-import { useLangContext } from "@/app/context/LangContext";
+import { ArticleInterface } from "@/context/ArticleContext";
+import { useLangContext } from "@/context/LangContext";
 
 const fadeIn = keyframes`
   from {

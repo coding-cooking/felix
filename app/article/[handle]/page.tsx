@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { notFound } from "next/navigation";
 import { ArticleImage } from "@/components/ArticleImage";
-import { ArticleInterface } from "../../context/ArticleContext";
+import { ArticleInterface } from "../../../context/ArticleContext";
 import { Metadata } from 'next';
 import { RecentArticles } from '@/components/RecentArticles';
 import { ArticleContent } from '@/components/ArticleContent';

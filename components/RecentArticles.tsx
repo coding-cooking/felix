@@ -1,12 +1,12 @@
 "use client"
 
-import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext";
+import ArticleContext, { ArticleInterface } from "@/context/ArticleContext";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { useContext } from "react";
 import styled from "@emotion/styled";
-import { useLangContext } from "@/app/context/LangContext";
+import { useLangContext } from "@/context/LangContext";
 
 const StyledBox = styled(Box)`
     margin-top: 20px;

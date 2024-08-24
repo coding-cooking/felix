@@ -1,11 +1,11 @@
 "use client"
 
-import { ArticleInterface } from '@/app/context/ArticleContext';
+import { ArticleInterface } from '@/context/ArticleContext';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import styled from "@emotion/styled";
-import default_image from "../public/default_image.jpg"
-import { useLangContext } from '@/app/context/LangContext';
+import default_image from "../public/default_image.jpg";
+import { useLangContext } from '@/context/LangContext';
 
 type ArticleContentInterface = {
     article: ArticleInterface;
@@ -42,8 +42,8 @@ export const ArticleContent = ({ article }: ArticleContentInterface) => {
                                 height: 'auto',
                             }}
                             width={600}
-                            height={400} 
-                            />
+                            height={400}
+                        />
                         <StyledCaption>{lang === "EN" ? con.englishCaption : con.chineseCaption}</StyledCaption>
                     </div>
             })}

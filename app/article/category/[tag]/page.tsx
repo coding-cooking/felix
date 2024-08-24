@@ -1,7 +1,7 @@
 "use client"
 
-import ArticleContext, { ArticleInterface } from "@/app/context/ArticleContext"
-import { useLangContext } from "@/app/context/LangContext"
+import ArticleContext, { ArticleInterface } from "@/context/ArticleContext"
+import { useLangContext } from "@/context/LangContext"
 import CardList from "@/components/CardList"
 import { useContext } from "react"
 import Container from "@mui/material/Container"

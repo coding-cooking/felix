@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 import { GoogleTagManager } from '@next/third-parties/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { usePathname } from 'next/navigation';
-import ArticleContext, { ArticleInterface } from "./context/ArticleContext";
-import LangContext from "./context/LangContext";
+import ArticleContext, { ArticleInterface } from "../context/ArticleContext";
+import LangContext from "../context/LangContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,7 +31,7 @@ export default function RootLayout({
   }, []);
 
   useEffect(() => {
-    const fetchArticles = async (page=1) => {
+    const fetchArticles = async (page = 1) => {
       try {
         const res = await fetch(`/api/articles`);
         const data = await res.json();
@@ -49,7 +49,7 @@ export default function RootLayout({
       <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
       <body className={inter.className}>
         <AppRouterCacheProvider options={{ key: "fei" }}>
-          <LangContext.Provider value={{lang, setLang}}>
+          <LangContext.Provider value={{ lang, setLang }}>
             <ArticleContext.Provider value={articles}>
               <HeaderBar />
               {windowHeight && (

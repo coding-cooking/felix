@@ -12,7 +12,7 @@ import SearchBar from "./SearchBar";
 import { Suspense } from "react";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import GTranslateIcon from '@mui/icons-material/GTranslate';
-import { useLangContext } from "@/app/context/LangContext";
+import { useLangContext } from "@/context/LangContext";
 
 const StyledContainer = styled(Container)`
   @media (max-width: 768px) {
