@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import Stack from '@mui/material/Stack';
 import Image from 'next/image';
 import Skeleton from '@mui/material/Skeleton';
-import { ArticleInterface } from '@/app/context/ArticleContext';
+import { ArticleInterface } from '@/context/ArticleContext';
 
 const StyledStack = styled(Stack)`
     width: 100%;
