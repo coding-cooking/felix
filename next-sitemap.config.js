@@ -2,12 +2,12 @@
 export default {
 	siteUrl: "https://felix-one.vercel.app",
 	generateRobotsTxt: true,
-	exclude: ["/article/new/*", "/api/*"],
+	exclude: ["/article/new", "/article/new/*", "/api/*"],
 	robotsTxtOptions: {
 		policies: [
 			{
 				userAgent: "*",
-				disallow: ["/article/new/*", "/api/*"],
+				disallow: ["/article/new", "/article/new/*", "/api/*"],
 			},
 		],
 	},

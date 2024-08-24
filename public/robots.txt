@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Disallow: /article/new/*
+Disallow: /api/*
+
+# Host
+Host: https://felix-one.vercel.app
+
+# Sitemaps
+Sitemap: https://felix-one.vercel.app/sitemap.xml
