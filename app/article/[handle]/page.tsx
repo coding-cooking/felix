@@ -17,7 +17,7 @@ type Props = {
   params: { handle: string }
 }
 
-export const generateMetadata = cache(async ({ params }: Props): Promise<Metadata> => {
+export async function generateMetadata ({ params }: Props): Promise<Metadata> {
   const handle = params.handle;
   const data = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
   const canonicalUrl = `${process.env.BASE_URL}/article/${handle}`;
@@ -50,9 +50,8 @@ export const generateMetadata = cache(async ({ params }: Props): Promise<Metadat
     },
   }
 }
-)
 
-export const Article = cache(async ({ params }: { params: { handle: string } }) =>{
+export default async function Article ({ params }: { params: { handle: string } }){
   "use server";
   const { handle } = params;
   try {
@@ -108,6 +107,4 @@ export const Article = cache(async ({ params }: { params: { handle: string } }) 
   }
 
 }
-)
 
-export default Article;
