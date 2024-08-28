@@ -29,7 +29,7 @@ export const ArticleTag = ({ article }: ArticleTagProps) => {
     const { lang } = useLangContext();
 
     return <>
-        Tags:
+        <b>Tags:</b>
         {lang === "EN" ?
             article.englishTags.map((tag, index) => {
                 const lowercaseTag = tag.toLowerCase();
