@@ -38,7 +38,8 @@ interface ContentBlock {
     englishCaption?: string;
 }
 
-export default function NewArticle() {
+export default function UpdateArticle({ params }: { params: { handle: string } }) {
+    const { handle } = params;
     const [contentType, setContentType] = useState<'paragraph' | 'image'>('paragraph');
     const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([{ type: contentType }]);
     const [chineseTags, setChineseTags] = useState<string[]>([]);
@@ -85,7 +86,7 @@ export default function NewArticle() {
             } else {
                 alert('Failed to create article.');
             }
-        }catch(error){
+        } catch (error) {
             console.log(error)
         }
     };
@@ -100,7 +101,7 @@ export default function NewArticle() {
                 <InputLabel htmlFor="handle" required>Handle</InputLabel>
                 <Input id="handle" name="handle" />
                 <InputLabel htmlFor="bannerImageUrl" required>Banner ImageUrl</InputLabel>
-                <Input id="bannerImageUrl" name="bannerImageUrl"/>
+                <Input id="bannerImageUrl" name="bannerImageUrl" />
                 {contentBlocks.map((block, index) => (
                     <div key={index}>
                         <InputLabel id={`content-type-label-${index}`} required>Type</InputLabel>
