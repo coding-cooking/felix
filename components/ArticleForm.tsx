@@ -9,7 +9,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import { Button } from '@mui/base/Button';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SelectChangeEvent } from '@mui/material';
 import { TagsInput } from "@/components/TagsInput";
 
@@ -29,7 +29,7 @@ const StyledForm = styled.form`
     }
 `
 
-interface ContentBlock {
+type ContentBlock = {
     type: string;
     chineseContent?: string;
     englishContent?: string;
@@ -38,11 +38,32 @@ interface ContentBlock {
     englishCaption?: string;
 }
 
-export default function NewArticle() {
+type NewArticleProps = {
+    initialData?: {
+        chineseTitle: string;
+        englishTitle: string;
+        handle: string;
+        bannerImageUrl: string;
+        content: ContentBlock[];
+        chineseTags: string[];
+        englishTags: string[];
+    };
+    submitUrl: string;
+}
+
+export default function ArticleForm({ initialData, submitUrl }: NewArticleProps) {
     const [contentType, setContentType] = useState<'paragraph' | 'image'>('paragraph');
-    const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([{ type: contentType }]);
-    const [chineseTags, setChineseTags] = useState<string[]>([]);
-    const [englishTags, setEnglishTags] = useState<string[]>([]);
+    const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>(initialData?.content || [{ type: contentType }]);
+    const [chineseTags, setChineseTags] = useState<string[]>(initialData?.chineseTags || []);
+    const [englishTags, setEnglishTags] = useState<string[]>(initialData?.englishTags || []);
+
+    useEffect(() => {
+        if (initialData) {
+            setContentBlocks(initialData.content);
+            setChineseTags(initialData.chineseTags);
+            setEnglishTags(initialData.englishTags);
+        }
+    }, [initialData]);
 
     const handleTypeChange = (index: number, event: SelectChangeEvent<string>) => {
         const newContentBlocks = [...contentBlocks];
@@ -73,7 +94,7 @@ export default function NewArticle() {
             chineseTags,
         };
         try {
-            const response = await fetch('/api/articles/new', {
+            const response = await fetch(submitUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,9 +102,9 @@ export default function NewArticle() {
                 body: JSON.stringify(formObject),
             });
             if (response.ok) {
-                alert('Article created successfully!');
+                alert('Article submitted successfully!');
             } else {
-                alert('Failed to create article.');
+                alert('Failed to submit article.');
             }
         } catch (error) {
             console.log(error)
@@ -94,13 +115,13 @@ export default function NewArticle() {
         <StyledContainer>
             <StyledForm onSubmit={handleSubmit}>
                 <InputLabel htmlFor="chineseTitle" required>Chinese Title</InputLabel>
-                <Input id="chineseTitle" name="chineseTitle" />
+                <Input id="chineseTitle" name="chineseTitle" defaultValue={initialData?.chineseTitle || ''} />
                 <InputLabel htmlFor="englishTitle" required>English Title</InputLabel>
-                <Input id="englishTitle" name="englishTitle" />
+                <Input id="englishTitle" name="englishTitle" defaultValue={initialData?.englishTitle || ''} />
                 <InputLabel htmlFor="handle" required>Handle</InputLabel>
-                <Input id="handle" name="handle" />
+                <Input id="handle" name="handle" defaultValue={initialData?.handle || ''} />
                 <InputLabel htmlFor="bannerImageUrl" required>Banner ImageUrl</InputLabel>
-                <Input id="bannerImageUrl" name="bannerImageUrl" />
+                <Input id="bannerImageUrl" name="bannerImageUrl" defaultValue={initialData?.bannerImageUrl || ''} />
                 {contentBlocks.map((block, index) => (
                     <div key={index}>
                         <InputLabel id={`content-type-label-${index}`} required>Type</InputLabel>
@@ -124,6 +145,7 @@ export default function NewArticle() {
                                     style={{ width: "100%" }}
                                     id={`chineseContent-${index}`}
                                     name="chineseContent"
+                                    defaultValue={block.chineseContent || ''}
                                     onChange={(event) => handleInputChange(index, 'chineseContent', event)}
                                 />
                                 <InputLabel htmlFor={`englishContent-${index}`} required>English Content</InputLabel>
@@ -133,6 +155,7 @@ export default function NewArticle() {
                                     style={{ width: "100%" }}
                                     id={`englishContent-${index}`}
                                     name="englishContent"
+                                    defaultValue={block.englishContent || ''}
                                     onChange={(event) => handleInputChange(index, 'englishContent', event)}
                                 />
                             </>
@@ -145,6 +168,7 @@ export default function NewArticle() {
                                     id={`imageUrl-${index}`}
                                     name="imageUrl"
                                     style={{ width: "100%" }}
+                                    defaultValue={block.imageUrl || ''}
                                     onChange={(event) => handleInputChange(index, 'imageUrl', event)}
                                 />
                                 <InputLabel htmlFor={`chineseCaption-${index}`} required>Chinese Caption</InputLabel>
@@ -152,6 +176,7 @@ export default function NewArticle() {
                                     id={`chineseCaption-${index}`}
                                     name="chineseCaption"
                                     style={{ width: "100%" }}
+                                    defaultValue={block.chineseCaption || ''}
                                     onChange={(event) => handleInputChange(index, 'chineseCaption', event)}
                                 />
                                 <InputLabel htmlFor={`englishCaption-${index}`} required>English Caption</InputLabel>
@@ -159,6 +184,7 @@ export default function NewArticle() {
                                     id={`englishCaption-${index}`}
                                     name="englishCaption"
                                     style={{ width: "100%" }}
+                                    defaultValue={block.englishCaption || ''}
                                     onChange={(event) => handleInputChange(index, 'englishCaption', event)}
                                 />
                             </Stack>

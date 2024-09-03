@@ -6,6 +6,4 @@ export const PUT = async (req: NextRequest, res: NextResponse) => {
     if (!chineseTitle || !englishTitle || !handle || !bannerImageUrl || !content || !englishTags || !chineseTags) {
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 400 })
     }
-    
-
 }

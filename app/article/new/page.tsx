@@ -1,8 +1,8 @@
 "use client"
-import NewArticle from "@/components/NewArticle"
+import ArticleForm from "@/components/ArticleForm"
 
 export default function CreateArticle() {
     return (
-        <NewArticle />
+        <ArticleForm submitUrl="/api/articles/new"/>
     )
 }
