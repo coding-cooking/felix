@@ -12,7 +12,6 @@ import { Button } from '@mui/base/Button';
 import { useState } from "react";
 import { SelectChangeEvent } from '@mui/material';
 import { TagsInput } from "@/components/TagsInput";
-import { ArticleInterface } from "@/context/ArticleContext";
 
 const StyledContainer = styled(Container)`
     margin-top: 100px;
@@ -39,15 +38,11 @@ interface ContentBlock {
     englishCaption?: string;
 }
 
-export default async function UpdateArticle({ params }: { params: { handle: string } }) {
-    const { handle } = params;
+export default function NewArticle() {
     const [contentType, setContentType] = useState<'paragraph' | 'image'>('paragraph');
     const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([{ type: contentType }]);
     const [chineseTags, setChineseTags] = useState<string[]>([]);
     const [englishTags, setEnglishTags] = useState<string[]>([]);
-
-    const response = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
-    const article: ArticleInterface = await response.json();
 
     const handleTypeChange = (index: number, event: SelectChangeEvent<string>) => {
         const newContentBlocks = [...contentBlocks];
@@ -78,14 +73,14 @@ export default async function UpdateArticle({ params }: { params: { handle: stri
             chineseTags,
         };
         try {
-            const res = await fetch('/api/articles/update', {
+            const response = await fetch('/api/articles/new', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formObject),
             });
-            if (res.ok) {
+            if (response.ok) {
                 alert('Article created successfully!');
             } else {
                 alert('Failed to create article.');
@@ -99,13 +94,13 @@ export default async function UpdateArticle({ params }: { params: { handle: stri
         <StyledContainer>
             <StyledForm onSubmit={handleSubmit}>
                 <InputLabel htmlFor="chineseTitle" required>Chinese Title</InputLabel>
-                <Input id="chineseTitle" name="chineseTitle" value={article.chineseTitle} />
+                <Input id="chineseTitle" name="chineseTitle" />
                 <InputLabel htmlFor="englishTitle" required>English Title</InputLabel>
-                <Input id="englishTitle" name="englishTitle" value={article.englishTitle} />
+                <Input id="englishTitle" name="englishTitle" />
                 <InputLabel htmlFor="handle" required>Handle</InputLabel>
-                <Input id="handle" name="handle" value={article.handle}/>
+                <Input id="handle" name="handle" />
                 <InputLabel htmlFor="bannerImageUrl" required>Banner ImageUrl</InputLabel>
-                <Input id="bannerImageUrl" name="bannerImageUrl" value={article.bannerImageUrl}/>
+                <Input id="bannerImageUrl" name="bannerImageUrl" />
                 {contentBlocks.map((block, index) => (
                     <div key={index}>
                         <InputLabel id={`content-type-label-${index}`} required>Type</InputLabel>
