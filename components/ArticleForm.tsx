@@ -12,6 +12,7 @@ import { Button } from '@mui/base/Button';
 import { useEffect, useState } from "react";
 import { SelectChangeEvent } from '@mui/material';
 import { TagsInput } from "@/components/TagsInput";
+import { useRouter } from "next/navigation";
 
 const StyledContainer = styled(Container)`
     margin-top: 100px;
@@ -56,6 +57,7 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
     const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>(initialData?.content || [{ type: contentType }]);
     const [chineseTags, setChineseTags] = useState<string[]>(initialData?.chineseTags || []);
     const [englishTags, setEnglishTags] = useState<string[]>(initialData?.englishTags || []);
+    const router = useRouter();
 
     useEffect(() => {
         if (initialData) {
@@ -95,7 +97,7 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
         };
         try {
             const response = await fetch(submitUrl, {
-                method: 'POST',
+                method: submitUrl === '/api/articles/new' ? 'POST': 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -103,6 +105,7 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
             });
             if (response.ok) {
                 alert('Article submitted successfully!');
+                router.push(`/article/${formObject.handle}`); 
             } else {
                 alert('Failed to submit article.');
             }
