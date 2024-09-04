@@ -94,6 +94,7 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
             content: contentBlocks,
             englishTags,
             chineseTags,
+            secret: process.env.NEXT_PUBLIC_ARTICLE_SECRET, 
         };
         try {
             const response = await fetch(submitUrl, {
