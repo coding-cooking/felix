@@ -5,6 +5,12 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (req: NextRequest, res: NextResponse) => {
     const { chineseTitle, englishTitle, handle, bannerImageUrl, content, englishTags, chineseTags } = await req.json();
 
+    const secret = req.headers.get('x-article-secret');
+
+    if (secret !== process.env.ARTICLE_SECRET) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     if (!chineseTitle || !englishTitle || !handle || !bannerImageUrl || !content || !englishTags || !chineseTags) {
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 400 })
     }

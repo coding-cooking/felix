@@ -101,6 +101,7 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
                 method: submitUrl === '/api/articles/new' ? 'POST': 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'x-article-secret': process.env.NEXT_PUBLIC_ARTICLE_SECRET || '',
                 },
                 body: JSON.stringify(formObject),
             });

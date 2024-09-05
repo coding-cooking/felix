@@ -3,8 +3,10 @@ import connectDB from "@/config/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
 
 export const PUT = async (req: NextRequest, res: NextResponse) => {
-    const { chineseTitle, englishTitle, handle, bannerImageUrl, content, englishTags, chineseTags, secret } = await req.json();
+    const { chineseTitle, englishTitle, handle, bannerImageUrl, content, englishTags, chineseTags } = await req.json();
 
+    const secret = req.headers.get('x-article-secret');
+    
     if (secret !== process.env.ARTICLE_SECRET) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
