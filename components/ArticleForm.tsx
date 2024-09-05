@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import { useEffect, useState } from "react";
 import { SelectChangeEvent } from '@mui/material';
 import { TagsInput } from "@/components/TagsInput";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const StyledContainer = styled(Container)`
     margin-top: 100px;
@@ -61,6 +61,17 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
     const [englishTags, setEnglishTags] = useState<string[]>(initialData?.englishTags || []);
     const [articleSecret, setArticleSecret] = useState<string>('');
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const secret = process.env.NEXT_PUBLIC_ARTICLE_SECRET;
+
+    const querySecret = searchParams.get('secret');
+
+    useEffect(()=> {
+        if (querySecret !== secret ){
+            router.push('/');
+        }
+    },[searchParams])
 
     useEffect(() => {
         if (initialData) {
@@ -98,12 +109,6 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
             englishTags,
             chineseTags,
         };
-
-        // if (!secret) {
-        //     console.error('Secret is not defined.');
-        //     alert('Submission failed: missing secret.');
-        //     return;
-        // }
 
         try {
             const response = await fetch(submitUrl, {

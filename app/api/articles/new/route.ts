@@ -7,8 +7,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
     const secret = req.headers.get('x-article-secret');
 
-    console.log(secret)
-
     if (secret !== process.env.NEXT_PUBLIC_ARTICLE_SECRET) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
