@@ -6,8 +6,8 @@ export const PUT = async (req: NextRequest, res: NextResponse) => {
     const { chineseTitle, englishTitle, handle, bannerImageUrl, content, englishTags, chineseTags } = await req.json();
 
     const secret = req.headers.get('x-article-secret');
-    
-    if (secret !== process.env.ARTICLE_SECRET) {
+
+    if (secret !== process.env.NEXT_PUBLIC_ARTICLE_SECRET) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 

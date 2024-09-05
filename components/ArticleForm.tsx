@@ -8,7 +8,7 @@ import styled from "@emotion/styled";
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
-import { Button } from '@mui/base/Button';
+import Button from '@mui/material/Button';
 import { useEffect, useState } from "react";
 import { SelectChangeEvent } from '@mui/material';
 import { TagsInput } from "@/components/TagsInput";
@@ -16,11 +16,13 @@ import { useRouter } from "next/navigation";
 
 const StyledContainer = styled(Container)`
     margin-top: 100px;
+    
     width: 100%;
 `
 
 const StyledForm = styled.form`
     margin: 0 auto;
+    padding-bottom: 100px;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -57,6 +59,7 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
     const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>(initialData?.content || [{ type: contentType }]);
     const [chineseTags, setChineseTags] = useState<string[]>(initialData?.chineseTags || []);
     const [englishTags, setEnglishTags] = useState<string[]>(initialData?.englishTags || []);
+    const [articleSecret, setArticleSecret] = useState<string>('');
     const router = useRouter();
 
     useEffect(() => {
@@ -95,26 +98,25 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
             englishTags,
             chineseTags,
         };
-        const secret = process.env.NEXT_PUBLIC_ARTICLE_SECRET;
 
-        if (!secret) {
-            console.error('Secret is not defined.');
-            alert('Submission failed: missing secret.');
-            return;
-        }
+        // if (!secret) {
+        //     console.error('Secret is not defined.');
+        //     alert('Submission failed: missing secret.');
+        //     return;
+        // }
 
         try {
             const response = await fetch(submitUrl, {
-                method: submitUrl === '/api/articles/new' ? 'POST': 'PUT',
+                method: submitUrl === '/api/articles/new' ? 'POST' : 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-article-secret': secret,
+                    'x-article-secret': articleSecret,
                 },
                 body: JSON.stringify(formObject),
             });
             if (response.ok) {
                 alert('Article submitted successfully!');
-                router.push(`/article/${formObject.handle}`); 
+                router.push(`/article/${formObject.handle}`);
             } else {
                 alert('Failed to submit article.');
             }
@@ -204,7 +206,12 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
                     </div>
                 ))}
 
-                <Button color="primary" onClick={addContentBlock}>Add Content Block</Button>
+                <Button
+                    variant="contained"
+                    sx={{ width: 200, height: 40, marginTop: 2, marginBottom: 2 }}
+                    onClick={addContentBlock}>
+                    Add Content Block
+                </Button>
 
                 <TagsInput tags={chineseTags} setTags={setChineseTags} label="Chinese Tags" />
                 <TagsInput tags={englishTags} setTags={setEnglishTags} label="English Tags" />
@@ -213,7 +220,14 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
                 <Input id="chineseTags" name="chineseTags"/>
                 <InputLabel htmlFor="englishTags" required>English Tags</InputLabel>
                 <Input id="englishTags" name="englishTags" /> */}
-                <Button type="submit">
+                <InputLabel htmlFor="articleSecret" required>Article Secret</InputLabel>
+                <Input
+                    id="articleSecret"
+                    name="articleSecret"
+                    value={articleSecret}
+                    onChange={(e) => setArticleSecret(e.target.value)} // Handle secret input
+                />
+                <Button type="submit" variant="contained" sx={{ width: 200, height: 40, marginTop: 2, marginBottom: 2 }}>
                     Submit
                 </Button>
             </StyledForm>
