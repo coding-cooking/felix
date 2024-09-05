@@ -94,14 +94,21 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
             content: contentBlocks,
             englishTags,
             chineseTags,
-            secret: process.env.NEXT_PUBLIC_ARTICLE_SECRET, 
         };
+        const secret = process.env.NEXT_PUBLIC_ARTICLE_SECRET;
+
+        if (!secret) {
+            console.error('Secret is not defined.');
+            alert('Submission failed: missing secret.');
+            return;
+        }
+
         try {
             const response = await fetch(submitUrl, {
                 method: submitUrl === '/api/articles/new' ? 'POST': 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-article-secret': process.env.NEXT_PUBLIC_ARTICLE_SECRET || '',
+                    'x-article-secret': secret,
                 },
                 body: JSON.stringify(formObject),
             });
