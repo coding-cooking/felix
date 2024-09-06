@@ -5,7 +5,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import { ArticleList } from "@/components/ArticleList";
 
 export const metadata: Metadata = {
-  title: "Fei Zhang | Felix | Web Development | Product Operations",
+  title: "Felix | Web Development | Product Operations",
   description: "My name is Felix, I'm a software engineer based in Sydney, I'd love to provide high standard services regarding web development on both the frontend and backend. My email can be accessed on my blog website: felix-one.vercel.app.",
   icons: {
     icon: "/logo_light.png"
