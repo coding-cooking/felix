@@ -56,10 +56,6 @@ export async function generateStaticParams() {
     return articles.map((article) => ({
       handle: article.handle,
     }))
-  } else {
-    return {
-      notFound: true,
-    }
   }
 }
 
