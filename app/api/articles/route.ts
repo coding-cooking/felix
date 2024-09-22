@@ -6,6 +6,7 @@ export async function GET(request: Request) {
     try {
         await dbConnect();
         const articles = await Article.find({}).lean().exec();
+        NextResponse.next().headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=30');
         if (articles.length === 0) return NextResponse.json({ message: "No articles found!" }, { status: 204 });
         return NextResponse.json(articles, { status: 200 });
     } catch (err) {
