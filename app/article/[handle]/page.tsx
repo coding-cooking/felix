@@ -17,7 +17,7 @@ type Props = {
   params: { handle: string }
 }
 
-export async function generateMetadata ({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const handle = params.handle;
   const data = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
   const canonicalUrl = `${process.env.BASE_URL}/article/${handle}`;
@@ -51,8 +51,14 @@ export async function generateMetadata ({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Article ({ params }: { params: { handle: string } }){
-  "use server";
+export async function generateStaticParams() {
+  const articles: ArticleInterface[] = await fetch(`${process.env.BASE_URL}/api/articles`).then((res) => res.json())
+  return articles.map((post) => ({
+    handle: post.handle,
+  }))
+}
+
+export default async function Article({ params }: { params: { handle: string } }) {
   const { handle } = params;
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
@@ -105,6 +111,5 @@ export default async function Article ({ params }: { params: { handle: string } 
     console.error("Error fetching article:", err);
     return notFound();
   }
-
 }
 
