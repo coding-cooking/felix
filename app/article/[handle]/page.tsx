@@ -56,7 +56,6 @@ export async function generateStaticParams() {
   return articles.map((article) => ({
     handle: article.handle,
   }))
-
 }
 
 export default async function Article({ params }: { params: { handle: string } }) {
