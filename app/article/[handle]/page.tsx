@@ -50,46 +50,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  // const articles: ArticleInterface[] = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`)
-  //   .then((res) => res.json())
-  //   .catch((err) => {
-  //     console.error('Error fetching articles:', err);
-  //     return [];
-  //   });
-
-  // if (!articles || articles.length === 0) {
-  //   return [];
-  // }
-
-  // return articles.map((article) => ({
-  //   handle: article.handle,
-  // }))
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`);
-    // const data = await response.text(); // Read as plain text to check if it's HTML
-    try {
-      const articles: ArticleInterface[] = await response.json(); // Parse JSON if valid
-      return articles.map((article) => ({
-        handle: article.handle,
-      }));
-    } catch (parseError) {
-      console.error('Error parsing JSON:', parseError);
+  const articles: ArticleInterface[] = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`)
+    .then((res) => res.json())
+    .catch((err) => {
+      console.error('Error fetching articles:', err);
       return [];
-    }
-  } catch (err) {
-    console.error('Error fetching articles:', err);
+    });
+
+  if (!articles || articles.length === 0) {
     return [];
   }
+
+  return articles.map((article) => ({
+    handle: article.handle,
+  }))
 }
 
 export default async function Article({ params }: { params: { handle: string } }) {
+
   const { handle } = params;
+
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${handle}`);
+
     if (!response.ok) {
       return notFound();
     }
+
     const article: ArticleInterface = await response.json();
+
     if (!article) return notFound();
 
     const articleDate = new Date(article.publishedDate);
