@@ -60,7 +60,7 @@ export async function generateStaticParams() {
 export default async function Article({ params }: { params: { handle: string } }) {
   const { handle } = params;
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
     if (!response.ok) {
       return notFound();
     }
