@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
-    const articles: ArticleInterface[] = await fetch(`${process.env.BASE_URL}/api/articles`).then((res) => res.json())
+    const articles: ArticleInterface[] = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`).then((res) => res.json())
     return articles.map((article) => ({
       handle: article.handle,
     }))
