@@ -19,7 +19,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const handle = params.handle;
-  const data = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
+  const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
   const canonicalUrl = `${process.env.BASE_URL}/article/${handle}`;
   const article: ArticleInterface = await data.json();
   const shareDescription = article.content?.find(con => con.type === 'paragraph')?.englishContent?.slice(0, 150) + '...';
