@@ -19,7 +19,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const handle = params.handle;
   const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
-  const canonicalUrl = `${process.env.BASE_URL}/article/${handle}`;
+  const canonicalUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/article/${handle}`;
   const article: ArticleInterface = await data.json();
   const shareDescription = article.content?.find(con => con.type === 'paragraph')?.englishContent?.slice(0, 150) + '...';
   const shareImageUrl = article.bannerImageUrl || 'https://images.pexels.com/photos/21300075/pexels-photo-21300075/free-photo-of-sydney-sea.jpeg';

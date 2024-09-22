@@ -9,8 +9,8 @@ type UpdateArticleProps = {
 
 export default async function UpdateArticle({ params }: UpdateArticleProps) {
     const { handle } = params;
-    const response = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
     const article: ArticleInterface = await response.json();
 
-    return <ArticleForm initialData={article} submitUrl="/api/articles/update"/>
+    return <ArticleForm initialData={article} submitUrl="/api/articles/update" />
 }
