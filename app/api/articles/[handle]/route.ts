@@ -9,8 +9,8 @@ export async function GET(req: NextRequest, { params }: { params: { handle: stri
     if (!params?.handle) {
         return NextResponse.json({ message: 'Handle parameter is required!' }, { status: 404 });
     }
-    NextResponse.next().headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=30');
     const article = await Article.findOne({ handle: params.handle }).exec();
+    NextResponse.next().headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=30');
     if (!article) {
         return NextResponse.json({ message: 'Not found' }, { status: 404 });
     }
