@@ -10,7 +10,6 @@ import { RecentArticles } from '@/components/RecentArticles';
 import { ArticleContent } from '@/components/ArticleContent';
 import { ArticleTitle } from '@/components/ArticleTitle';
 import { ArticleTag } from '@/components/ArticleTag';
-require("dotenv").config();
 
 type Props = {
   params: { handle: string }
