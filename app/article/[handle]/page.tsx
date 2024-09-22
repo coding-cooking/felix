@@ -59,7 +59,6 @@ export async function generateStaticParams() {
 }
 
 export default async function Article({ params }: { params: { handle: string } }) {
-  "use server";
   const { handle } = params;
   try {
     const response = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
