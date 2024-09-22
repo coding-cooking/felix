@@ -10,7 +10,6 @@ import { RecentArticles } from '@/components/RecentArticles';
 import { ArticleContent } from '@/components/ArticleContent';
 import { ArticleTitle } from '@/components/ArticleTitle';
 import { ArticleTag } from '@/components/ArticleTag';
-import { PHASE_PRODUCTION_BUILD } from 'next/dist/shared/lib/constants';
 require("dotenv").config();
 
 type Props = {
@@ -53,15 +52,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const articles: ArticleInterface[] = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`).then((res) => res.json())
-  return articles.map((article) => ({
-    handle: article.handle,
-  }))
+  if (articles) {
+    return articles.map((article) => ({
+      handle: article.handle,
+    }))
+  } else {
+    return {
+      notFound: true,
+    }
+  }
 }
 
 export default async function Article({ params }: { params: { handle: string } }) {
   const { handle } = params;
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
+    const response = await fetch(`${process.env.BASE_URL}/api/articles/${handle}`, { cache: 'force-cache' });
     if (!response.ok) {
       return notFound();
     }
