@@ -10,10 +10,14 @@ export async function GET(req: NextRequest, { params }: { params: { handle: stri
         return NextResponse.json({ message: 'Handle parameter is required!' }, { status: 404 });
     }
     const article = await Article.findOne({ handle: params.handle }).exec();
-    NextResponse.next().headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=30');
+
+    // Set cache control headers
+    const response = NextResponse.json(article, { status: 200 });
+    response.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=30');
+
     if (!article) {
         return NextResponse.json({ message: 'Not found' }, { status: 404 });
     }
 
-    return NextResponse.json(article, { status: 201 });
+    return NextResponse.json(article, { status: 200 });
 }

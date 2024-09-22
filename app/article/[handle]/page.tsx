@@ -51,19 +51,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`);
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    const articles: ArticleInterface[] = await res.json();
-    return articles.map((article) => ({
-      handle: article.handle,
-    }))
-  } catch (error) {
-    console.error("Failed to fetch articles:", error);
+  const articles: ArticleInterface[] = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`)
+    .then((res) => res.json())
+    .catch((err) => {
+      console.error('Error fetching articles:', err);
+      return [];
+    });
+
+  if (!articles || articles.length === 0) {
     return [];
   }
+
+  return articles.map((article) => ({
+    handle: article.handle,
+  }))
 }
 
 export default async function Article({ params }: { params: { handle: string } }) {
