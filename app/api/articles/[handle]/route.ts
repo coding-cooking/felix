@@ -4,14 +4,14 @@ import dbConnect from "@/config/dbConnect";
 
 export const dynamic = 'force-static';
 
-export async function GET(req: NextRequest, res: { params: { handle: string } }) {
-    if (!res?.params?.handle) {
+export async function GET(req: NextRequest, {params}: { params: { handle: string } }) {
+    if (!params?.handle) {
         return NextResponse.json({ message: 'Handle parameter is required!' }, { status: 404 });
     }
 
     await dbConnect();
 
-    const article = await Article.findOne({ handle: res.params.handle }).exec();
+    const article = await Article.findOne({ handle: params.handle }).exec();
 
     // Set cache control headers
     const response = NextResponse.json(article, { status: 200 });
