@@ -67,11 +67,11 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
 
     const querySecret = searchParams.get('secret');
 
-    useEffect(()=> {
-        if (querySecret !== secret ){
+    useEffect(() => {
+        if (querySecret !== secret) {
             router.push('/');
         }
-    },[searchParams])
+    }, [searchParams])
 
     useEffect(() => {
         if (initialData) {
@@ -149,6 +149,7 @@ export default function ArticleForm({ initialData, submitUrl }: NewArticleProps)
                             style={{ width: "44%", height: "30px" }}
                             value={block.type}
                             name="type"
+                            defaultChecked={true}
                             onChange={(event) => handleTypeChange(index, event)}
                         >
                             <MenuItem value="paragraph">Paragraph</MenuItem>
