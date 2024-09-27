@@ -11,7 +11,6 @@ import { LogoSvg } from "./Icon";
 import SearchBar from "./SearchBar";
 import { Suspense } from "react";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import GTranslateIcon from '@mui/icons-material/GTranslate';
 import { useLangContext } from "@/context/LangContext";
 import LangSwitch from "./LangSwitch";
 
@@ -20,7 +19,6 @@ const StyledContainer = styled(Container)`
           margin-bottom: 10px;
         }
 `
-
 const StyledAppBar = styled(AppBar)`
   background-color: rgb(var(--header-bg));
 `;
@@ -66,8 +64,7 @@ function HeaderBar() {
           </TableSeachBar>
 
           <Stack sx={{ flexDirection: "row", flexGrow: 1, textAlign: "right", gap: 2, justifyContent: "end", alignItems: "center" }}>
-            <GTranslateIcon sx={{ cursor: "pointer" }} onClick={() => { setLang(prev => prev === "EN" ? "CH" : "EN") }} />
-            <LangSwitch />
+            <LangSwitch setLang={setLang} lang={lang} />
             <StyledLink href="mailto:felixzhang.rocinante@gmail.com">
               <MailOutlineIcon />
             </StyledLink>

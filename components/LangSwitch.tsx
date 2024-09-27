@@ -1,11 +1,15 @@
+"ues client"
+
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
+import { Dispatch, SetStateAction } from 'react';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 48,
     height: 24,
     padding: 7,
+    marginRight: 0,
     '& .MuiSwitch-switchBase': {
         margin: 1,
         padding: 0,
@@ -26,7 +30,6 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
         },
     },
     '& .MuiSwitch-thumb': {
-        // backgroundColor: '#001e3c',
         width: 20,
         height: 20,
         '&::before': {
@@ -54,11 +57,22 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     },
 }));
 
-export default function LangSwitch() {
+type LangSwitchProps = {
+    setLang: Dispatch<SetStateAction<"EN" | "CH">>;
+    lang: "EN" | "CH";
+}
+
+export default function LangSwitch({ lang, setLang }: LangSwitchProps) {
+    function handleChange(event: React.SyntheticEvent<Element, Event>, checked: boolean) {
+        setLang(checked ? "EN" : "CH");
+    }
+
     return (
         <FormControlLabel
             control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
             label=""
+            checked={lang === "EN"}
+            onChange={handleChange}
         />
     )
 }
