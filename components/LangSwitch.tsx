@@ -9,7 +9,6 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 48,
     height: 24,
     padding: 7,
-    marginRight: 0,
     '& .MuiSwitch-switchBase': {
         margin: 1,
         padding: 0,
@@ -70,6 +69,7 @@ export default function LangSwitch({ lang, setLang }: LangSwitchProps) {
     return (
         <FormControlLabel
             control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+            sx={{ marginRight: -2 }}
             label=""
             checked={lang === "EN"}
             onChange={handleChange}

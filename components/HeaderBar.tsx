@@ -63,7 +63,7 @@ function HeaderBar() {
             <Suspense><SearchBar /></Suspense>
           </TableSeachBar>
 
-          <Stack sx={{ flexDirection: "row", flexGrow: 1, textAlign: "right", gap: 2, justifyContent: "end", alignItems: "center" }}>
+          <Stack sx={{ flexDirection: "row", flexGrow: 1, textAlign: "right", gap: 4, justifyContent: "end", alignItems: "center" }}>
             <LangSwitch setLang={setLang} lang={lang} />
             <StyledLink href="mailto:felixzhang.rocinante@gmail.com">
               <MailOutlineIcon />
