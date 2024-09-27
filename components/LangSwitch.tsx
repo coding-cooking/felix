@@ -68,7 +68,7 @@ export default function LangSwitch({ lang, setLang }: LangSwitchProps) {
 
     return (
         <FormControlLabel
-            control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+            control={<MaterialUISwitch sx={{ m: 1 }} />}
             sx={{ marginRight: -2 }}
             label=""
             checked={lang === "EN"}
