@@ -1,8 +1,6 @@
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
-import english_icon from '../public/english_icon.svg';
-import chinese_filled from '../public/chinese-filled.png';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 48,
@@ -16,7 +14,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
             color: '#fff',
             transform: 'translateX(22px)',
             '& .MuiSwitch-thumb:before': {
-                backgroundImage: `url(${english_icon})`,
+                backgroundImage: `url('english_icon.svg')`,
             },
             '& + .MuiSwitch-track': {
                 opacity: 1,
@@ -28,7 +26,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
         },
     },
     '& .MuiSwitch-thumb': {
-        backgroundColor: '#001e3c',
+        // backgroundColor: '#001e3c',
         width: 20,
         height: 20,
         '&::before': {
@@ -40,7 +38,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
             top: 0,
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            backgroundImage: `url(${english_icon})`,
+            backgroundImage: `url('chinese_icon.svg')`,
         },
         ...theme.applyStyles('dark', {
             backgroundColor: '#003892',
