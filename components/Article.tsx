@@ -10,9 +10,8 @@ import { RecentArticles } from '@/components/RecentArticles';
 import { ArticleContent } from '@/components/ArticleContent';
 import { ArticleTitle } from '@/components/ArticleTitle';
 import { ArticleTag } from '@/components/ArticleTag';
-import dynamic from 'next/dynamic';
-const DiscussionEmbed = dynamic(() => import('disqus-react').then(mod => mod.DiscussionEmbed), { ssr: false });
-const CommentCount = dynamic(() => import('disqus-react').then(mod => mod.CommentCount), { ssr: false });
+import { DiscussionEmbed, CommentCount } from 'disqus-react';
+import { useLangContext } from '@/context/LangContext';
 
 type ArticleProps = {
     article: ArticleInterface,
@@ -21,16 +20,16 @@ type ArticleProps = {
 
 export const Article = ({ article, handle }: ArticleProps) => {
     const articleDate = new Date(article.publishedDate);
+    const { lang } = useLangContext();
     const disqusShortname = "felixs-blog-1";
     const disqusConfig = {
-        url: `${process.env.BASE_URL}/article/${handle}`,
+        url: `https://felix-one.vercel.app/article/${handle}`,
         identifier: article.id,
         title: article.englishTitle,
-        language: 'zh_TW',
+        language: 'en_US',
     };
 
     return (
-
         <Stack>
             <ArticleImage article={article} />
             <Container maxWidth="lg" sx={{
@@ -60,6 +59,8 @@ export const Article = ({ article, handle }: ArticleProps) => {
                         </Typography>
                         <Box>
                             <ArticleContent article={article} />
+                        </Box>
+                        <Box sx={{ margin: "30px 0" }}>
                             <CommentCount shortname={disqusShortname} config={disqusConfig}>
                                 Comments
                             </CommentCount>
