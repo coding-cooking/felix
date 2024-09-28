@@ -11,6 +11,7 @@ import { ArticleContent } from '@/components/ArticleContent';
 import { ArticleTitle } from '@/components/ArticleTitle';
 import { ArticleTag } from '@/components/ArticleTag';
 import { DiscussionEmbed, CommentCount } from 'disqus-react';
+import { useLangContext } from '@/context/LangContext';
 
 type ArticleProps = {
     article: ArticleInterface,
@@ -19,6 +20,7 @@ type ArticleProps = {
 
 export const Article = ({ article, handle }: ArticleProps) => {
     const articleDate = new Date(article.publishedDate);
+    const { lang } = useLangContext();
     const disqusShortname = "felixs-blog-1";
     const disqusConfig = {
         url: `https://felix-one.vercel.app/article/${handle}`,
@@ -28,7 +30,6 @@ export const Article = ({ article, handle }: ArticleProps) => {
     };
 
     return (
-
         <Stack>
             <ArticleImage article={article} />
             <Container maxWidth="lg" sx={{
@@ -58,6 +59,8 @@ export const Article = ({ article, handle }: ArticleProps) => {
                         </Typography>
                         <Box>
                             <ArticleContent article={article} />
+                        </Box>
+                        <Box sx={{ margin: "30px 0" }}>
                             <CommentCount shortname={disqusShortname} config={disqusConfig}>
                                 Comments
                             </CommentCount>
