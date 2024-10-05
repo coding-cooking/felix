@@ -41,22 +41,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-// export async function generateStaticParams() {
-//   const articles: ArticleInterface[] = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`)
-//     .then((res) => res.json())
-//     .catch((err) => {
-//       console.error('Error fetching articles:', err);
-//       return [];
-//     });
+export async function generateStaticParams() {
+  const articles: ArticleInterface[] = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`)
+    .then((res) => res.json())
+    .catch((err) => {
+      console.error('Error fetching articles:', err);
+      return [];
+    });
 
-//   if (!articles || articles.length === 0) {
-//     return [];
-//   }
+  if (!articles || articles.length === 0) {
+    return [];
+  }
 
-//   return articles.map((article) => ({
-//     handle: article.handle,
-//   }))
-// }
+  return articles.map((article) => ({
+    handle: article.handle,
+  }))
+}
 
 export default async function ArticlePage(this: any, { params }: { params: { handle: string } }) {
 
