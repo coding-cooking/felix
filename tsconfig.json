@@ -36,7 +36,7 @@
     "model/Article.js",
     "scripts/migratemd.js",
     "config/dbConnect.js"
-, "generate-sitemap.js", "config/commentsCount.js"  ],
+, "generate-sitemap.js", "config/commentsCount.js", "app/about/page.tsx"  ],
   "exclude": [
     "node_modules"
   ]
