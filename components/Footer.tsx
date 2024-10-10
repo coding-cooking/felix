@@ -2,10 +2,12 @@
 import Container from "@mui/material/Container";
 import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
+import Subscription from "./Subscription";
+import SubscriptionForm from "./SubscriptionForm";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 58px;
+  height: 100px;
   background-color: rgba(var(--header-bg), 0.9);
 `;
 
@@ -16,7 +18,7 @@ export default function Footer() {
         maxWidth="xl"
         sx={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "space-around",
           alignItems: "center",
           height: "100%",
         }}
@@ -31,7 +33,10 @@ export default function Footer() {
         >
           Copyright © 2024 | Felix
         </Typography>
-    </Container>
+        <Typography>
+          <SubscriptionForm />
+        </Typography>
+      </Container>
     </Wrapper >
   );
 }

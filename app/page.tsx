@@ -61,7 +61,7 @@ export default async function Homepage({ searchParams }: HomepageProps) {
       <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
       <ArticleList initialPage={initialPage} />
       {/* <CardList initialPage={initialPage} /> */}
-      <Subscription />
+      {/* <Subscription /> */}
     </>
   );
 }
