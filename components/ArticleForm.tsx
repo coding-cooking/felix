@@ -16,7 +16,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 const StyledContainer = styled(Container)`
     margin-top: 100px;
-    
     width: 100%;
 `
 
