@@ -15,7 +15,7 @@
     "@emotion/react": "^11.11.4",
     "@formspree/react": "^2.5.1",
     "@mui/icons-material": "^5.15.14",
-    "@mui/material-nextjs": "^5.15.11",
+    "@mui/material-nextjs": "^5.16.6",
     "@next/third-parties": "^14.1.4",
     "@types/mongoose": "^5.11.96",
     "aws4": "^1.13.0",
