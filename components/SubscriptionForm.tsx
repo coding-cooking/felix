@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 
 const Container = styled("div")(({ theme }) => ({
     width: "300px",
-    height: "40px",
+    height: "44px",
     backgroundColor: "rgba(255, 255, 255, 1)",
     borderRadius: "10px",
 }));
@@ -14,6 +14,8 @@ const Container = styled("div")(({ theme }) => ({
 const StyledForm = styled("form")(({ theme }) => ({
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
+    padding: "4px",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -42,22 +44,33 @@ export default function SubscriptionForm() {
     return (
         <Container>
             <StyledForm>
-                <StyledInputBase />
+                <StyledInputBase
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="example@example.com"
+                    style={{
+                        fontSize: "14px",
+                        padding: "0 12px",
+                    }}
+                />
                 <ValidationError
                     prefix="Email"
                     field="email"
                     errors={state.errors}
                 />
                 <Button
-                    variant="text"
+                    variant="contained"
                     type="submit"
                     disabled={state.submitting}
                     style={{
-                        width: "100%",
-                        fontSize: "20px",
+                        width: "36px",
+                        height: "36px",
+                        backgroundColor: "rgba(0,0,0,1)",
+                        fontSize: "14px",
                     }}
                 >
-                    →
+                    sub
                 </Button>
 
             </StyledForm>
