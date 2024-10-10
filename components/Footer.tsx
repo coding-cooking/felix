@@ -26,7 +26,7 @@ export default function Footer() {
         <Typography
           variant="overline"
           display="block"
-          fontSize={"12px"}
+          fontSize={"14px"}
           color={"white"}
           marginBottom={"0px"}
           gutterBottom
