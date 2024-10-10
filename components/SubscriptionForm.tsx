@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import DoneIcon from "@mui/icons-material/Done";
 
 const Container = styled.div`
-    width: 300px;
+    min-width: 300px;
     height: 44px;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
@@ -17,6 +17,8 @@ const StyledForm = styled.form`
     flex-direction: row;
     align-items: center;
     padding: 4px;
+
+    
 `
 
 const StyledInputBase = styled(InputBase)`
