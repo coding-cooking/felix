@@ -2,8 +2,11 @@
 import styled from "@emotion/styled";
 import { useForm, ValidationError } from "@formspree/react";
 import InputBase from "@mui/material/InputBase";
-import Button from "@mui/material/Button";
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from "@mui/icons-material/Done";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useState } from "react";
 
 const Container = styled.div`
     min-width: 300px;
@@ -36,7 +39,14 @@ const Congratulation = styled.div`
 
 export default function SubscriptionForm() {
     const [state, handleSubmit] = useForm("mzbnjkby");
+    const [loading, setLoading] = useState<boolean>(false);
 
+    const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setLoading(true);
+        await handleSubmit(event);
+        setLoading(false);
+    };
     return (
         <Container>
             {state.succeeded ? (
@@ -45,7 +55,7 @@ export default function SubscriptionForm() {
                     Thank you!
                 </Congratulation>
             ) : (
-                <StyledForm onSubmit={handleSubmit}>
+                <StyledForm onSubmit={handleFormSubmit}>
                     <StyledInputBase
                         id="email"
                         type="email"
@@ -68,16 +78,14 @@ export default function SubscriptionForm() {
                         style={{
                             width: "36px",
                             height: "36px",
-                            backgroundColor: "rgba(0,0,0,1)",
+                            backgroundColor: loading ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,1)",
                             fontSize: "14px",
                         }}
                     >
-                        ✓
+                        {loading ? <CircularProgress size={20} color="inherit" /> : <ArrowForwardIcon />}
                     </Button>
-
                 </StyledForm>)
             }
-
         </Container >
     )
 }
