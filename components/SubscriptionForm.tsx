@@ -43,9 +43,9 @@ export default function SubscriptionForm() {
 
     const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setLoading(true);  // Set loading state to true when the form is submitted
-        await handleSubmit(event);  // Submit the form
-        setLoading(false);  // Reset loading state once submission is complete
+        setLoading(true);
+        await handleSubmit(event);
+        setLoading(false);
     };
     return (
         <Container>
