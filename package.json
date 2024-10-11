@@ -11,7 +11,7 @@
     "build:sitemap": "node generate-sitemap.js"
   },
   "dependencies": {
-    "@emotion/cache": "^11.11.0",
+    "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.11.4",
     "@formspree/react": "^2.5.1",
     "@mui/icons-material": "^5.15.14",
