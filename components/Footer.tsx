@@ -2,12 +2,11 @@
 import Container from "@mui/material/Container";
 import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
-import Subscription from "./Subscription";
 import SubscriptionForm from "./SubscriptionForm";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100px;
+  height: 180px;
   background-color: rgba(var(--header-bg), 0.9);
 `;
 
@@ -15,6 +14,7 @@ const StyledContainer = styled(Container)`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding: 40px 0;
   height: 100%;
 
   @media (max-width: 768px) {
