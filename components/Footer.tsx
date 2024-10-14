@@ -21,6 +21,13 @@ const StyledContainer = styled(Container)`
       flex-direction: column;
     }
 `
+
+const SubscriptionContainer = styled(Typography)`
+  display: flex;
+  flex-direction: column;
+  order: 1;
+  gap: 10px;
+`
 export default function Footer() {
   return (
     <Wrapper>
@@ -38,9 +45,10 @@ export default function Footer() {
         >
           Copyright © 2024 | Felix
         </Typography>
-        <Typography sx={{ order: "1" }}>
+        <SubscriptionContainer>
+          <Typography variant="body2" gutterBottom color={"white"} sx={{ display: 'block' }}>Enter your email to join my free newsletter:</Typography>
           <SubscriptionForm />
-        </Typography>
+        </SubscriptionContainer>
       </StyledContainer>
     </Wrapper >
   );
