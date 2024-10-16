@@ -38,18 +38,18 @@ export default function SearchBar() {
     const inputRef = useRef<HTMLInputElement>(null);
     const { lang } = useLangContext();
 
-    const handleSearch = useDebouncedCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const params = new URLSearchParams(searchParams);
+    // const handleSearch = useDebouncedCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const params = new URLSearchParams(searchParams);
 
-        if (e.target.value) {
-            // params.set("page", "1");
-            params.delete("page");
-            params.set("q", e.target.value);
-        } else {
-            params.delete("q");
-        }
-        replace(`${pathname}?${params}`)
-    }, 100)
+    //     if (e.target.value) {
+    //         // params.set("page", "1");
+    //         params.delete("page");
+    //         params.set("q", e.target.value);
+    //     } else {
+    //         params.delete("q");
+    //     }
+    //     replace(`${pathname}?${params}`)
+    // }, 100)
 
     const handleOptionClick = () => {
         inputRef.current?.blur()
