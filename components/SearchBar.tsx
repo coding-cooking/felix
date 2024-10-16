@@ -3,7 +3,6 @@
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import { useDebouncedCallback } from "use-debounce";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -70,6 +69,16 @@ export default function SearchBar() {
                     if (value) {
                         handleOptionClick();
                     }
+                }}
+                componentsProps={{
+                    paper: {
+                        sx: {
+                            width: "auto",
+                            margin: "auto",
+                            borderTopLeftRadius: 0,
+                            borderTopRightRadius: 0,
+                        },
+                    },
                 }}
                 // clearIcon={
                 //     <ClearIcon
