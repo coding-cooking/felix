@@ -10,6 +10,7 @@ import { useContext, useRef } from "react";
 import ArticleContext, { ArticleInterface } from "@/context/ArticleContext";
 import Link from "next/link";
 import { useLangContext } from "@/context/LangContext";
+import ClearIcon from '@mui/icons-material/Clear';
 
 const Search = styled("div")(({ theme }) => ({
     // width: "300px",
@@ -59,7 +60,6 @@ export default function SearchBar() {
             <Autocomplete
                 freeSolo
                 id="free-solo-2-demo"
-                disableClearable
                 sx={{ flexGrow: 1 }}
                 options={articles}
                 getOptionLabel={(option: string | ArticleInterface) => {
@@ -79,6 +79,17 @@ export default function SearchBar() {
                             borderTopRightRadius: 0,
                         },
                     },
+                    clearIndicator: {
+                        sx: {
+                            color: "white",
+                            fontSize: "16px",
+                            transition: 'transform 0.2s ease-in-out',
+                            '&:hover': {
+                                transform: 'scale(1.25)',
+                            }
+                        }
+                    }
+
                 }}
                 // clearIcon={
                 //     <ClearIcon
@@ -92,7 +103,7 @@ export default function SearchBar() {
                         label=""
                         InputProps={{
                             ...params.InputProps,
-                            type: 'search',
+                            type: 'text',
                             startAdornment: (
                                 <InputAdornment position="start">
                                     <SearchIcon sx={{ visibility: 'block', color: 'white' }} />
