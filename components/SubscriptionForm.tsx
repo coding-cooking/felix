@@ -19,9 +19,7 @@ const StyledForm = styled.form`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 4px;
-
-    
+    padding: 4px;    
 `
 
 const StyledInputBase = styled(InputBase)`
