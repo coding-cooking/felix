@@ -80,6 +80,8 @@ export default function CardList({ articles, initialPage }: CardListProps) {
   const shareButtonsTimeout = useRef<NodeJS.Timeout | null>(null);
   const { lang } = useLangContext();
 
+  console.log('articles are', articles.length)
+
   function paginate(articles: ArticleInterface[], page: string, pageSize: number) {
     const startIndex = (Number(page) - 1) * pageSize;
     const endIndex = startIndex + pageSize - 1;
