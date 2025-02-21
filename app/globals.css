@@ -5,7 +5,7 @@ html * {
 }
 
 :root {
-  --header-bg: 38, 49, 110;
+  --header-bg: 40, 49, 110;
   --footer-bg: 70, 83, 156;
   --white: #fff;
   --nav-category-color: 65, 110, 166;
