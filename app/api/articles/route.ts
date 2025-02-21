@@ -6,7 +6,6 @@ export async function GET(request: Request) {
     try {
         await dbConnect();
         const articles = await Article.find({}).lean().exec();
-        
         const response = NextResponse.json(articles, { status: 200 });
         response.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=30');
         

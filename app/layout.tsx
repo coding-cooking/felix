@@ -34,7 +34,8 @@ export default function RootLayout({
   useEffect(() => {
     const fetchArticles = cache(async () => {
       try {
-        const res = await fetch(`/api/articles`, { cache: 'force-cache' });
+        // const res = await fetch(`/api/articles`, { cache: 'force-cache' });
+        const res = await fetch(`/api/articles`);
         const data = await res.json();
         setArticles(data);
       } catch (error) {

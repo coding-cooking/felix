@@ -35,4 +35,17 @@ async function dbConnect() {
 	return cached.conn;
 }
 
+// const dbConnect = async () => {
+// 	try {
+// 		await mongoose.connect(MONGODB_URI, {
+// 			useNewUrlParser: true,
+// 			useUnifiedTopology: true,
+// 		});
+// 		console.log("Database connected successfully");
+// 	} catch (error) {
+// 		console.error("Database connection error:", error);
+// 		throw error; // Rethrow the error to handle it in the calling function
+// 	}
+// };
+
 export default dbConnect;
