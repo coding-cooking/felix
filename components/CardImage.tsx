@@ -21,8 +21,8 @@ export const CardImage = ({ article }: CardImageProps) => {
     return <>
         <StyledImage
             src={article.bannerImageUrl}
-            width={345}
-            height={isLoading ? 0 : 140}
+            width={700}
+            height={isLoading ? 0 : 280}
             alt=''
             loading="lazy"
             quality={75}
