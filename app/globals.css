@@ -5,8 +5,8 @@ html * {
 }
 
 :root {
-  --header-bg: 40, 49, 110;
-  --footer-bg: 70, 83, 156;
+  --header-bg: 0, 0, 0;
+  --footer-bg: 0, 0, 0;
   --white: #fff;
   --nav-category-color: 65, 110, 166;
   --nav-category-active-bg: 25, 118, 210, 0.2;

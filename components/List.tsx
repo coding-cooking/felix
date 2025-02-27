@@ -74,8 +74,6 @@ export default function List({ articles, initialPage }: CardListProps) {
     const shareButtonsTimeout = useRef<NodeJS.Timeout | null>(null);
     const { lang } = useLangContext();
 
-    console.log('articles are', articles)
-
     function paginate(articles: ArticleInterface[], page: string, pageSize: number) {
         const startIndex = (Number(page) - 1) * pageSize;
         const endIndex = startIndex + pageSize - 1;
@@ -127,25 +125,6 @@ export default function List({ articles, initialPage }: CardListProps) {
                                     </CardContent>
                                 </CardActionArea>
                             </Link>
-                            {/* <CardActions sx={{ position: "relative", paddingTop: "10px" }}>
-                                <Button
-                                    size="small"
-                                    color="primary"
-                                    onMouseEnter={() => handleMouseEnter(index)}
-                                    onMouseLeave={handleMouseLeave}>
-                                    Share
-                                </Button>
-                                {showShareButtons && hoveredIndex === index &&
-                                    <ShareButtons
-                                        article={article}
-                                        onMouseEnter={() => handleMouseEnter(index)}
-                                        onMouseLeave={handleMouseLeave}
-                                        show={showShareButtons && hoveredIndex === index}
-                                    />}
-                                <Link href={`/article/${article.handle}`}>
-                                    <Button size="small">Learn More</Button>
-                                </Link>
-                            </CardActions> */}
                         </StyledCard>
                     );
                 })}
