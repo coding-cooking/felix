@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Pagination from '@mui/material/Pagination';
 import { ArticleInterface } from "@/context/ArticleContext";
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useThemeContext } from "@/context/ThemeContext";
 
 const NUM_PER_PAGE = 9;
 
@@ -14,8 +15,9 @@ export default function PaginationCard({ page, articles }: PaginationProps) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace, push } = useRouter();
+    const { theme } = useThemeContext();
 
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams.toString());
 
     const count = (articles.length) % NUM_PER_PAGE === 0 ? (articles.length) / NUM_PER_PAGE : parseInt((articles.length / NUM_PER_PAGE).toString()) + 1;
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -38,6 +40,27 @@ export default function PaginationCard({ page, articles }: PaginationProps) {
             flexWrap: "wrap",
         }}
     >
-        <Pagination count={count} variant="outlined" color="primary" page={Number(page)} onChange={handleChange} />
+        <Pagination
+            count={count}
+            variant="outlined"
+            page={Number(page)}
+            onChange={handleChange}
+            sx={{
+                "& .MuiPaginationItem-root": {
+                    color: theme === "dark" ? "#fff" : "#000", // Adjust based on your theme
+                    borderColor: theme === "dark" ? "#fff" : "#000", // Adjust border color as well
+                },
+                "& .MuiPaginationItem-ellipsis": {
+                    color: theme === "dark" ? "#fff" : "#000", // Color for ellipsis
+                },
+                "& .MuiPaginationItem-page.Mui-selected": {
+                    backgroundColor: theme === "dark" ? "#424242" : "#ddd", // Background of the selected page
+                    color: theme === "dark" ? "#fff" : "#000", // Color of selected page
+                },
+                "& .MuiPaginationItem-root:hover": {
+                    backgroundColor: theme === "dark" ? "#616161" : "#f5f5f5", // Hover background
+                },
+            }}
+        />
     </Box>
 }

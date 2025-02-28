@@ -13,6 +13,7 @@ import { Suspense } from "react";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { useLangContext } from "@/context/LangContext";
 import LangSwitch from "./LangSwitch";
+import { useThemeContext } from "@/context/ThemeContext";
 
 const StyledContainer = styled(Container)`
   @media (max-width: 768px) {
@@ -50,6 +51,7 @@ const MobileSeachBar = styled(Container)`
 
 function HeaderBar() {
   const { lang, setLang } = useLangContext();
+  const { theme } = useThemeContext();
 
   return (
     <StyledAppBar position="fixed" elevation={3}>

@@ -1,18 +1,23 @@
 "use client"
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { Button, CardActionArea } from "@mui/material";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import PaginationCard from "./PaginationCard";
 import { CardImage } from "./CardImage";
-import { ShareButtons } from "./ShareButtons";
 import styled from "@emotion/styled";
 import { ArticleInterface } from "@/context/ArticleContext";
 import { useLangContext } from "@/context/LangContext";
+import { useThemeContext } from "@/context/ThemeContext";
+
+const StyledContainer = styled(Container)`
+    padding: 60px !important;
+    margin: 0 !important;
+    background-color: ${({ theme }) => theme === 'dark' ? 'black' : 'white'};
+`
 
 const StyledBoxContainer = styled.div`
   display: flex;
@@ -20,7 +25,7 @@ const StyledBoxContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 60px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 `;
 
 const StyledCard = styled.div`
@@ -38,21 +43,23 @@ const StyledTitle = styled(Typography)`
       -webkit-line-clamp: 2;
       height: 66px;
       line-height: 1.4;
+      color: ${({ theme }) => theme === 'dark' ? 'white' : 'black'};
     }
 `
 
 const StyledContent = styled(Typography)`
-  overflow: hidden;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 3;
-  height: 60px;
-  line-height: 1.4;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    height: 60px;
+    line-height: 1.4;
+    color: ${({ theme }) => theme === 'dark' ? 'white' : 'black'};
 `
 
 const PaginationWrapper = styled(Box)`
   @media (max-width: 768px) {
-      display: none;
+    display: none;
     }
 `
 const LoadButton = styled(Button) < { 'data-nomorearticles': boolean }> `
@@ -73,6 +80,7 @@ export default function List({ articles, initialPage }: CardListProps) {
     const [pageSize, setPageSize] = useState<number>(9)
     const shareButtonsTimeout = useRef<NodeJS.Timeout | null>(null);
     const { lang } = useLangContext();
+    const { theme } = useThemeContext();
 
     function paginate(articles: ArticleInterface[], page: string, pageSize: number) {
         const startIndex = (Number(page) - 1) * pageSize;
@@ -107,7 +115,7 @@ export default function List({ articles, initialPage }: CardListProps) {
     const nomorearticles = pageSize >= articles.length;
 
     return (
-        <Container maxWidth="xl">
+        <StyledContainer maxWidth="xl" theme={theme}>
             <StyledBoxContainer>
                 {paginate(articles, initialPage, pageSize).map((article, index) => {
                     return (
@@ -116,10 +124,10 @@ export default function List({ articles, initialPage }: CardListProps) {
                                 <CardActionArea>
                                     <CardImage article={article} />
                                     <CardContent>
-                                        <StyledTitle gutterBottom variant="h5">
+                                        <StyledTitle gutterBottom variant="h5" theme={theme}>
                                             {lang === "EN" ? article.englishTitle : article.chineseTitle}
                                         </StyledTitle>
-                                        <StyledContent variant="body2" color="text.secondary" height={80}>
+                                        <StyledContent variant="body2" color="text.secondary" height={80} theme={theme}>
                                             {lang === "EN" ? article.content[0]?.englishContent : article.content[0]?.chineseContent}
                                         </StyledContent>
                                     </CardContent>
@@ -133,6 +141,6 @@ export default function List({ articles, initialPage }: CardListProps) {
                 <PaginationCard page={initialPage} articles={articles} />
             </PaginationWrapper>
             <LoadButton variant="contained" onClick={loadMore} data-nomorearticles={nomorearticles}>Load More</LoadButton>
-        </Container>
+        </StyledContainer>
     );
 }

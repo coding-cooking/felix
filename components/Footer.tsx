@@ -7,7 +7,7 @@ import SubscriptionForm from "./SubscriptionForm";
 const Wrapper = styled.div`
   width: 100%;
   height: 180px;
-  background-color: rgba(var(--header-bg), 0.9);
+  background-color: rgba(var(--header-bg), 1);
 `;
 
 const StyledContainer = styled(Container)`
