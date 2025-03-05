@@ -5,6 +5,8 @@ import AppBar from "@mui/material/AppBar";
 import Stack from '@mui/material/Stack';
 import Toolbar from "@mui/material/Toolbar";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import LightModeIcon from '@mui/icons-material/LightMode';
+import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
 import Container from "@mui/material/Container";
 import { styled } from "@mui/material/styles";
 import { LogoSvg } from "./Icon";
@@ -51,7 +53,7 @@ const MobileSeachBar = styled(Container)`
 
 function HeaderBar() {
   const { lang, setLang } = useLangContext();
-  const { theme } = useThemeContext();
+  const { theme, setTheme } = useThemeContext();
 
   return (
     <StyledAppBar position="fixed" elevation={3}>
@@ -61,9 +63,9 @@ function HeaderBar() {
             <LogoSvg width={60} height={35} />
           </StyledLink>
 
-          <TableSeachBar>
+          {/* <TableSeachBar>
             <Suspense><SearchBar /></Suspense>
-          </TableSeachBar>
+          </TableSeachBar> */}
 
           <Stack sx={{ flexDirection: "row", flexGrow: 1, textAlign: "right", gap: 4, justifyContent: "end", alignItems: "center" }}>
             <LangSwitch setLang={setLang} lang={lang} />
@@ -76,11 +78,12 @@ function HeaderBar() {
             >
               <GitHubIcon />
             </StyledLink>
+            {theme === 'light' ? <LightModeIcon onClick={() => setTheme('dark')} /> : <NightlightRoundIcon onClick={() => setTheme('light')} />}
           </Stack>
         </StyledToolBar>
-        <MobileSeachBar>
+        {/* <MobileSeachBar>
           <Suspense><SearchBar /></Suspense>
-        </MobileSeachBar>
+        </MobileSeachBar> */}
       </StyledContainer>
     </StyledAppBar>
   );
