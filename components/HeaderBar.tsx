@@ -7,12 +7,10 @@ import Toolbar from "@mui/material/Toolbar";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LightModeIcon from '@mui/icons-material/LightMode';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import Container from "@mui/material/Container";
 import { styled } from "@mui/material/styles";
 import { LogoSvg } from "./Icon";
-import SearchBar from "./SearchBar";
-import { Suspense } from "react";
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { useLangContext } from "@/context/LangContext";
 import LangSwitch from "./LangSwitch";
 import { useThemeContext } from "@/context/ThemeContext";
@@ -22,9 +20,16 @@ const StyledContainer = styled(Container)`
           margin-bottom: 10px;
         }
 `
-const StyledAppBar = styled(AppBar)`
-  background-color: rgb(var(--header-bg));
-`;
+
+interface StyledAppBarProps {
+  customTheme: 'dark' | 'light';
+}
+
+const StyledAppBar = styled(AppBar, {
+  shouldForwardProp: (prop) => prop !== 'customTheme'
+})<StyledAppBarProps>(({ customTheme }) => ({
+  backgroundColor: customTheme === 'dark' ? 'black' : 'white'
+}));
 
 const StyledToolBar = styled(Toolbar)`
   gap: 12px;
@@ -55,12 +60,15 @@ function HeaderBar() {
   const { lang, setLang } = useLangContext();
   const { theme, setTheme } = useThemeContext();
 
+  const iconColor = theme === 'dark' ? 'white' : 'black';
+  const logoColor = theme === 'dark' ? 'white' : 'black';
+
   return (
-    <StyledAppBar position="fixed" elevation={3}>
+    <StyledAppBar position="fixed" elevation={3} customTheme={theme}>
       <StyledContainer maxWidth="xl">
         <StyledToolBar disableGutters>
           <StyledLink href="/">
-            <LogoSvg width={60} height={35} />
+            <LogoSvg width={60} height={35} color={logoColor} />
           </StyledLink>
 
           {/* <TableSeachBar>
@@ -70,15 +78,18 @@ function HeaderBar() {
           <Stack sx={{ flexDirection: "row", flexGrow: 1, textAlign: "right", gap: 4, justifyContent: "end", alignItems: "center" }}>
             <LangSwitch setLang={setLang} lang={lang} />
             <StyledLink href="mailto:felixzhang.rocinante@gmail.com">
-              <MailOutlineIcon />
+              <MailOutlineIcon sx={{ color: iconColor }} />
             </StyledLink>
             <StyledLink
               href="https://github.com/coding-cooking"
               target="_blank"
             >
-              <GitHubIcon />
+              <GitHubIcon sx={{ color: iconColor }} />
             </StyledLink>
-            {theme === 'light' ? <LightModeIcon onClick={() => setTheme('dark')} /> : <NightlightRoundIcon onClick={() => setTheme('light')} />}
+            {theme === 'light' ?
+              <NightlightRoundIcon sx={{ color: iconColor, cursor: 'pointer' }} onClick={() => setTheme('dark')} /> :
+              <LightModeIcon sx={{ color: iconColor, cursor: 'pointer' }} onClick={() => setTheme('light')} />
+            }
           </Stack>
         </StyledToolBar>
         {/* <MobileSeachBar>
