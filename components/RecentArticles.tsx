@@ -7,20 +7,22 @@ import Link from "next/link";
 import { useContext } from "react";
 import styled from "@emotion/styled";
 import { useLangContext } from "@/context/LangContext";
+import { useThemeContext } from "@/context/ThemeContext";
 
 const StyledBox = styled(Box)`
     margin-top: 20px;
+    
 `
 
 const StyledTypography = styled(Typography)`
-    color: rgba(38, 49, 110, 1);
+color: ${({ theme }) => theme === 'dark' ? '#ffffff' : '#26316ecc'};
 `
 
 const StyledLink = styled(Link)`
     font-size: 16;
     font-weight: 400;
+    color: ${({ theme }) => theme === 'dark' ? '#ffffff' : '#26316ecc'};
     line-height: 2;
-    color: rgba(38, 49, 110, .7);
     cursor: pointer;
 
     span {
@@ -55,16 +57,17 @@ export const RecentArticles = ({ handle }: RecentArticlesProps) => {
         return dateB.getTime() - dateA.getTime();
     })
     const { lang } = useLangContext();
+    const { theme } = useThemeContext();
 
     return (
         <StyledBox>
-            <StyledTypography variant="h5" lineHeight={2}>
+            <StyledTypography variant="h5" lineHeight={2} theme={theme}>
                 {lang === "EN" ? "Recent Articles" : "近期文章"}
             </StyledTypography>
             {sortedArticles?.map(article => {
                 return (
                     <Box key={`${article.handle}-${article.englishTitle}`}>
-                        <StyledLink href={`/article/${article.handle}`}>
+                        <StyledLink href={`/article/${article.handle}`} theme={theme}>
                             <span>
                                 {lang === "EN" ? article.englishTitle : article.chineseTitle}
                             </span>
