@@ -7,11 +7,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from "@mui/icons-material/Done";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useState } from "react";
+import { useThemeContext } from "@/context/ThemeContext";
 
 const Container = styled.div`
     min-width: 300px;
     height: 44px;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: #ebedeb;
     border-radius: 10px;
 `
 
@@ -28,7 +29,7 @@ const StyledInputBase = styled(InputBase)`
     `
 
 const Congratulation = styled.div`
-    background-color: rgba(7, 135, 24, 1);
+    background-color: #528b5a;
     border: none;
     border-radius: 10px;
     width: 100%;
@@ -44,6 +45,7 @@ const Congratulation = styled.div`
 export default function SubscriptionForm() {
     const [state, handleSubmit] = useForm("mzbnjkby");
     const [loading, setLoading] = useState<boolean>(false);
+    const { theme } = useThemeContext();
 
     const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -82,8 +84,9 @@ export default function SubscriptionForm() {
                         style={{
                             width: "36px",
                             height: "36px",
-                            backgroundColor: loading ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,1)",
+                            backgroundColor: loading ? "#0000004d" : theme === "dark" ? "#000000" : "#ffffff",
                             fontSize: "14px",
+                            color: theme === "dark" ? "#ffffff" : "#000000",
                         }}
                     >
                         {loading ? <CircularProgress size={20} color="inherit" /> : <ArrowForwardIcon />}
