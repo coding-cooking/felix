@@ -41,6 +41,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+export const revalidate = 3600;
+
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const articles: ArticleInterface[] = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`)
     .then((res) => res.json())
@@ -58,7 +62,7 @@ export async function generateStaticParams() {
   }))
 }
 
-export default async function ArticlePage(this: any, { params }: { params: { handle: string } }) {
+export default async function ArticlePage({ params }: { params: { handle: string } }) {
 
   const { handle } = params;
 
