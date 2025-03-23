@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import styled from "@emotion/styled";
 import default_image from "../public/default_image.jpg";
 import { useLangContext } from '@/context/LangContext';
+import { useThemeContext } from '@/context/ThemeContext';
 
 type ArticleContentInterface = {
     article: ArticleInterface;
@@ -14,6 +15,7 @@ type ArticleContentInterface = {
 const StyledReactMarkdown = styled(ReactMarkdown)`
     line-height: 2;
     margin: 10px 0;
+    color: ${({ theme }) => theme === 'dark' ? 'white' : 'black'};
 `
 
 const StyledCaption = styled.p`
@@ -24,6 +26,7 @@ const StyledCaption = styled.p`
 
 export const ArticleContent = ({ article }: ArticleContentInterface) => {
     const { lang } = useLangContext();
+    const { theme, setTheme } = useThemeContext();
 
     return (
         <>

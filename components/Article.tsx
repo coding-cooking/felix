@@ -12,6 +12,7 @@ import { ArticleTitle } from '@/components/ArticleTitle';
 import { ArticleTag } from '@/components/ArticleTag';
 import { DiscussionEmbed, CommentCount } from 'disqus-react';
 import { useLangContext } from '@/context/LangContext';
+import { useThemeContext } from '@/context/ThemeContext';
 
 type ArticleProps = {
     article: ArticleInterface,
@@ -21,7 +22,13 @@ type ArticleProps = {
 export const Article = ({ article, handle }: ArticleProps) => {
     const articleDate = new Date(article.publishedDate);
     const { lang } = useLangContext();
+    const { theme, setTheme } = useThemeContext();
+
+    const bgColor = theme === "dark" ? "black" : "white";
+    const txColor = theme === "dark" ? "white" : "black";
+
     const disqusShortname = "felixs-blog-1";
+
     const disqusConfig = {
         url: `https://felix-one.vercel.app/article/${handle}`,
         identifier: article.id,
@@ -30,7 +37,7 @@ export const Article = ({ article, handle }: ArticleProps) => {
     };
 
     return (
-        <Stack>
+        <Stack sx={{ backgroundColor: bgColor }}>
             <ArticleImage article={article} />
             <Container maxWidth="lg" sx={{
                 width: "100%",

@@ -3,11 +3,13 @@ import Container from "@mui/material/Container";
 import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import SubscriptionForm from "./SubscriptionForm";
+import { useThemeContext } from "@/context/ThemeContext";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ theme: 'dark' | 'light' }>`
   width: 100%;
   height: 180px;
-  background-color: rgba(var(--header-bg), 1);
+  background-color: ${props => props.theme === 'dark' ? '#000000' : '#ffffff'};
+  border-top: 1px solid #ebedeb;
 `;
 
 const StyledContainer = styled(Container)`
@@ -28,9 +30,11 @@ const SubscriptionContainer = styled(Typography)`
   order: 1;
   gap: 10px;
 `
+
 export default function Footer() {
+  const { theme } = useThemeContext();
   return (
-    <Wrapper>
+    <Wrapper theme={theme}>
       <StyledContainer
         maxWidth="xl"
       >
@@ -38,7 +42,7 @@ export default function Footer() {
           variant="overline"
           display="block"
           fontSize={"14px"}
-          color={"white"}
+          color={theme === 'dark' ? '#ffffff' : '#000000'}
           marginBottom={"0px"}
           gutterBottom
           sx={{ order: "2" }}
@@ -46,7 +50,7 @@ export default function Footer() {
           Copyright © 2024 | Felix
         </Typography>
         <SubscriptionContainer>
-          <Typography variant="body2" gutterBottom color={"white"} sx={{ display: 'block' }}>Enter your email to join my free newsletter:</Typography>
+          <Typography variant="body2" gutterBottom color={theme === 'dark' ? '#ffffff' : '#000000'} sx={{ display: 'block' }}>Enter your email to join my free newsletter:</Typography>
           <SubscriptionForm />
         </SubscriptionContainer>
       </StyledContainer>
