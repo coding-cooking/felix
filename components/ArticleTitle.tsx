@@ -15,7 +15,7 @@ const StyledContainer = styled.div`
 
 export const ArticleTitle = ({ article }: ArticleTitleInterface) => {
     const { lang } = useLangContext();
-    const { theme, setTheme } = useThemeContext();
+    const { theme } = useThemeContext();
 
     return (
         <StyledContainer theme={theme}>

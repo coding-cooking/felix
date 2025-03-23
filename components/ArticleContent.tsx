@@ -15,24 +15,24 @@ type ArticleContentInterface = {
 const StyledReactMarkdown = styled(ReactMarkdown)`
     line-height: 2;
     margin: 10px 0;
-    color: ${({ theme }) => theme === 'dark' ? 'white' : 'black'};
+    color: ${({ theme }) => theme === 'dark' ? '#ffffff' : '#000000'};
 `
 
 const StyledCaption = styled.p`
     font-size: 14px;
     font-weight: 200;
-    color: #a5a6a8;
+    color: ${({ theme }) => theme === 'dark' ? '#ffffff' : '#000000'};
 `
 
 export const ArticleContent = ({ article }: ArticleContentInterface) => {
     const { lang } = useLangContext();
-    const { theme, setTheme } = useThemeContext();
+    const { theme } = useThemeContext();
 
     return (
         <>
             {article.content.map((con, index) => {
                 return con.type === "paragraph" ?
-                    <StyledReactMarkdown key={index}>
+                    <StyledReactMarkdown key={index} theme={theme}>
                         {lang === "EN" ? con.englishContent : con.chineseContent}
                     </StyledReactMarkdown>
                     : <div key={index} style={{ position: 'relative', width: '100%', height: 'auto' }}>
@@ -47,7 +47,7 @@ export const ArticleContent = ({ article }: ArticleContentInterface) => {
                             width={600}
                             height={400}
                         />
-                        <StyledCaption>{lang === "EN" ? con.englishCaption : con.chineseCaption}</StyledCaption>
+                        <StyledCaption theme={theme}>{lang === "EN" ? con.englishCaption : con.chineseCaption}</StyledCaption>
                     </div>
             })}
         </>

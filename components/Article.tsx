@@ -11,7 +11,6 @@ import { ArticleContent } from '@/components/ArticleContent';
 import { ArticleTitle } from '@/components/ArticleTitle';
 import { ArticleTag } from '@/components/ArticleTag';
 import { DiscussionEmbed, CommentCount } from 'disqus-react';
-import { useLangContext } from '@/context/LangContext';
 import { useThemeContext } from '@/context/ThemeContext';
 
 type ArticleProps = {
@@ -21,11 +20,10 @@ type ArticleProps = {
 
 export const Article = ({ article, handle }: ArticleProps) => {
     const articleDate = new Date(article.publishedDate);
-    const { lang } = useLangContext();
-    const { theme, setTheme } = useThemeContext();
+    const { theme } = useThemeContext();
 
-    const bgColor = theme === "dark" ? "black" : "white";
-    const txColor = theme === "dark" ? "white" : "black";
+    const bgColor = theme === "dark" ? "#000000" : "#ffffff";
+    const txColor = theme === "dark" ? "#ffffff" : "#000000";
 
     const disqusShortname = "felixs-blog-1";
 
@@ -43,6 +41,7 @@ export const Article = ({ article, handle }: ArticleProps) => {
                 width: "100%",
                 display: "flex",
                 gap: "60px",
+                color: txColor
             }}>
                 <Box
                     sx={{
@@ -57,11 +56,11 @@ export const Article = ({ article, handle }: ArticleProps) => {
                     <Typography variant="h4" lineHeight={2} gutterBottom sx={{ "@media (max-width: 768px)": { fontSize: "24px", fontWeight: "400" } }}>
                         <ArticleTitle article={article} />
                     </Typography>
-                    <Typography variant="subtitle1" lineHeight={3} gutterBottom sx={{ color: "rgba(106, 101, 104, 1)", "@media (max-width: 768px)": { fontSize: "14px" } }}>
+                    <Typography variant="subtitle1" lineHeight={3} gutterBottom sx={{ color: txColor, "@media (max-width: 768px)": { fontSize: "14px" } }}>
                         {articleDate.toLocaleDateString()}
                     </Typography>
                     <Box>
-                        <Typography variant="body1" lineHeight={2} gutterBottom>
+                        <Typography variant="body1" lineHeight={2} gutterBottom sx={{ color: txColor }}>
                             <ArticleTag article={article} />
                         </Typography>
                         <Box>
