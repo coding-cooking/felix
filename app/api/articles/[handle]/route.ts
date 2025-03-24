@@ -3,31 +3,22 @@ import Article from "@/model/Article";
 import dbConnect from "@/config/dbConnect";
 
 export async function GET(req: NextRequest, { params }: { params: { handle: string } }) {
-    console.log("🔥 API HIT: /api/articles/[handle]");
-    console.log("📝 Params:", params);
-    console.log("🔍 Handle:", params?.handle);
-
     if (!params?.handle) {
-        console.error("❌ No handle provided");
         return NextResponse.json({ message: 'Handle parameter is required!' }, { status: 404 });
     }
 
     try {
-        console.log("🛠 Connecting to DB...");
         await dbConnect();
-        console.log('✅ Database connected for article:', params.handle);
 
         const article = await Article.findOne({ handle: params.handle }).lean().exec();
 
         if (!article) {
-            console.error('❌ No article found for handle:', params.handle);
             return NextResponse.json(
                 { message: `Article not found for handle: ${params.handle}` },
                 { status: 404 }
             );
         }
 
-        console.log('✅ Article found:', article);
         const response = NextResponse.json(article, {
             status: 200,
             headers: {
@@ -40,8 +31,6 @@ export async function GET(req: NextRequest, { params }: { params: { handle: stri
 
     } catch (error) {
         console.error('❌ Error in article API:', error);
-        console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
-
         if (error instanceof Error && error.message.includes('MONGODB_URI')) {
             return NextResponse.json(
                 { message: 'Database configuration error', error: error.message },
