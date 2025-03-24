@@ -10,10 +10,10 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const handle = params.handle;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${handle}`, { 
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${handle}`, {
       next: { revalidate: 3600 }
     });
-    
+
     if (!response.ok) {
       return {
         title: 'Article Not Found',
@@ -66,7 +66,7 @@ export async function generateStaticParams() {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`, {
       next: { revalidate: 3600 }
     });
-    
+
     if (!response.ok) {
       console.error('Error fetching articles:', response.statusText);
       return [];
@@ -88,10 +88,15 @@ export async function generateStaticParams() {
 }
 
 export default async function ArticlePage({ params }: { params: { handle: string } }) {
+  console.log("📝 Fetching article with handle:", params?.handle);
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${params.handle}`, {
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${params.handle}`;
+    console.log("🔗 API Request URL:", url);
+    const response = await fetch(url, {
       next: { revalidate: 3600 }
     });
+
+    console.log("📡 API Response Status:", response.status);
 
     if (!response.ok) {
       if (response.status === 404) {
