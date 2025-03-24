@@ -12,9 +12,9 @@ export async function GET(req: NextRequest, {params}: { params: { handle: string
         console.log('✅ Database connected for article:', params.handle);
 
         const article = await Article.findOne({ handle: params.handle }).lean().exec();
-        console.log('Article query result:', article ? 'Found' : 'Not found');
 
         if (!article) {
+            console.error('❌ No article found for handle:', params.handle);
             return NextResponse.json({ message: 'Article not found' }, { status: 404 });
         }
 
