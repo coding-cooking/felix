@@ -90,7 +90,7 @@ export async function generateStaticParams() {
 export default async function ArticlePage({ params }: { params: { handle: string } }) {
   console.log("📝 Fetching article with handle:", params?.handle);
   try {
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${params.handle}`;
+    const url = `/api/articles/${params.handle}`;
     console.log("🔗 API Request URL:", url);
     const response = await fetch(url, {
       next: { revalidate: 3600 }
