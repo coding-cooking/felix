@@ -9,16 +9,24 @@ type Props = {
   params: { handle: string }
 }
 
-async function getArticle(handle: string) {
-  const headersList = headers();
-  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
-  const host = headersList.get('host') || process.env.NEXT_PUBLIC_BASE_URL?.replace(/https?:\/\//, '') || 'localhost:3000';
-  const baseUrl = `${protocol}://${host}`;
+async function getBaseUrl() {
+  try {
+    const headersList = headers();
+    const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+    const host = headersList.get('host') || process.env.NEXT_PUBLIC_BASE_URL?.replace(/https?:\/\//, '') || 'localhost:3000';
+    return `${protocol}://${host}`;
+  } catch (error) {
+    // Fallback when headers() is not available (e.g., during static generation)
+    return process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  }
+}
 
+async function getArticle(handle: string) {
+  const baseUrl = await getBaseUrl();
   console.log(" Base URL:", baseUrl);
   const url = `${baseUrl}/api/articles/${handle}`;
   console.log(" Fetching article from:", url);
-
+  
   const response = await fetch(url, {
     headers: {
       'Accept': 'application/json'
@@ -93,11 +101,10 @@ export const dynamicParams = true;
 
 export async function generateStaticParams() {
   try {
-    const headersList = headers();
-    const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
-    const host = headersList.get('host') || process.env.NEXT_PUBLIC_BASE_URL?.replace(/https?:\/\//, '') || 'localhost:3000';
-    const baseUrl = `${protocol}://${host}`;
-
+    // During build time, we'll use the environment variable directly
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    console.log(" Static generation base URL:", baseUrl);
+    
     const response = await fetch(`${baseUrl}/api/articles`, {
       next: { revalidate: 3600 }
     });
