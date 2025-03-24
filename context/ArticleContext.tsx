@@ -2,7 +2,7 @@
 
 import { createContext } from "react";
 
-type ContentBlock = {
+export type ContentBlock = {
     type: string;
     chineseContent: string;
     englishContent: string;

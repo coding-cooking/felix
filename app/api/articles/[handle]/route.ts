@@ -3,9 +3,12 @@ import Article from "@/model/Article";
 import dbConnect from "@/config/dbConnect";
 
 export async function GET(req: NextRequest, { params }: { params: { handle: string } }) {
-    console.log("🔥 API HIT: /api/articles/", params?.handle);
+    console.log("🔥 API HIT: /api/articles/[handle]");
+    console.log("📝 Params:", params);
+    console.log("🔍 Handle:", params?.handle);
 
     if (!params?.handle) {
+        console.error("❌ No handle provided");
         return NextResponse.json({ message: 'Handle parameter is required!' }, { status: 404 });
     }
 
@@ -18,18 +21,27 @@ export async function GET(req: NextRequest, { params }: { params: { handle: stri
 
         if (!article) {
             console.error('❌ No article found for handle:', params.handle);
-            return NextResponse.json({ message: 'Article not found' }, { status: 404 });
+            return NextResponse.json(
+                { message: `Article not found for handle: ${params.handle}` },
+                { status: 404 }
+            );
         }
 
-        const response = NextResponse.json(article, { status: 200 });
-        response.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=30');
+        console.log('✅ Article found:', article);
+        const response = NextResponse.json(article, {
+            status: 200,
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'public, max-age=60, stale-while-revalidate=30'
+            }
+        });
+        
         return response;
 
     } catch (error) {
         console.error('❌ Error in article API:', error);
         console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
 
-        // Check if it's a database connection error
         if (error instanceof Error && error.message.includes('MONGODB_URI')) {
             return NextResponse.json(
                 { message: 'Database configuration error', error: error.message },
@@ -38,7 +50,11 @@ export async function GET(req: NextRequest, { params }: { params: { handle: stri
         }
 
         return NextResponse.json(
-            { message: 'Internal server error', error: error instanceof Error ? error.message : 'Unknown error' },
+            { 
+                message: 'Internal server error',
+                error: error instanceof Error ? error.message : 'Unknown error',
+                path: `/api/articles/${params.handle}`
+            },
             { status: 500 }
         );
     }
