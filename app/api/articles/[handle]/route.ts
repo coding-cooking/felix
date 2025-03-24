@@ -24,6 +24,7 @@ export async function GET(req: NextRequest, {params}: { params: { handle: string
 
     } catch (error) {
         console.error('❌ Error in article API:', error);
+        console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
         
         // Check if it's a database connection error
         if (error instanceof Error && error.message.includes('MONGODB_URI')) {
