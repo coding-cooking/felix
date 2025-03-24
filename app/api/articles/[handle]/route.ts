@@ -2,12 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import Article from "@/model/Article";
 import dbConnect from "@/config/dbConnect";
 
-export async function GET(req: NextRequest, {params}: { params: { handle: string } }) {
-    try {
-        if (!params?.handle) {
-            return NextResponse.json({ message: 'Handle parameter is required!' }, { status: 404 });
-        }
+export async function GET(req: NextRequest, { params }: { params: { handle: string } }) {
+    console.log("🔥 API HIT: /api/articles/", params?.handle);
 
+    if (!params?.handle) {
+        return NextResponse.json({ message: 'Handle parameter is required!' }, { status: 404 });
+    }
+
+    try {
+        console.log("🛠 Connecting to DB...");
         await dbConnect();
         console.log('✅ Database connected for article:', params.handle);
 
@@ -25,7 +28,7 @@ export async function GET(req: NextRequest, {params}: { params: { handle: string
     } catch (error) {
         console.error('❌ Error in article API:', error);
         console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
-        
+
         // Check if it's a database connection error
         if (error instanceof Error && error.message.includes('MONGODB_URI')) {
             return NextResponse.json(
