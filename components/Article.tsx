@@ -60,19 +60,20 @@ export const Article = ({ article, handle }: ArticleProps) => {
                         {articleDate.toLocaleDateString()}
                     </Typography>
                     <Box>
-                        <Typography variant="body1" lineHeight={2} gutterBottom sx={{ color: txColor }}>
-                            <ArticleTag article={article} />
-                        </Typography>
                         <Box>
-                            <ArticleContent article={article} />
+                            <ArticleTag article={article} />
                         </Box>
-                        <Box sx={{ margin: "30px 0" }}>
-                            <CommentCount shortname={disqusShortname} config={disqusConfig}>
-                                Comments
-                            </CommentCount>
-                            <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+                        <Box>
+                            <Box>
+                                <ArticleContent article={article} />
+                            </Box>
+                            <Box sx={{ margin: "30px 0" }}>
+                                <CommentCount shortname={disqusShortname} config={disqusConfig}>
+                                    Comments
+                                </CommentCount>
+                                <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+                            </Box>
                         </Box>
-
                     </Box>
                 </Box>
                 <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
