@@ -26,6 +26,13 @@ const FormWrapper = styled.div<{ theme: 'dark' | 'light' }>`
     }
 `;
 
+const Title = styled.h1`
+    margin: 30px 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 30px;
+    font-weight: 600;
+`;
+
 const Label = styled.p`
     font-size: 16px;
 `;
@@ -34,6 +41,7 @@ export default function Subscribe() {
     const { theme } = useThemeContext();
     return <Container theme={theme}>
         <FormWrapper theme={theme}>
+            <Title>Subscribe</Title>
             <Label>Subscribe to my posts in the box below. </Label>
             <SubscriptionForm />
         </FormWrapper>
