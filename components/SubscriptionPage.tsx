@@ -5,15 +5,26 @@ import styled from "@emotion/styled";
 import { useThemeContext } from "@/context/ThemeContext";
 
 const Container = styled.div<{ theme: 'dark' | 'light' }>`
-    padding: 120px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    width: 100%;
     height: 100vh;
     background-color: ${props => props.theme === 'dark' ? 'var(--dark-bg)' : 'var(--light-bg)'};
     color: ${props => props.theme === 'dark' ? 'var(--white)' : 'var(--black)'};
 `
+
+const FormWrapper = styled.div<{ theme: 'dark' | 'light' }>`
+    width: 50%;
+    margin: 0 auto;
+    padding: 120px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid ${props => props.theme === 'dark' ? 'var(--dark-border)' : 'var(--light-border)'};
+    gap: 20px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+`;
 
 const Label = styled.p`
     font-size: 16px;
@@ -22,8 +33,10 @@ const Label = styled.p`
 export default function Subscribe() {
     const { theme } = useThemeContext();
     return <Container theme={theme}>
-        <Label>Subscribe to my posts in the box below. </Label>
-        <SubscriptionForm />
+        <FormWrapper theme={theme}>
+            <Label>Subscribe to my posts in the box below. </Label>
+            <SubscriptionForm />
+        </FormWrapper>
     </Container>
 
 

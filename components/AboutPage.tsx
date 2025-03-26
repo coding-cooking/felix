@@ -1,7 +1,7 @@
 "use client"
 
-import { useThemeContext } from "@/context/ThemeContext"
-import styled from "@emotion/styled"
+import { useThemeContext } from "@/context/ThemeContext";
+import styled from "@emotion/styled";
 
 const aboutContent = [
     "I'm Felix, currently based in Sydney, where I build web projects and write about technology, culture, and the world around me.",
@@ -13,12 +13,22 @@ const aboutContent = [
 const Container = styled.div<{ theme: 'dark' | 'light' }>`
     width: 100%;
     min-height: 100vh;
+    background-color: ${props => props.theme === 'dark' ? 'var(--dark-bg)' : 'var(--light-bg)'};
+    color: ${props => props.theme === 'dark' ? 'var(--white)' : 'var(--black)'};
+`
+
+const Wrapper = styled.div<{ theme: 'dark' | 'light' }>`
+    width: 50%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    background-color: ${props => props.theme === 'dark' ? 'var(--dark-bg)' : 'var(--light-bg)'};
-    color: ${props => props.theme === 'dark' ? 'var(--white)' : 'var(--black)'};
+    border-top: 1px solid ${props => props.theme === 'dark' ? 'var(--dark-border)' : 'var(--light-border)'};
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 const Title = styled.h1`
@@ -42,10 +52,12 @@ export default function AboutPage() {
 
     return (
         <Container theme={theme}>
-            <Title>About Me</Title>
-            {aboutContent.map((paragraph, index) => (
-                <Paragraph key={index}>{paragraph}</Paragraph>
-            ))}
+            <Wrapper theme={theme}>
+                <Title>About Me</Title>
+                {aboutContent.map((paragraph, index) => (
+                    <Paragraph key={index}>{paragraph}</Paragraph>
+                ))}
+            </Wrapper>
         </Container>
     );
 }

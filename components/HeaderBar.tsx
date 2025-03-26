@@ -114,9 +114,9 @@ function HeaderBar() {
           </Stack>
 
           <WidgetsWrapper>
+            <StyledWidgets customTheme={theme} href="/">Home</StyledWidgets>
             <StyledWidgets customTheme={theme} href="/about">About</StyledWidgets>
             <StyledWidgets customTheme={theme} href="https://x.com/coding_cooking">Twitter</StyledWidgets>
-            <StyledWidgets customTheme={theme} href="https://github.com/coding-cooking">GitHub</StyledWidgets>
             <StyledWidgets customTheme={theme} href="mailto:felixzhang.rocinante@gmail.com">Contact</StyledWidgets>
             <StyledWidgets customTheme={theme} href="/subscribe">Subscribe</StyledWidgets>
           </WidgetsWrapper>
