@@ -15,13 +15,13 @@ const StyledBox = styled(Box)`
 `
 
 const StyledTypography = styled(Typography)`
-color: ${({ theme }) => theme === 'dark' ? '#ffffff' : '#26316ecc'};
+color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--blue)'};
 `
 
 const StyledLink = styled(Link)`
     font-size: 16;
     font-weight: 400;
-    color: ${({ theme }) => theme === 'dark' ? '#ffffff' : '#26316ecc'};
+    color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--blue)'};
     line-height: 2;
     cursor: pointer;
 
@@ -35,7 +35,7 @@ const StyledLink = styled(Link)`
     }
 
     &:focus-visible {
-        background: #bae498;
+        background: 'var(--light-green-bg)';
     }
 
     &:hover span {

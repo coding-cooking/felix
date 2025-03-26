@@ -8,8 +8,8 @@ import { useThemeContext } from "@/context/ThemeContext";
 const Wrapper = styled.div<{ theme: 'dark' | 'light' }>`
   width: 100%;
   height: 180px;
-  background-color: ${props => props.theme === 'dark' ? '#000000' : '#ffffff'};
-  border-top: 1px solid${props => props.theme === 'dark' ? '#000000' : '#ebedeb'}; 
+  background-color: ${props => props.theme === 'dark' ? 'var(--dark-bg)' : 'var(--light-bg)'};
+  border-top: 1px solid${props => props.theme === 'dark' ? 'var(--dark-border)' : 'var(--light-border)'}; 
 `;
 
 const StyledContainer = styled(Container)`
@@ -42,7 +42,7 @@ export default function Footer() {
           variant="overline"
           display="block"
           fontSize={"14px"}
-          color={theme === 'dark' ? '#ffffff' : '#000000'}
+          color={theme === 'dark' ? 'var(--white)' : 'var(--black)'}
           marginBottom={"0px"}
           gutterBottom
           sx={{ order: "2" }}
@@ -50,7 +50,7 @@ export default function Footer() {
           Copyright  2024 | Felix
         </Typography>
         <SubscriptionContainer>
-          <Typography variant="body2" gutterBottom color={theme === 'dark' ? '#ffffff' : '#000000'} sx={{ display: 'block' }}>Enter your email to join my free newsletter:</Typography>
+          <Typography variant="body2" gutterBottom color={theme === 'dark' ? 'var(--white)' : 'var(--black)'} sx={{ display: 'block' }}>Enter your email to join my free newsletter:</Typography>
           <div>
             <SubscriptionForm />
           </div>

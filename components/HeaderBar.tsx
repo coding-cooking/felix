@@ -15,23 +15,28 @@ import { useLangContext } from "@/context/LangContext";
 import LangSwitch from "./LangSwitch";
 import { useThemeContext } from "@/context/ThemeContext";
 
+interface StyledAppBarProps {
+  customTheme: 'dark' | 'light';
+}
+
 const StyledContainer = styled(Container)`
   @media (max-width: 768px) {
           margin-bottom: 10px;
         }
 `
 
-interface StyledAppBarProps {
-  customTheme: 'dark' | 'light';
-}
-
 const StyledAppBar = styled(AppBar, {
   shouldForwardProp: (prop) => prop !== 'customTheme'
 })<StyledAppBarProps>(({ customTheme }) => ({
-  backgroundColor: customTheme === 'dark' ? 'black' : 'white'
+  backgroundColor: customTheme === 'dark' ? 'var(--dark-bg)' : 'var(--light-bg)',
+  boxShadow: 'none',
+  position: 'static'
 }));
 
 const StyledToolBar = styled(Toolbar)`
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
 `;
 
@@ -60,15 +65,15 @@ function HeaderBar() {
   const { lang, setLang } = useLangContext();
   const { theme, setTheme } = useThemeContext();
 
-  const iconColor = theme === 'dark' ? 'white' : 'black';
-  const logoColor = theme === 'dark' ? 'white' : 'black';
+  const iconColor = theme === 'dark' ? 'var(--white)' : 'var(--black)';
+  const logoColor = theme === 'dark' ? 'var(--white)' : 'var(--black)';
 
   return (
-    <StyledAppBar position="fixed" elevation={3} customTheme={theme}>
+    <StyledAppBar elevation={3} customTheme={theme}>
       <StyledContainer maxWidth="xl">
         <StyledToolBar disableGutters>
           <StyledLink href="/">
-            <LogoSvg width={60} height={35} color={logoColor} />
+            <LogoSvg width={90} height={52} color={logoColor} />
           </StyledLink>
 
           {/* <TableSeachBar>

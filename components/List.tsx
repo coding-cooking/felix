@@ -14,9 +14,8 @@ import { useLangContext } from "@/context/LangContext";
 import { useThemeContext } from "@/context/ThemeContext";
 
 const StyledContainer = styled(Container)`
-    padding: 60px !important;
-    margin: 0 !important;
-    background-color: ${({ theme }) => theme === 'dark' ? 'black' : 'white'};
+    background-color: ${({ theme }) => theme === 'dark' ? 'var(--dark-bg)' : 'var(--light-bg)'};
+    padding-bottom: 40px;
 `
 
 const StyledBoxContainer = styled.div`
@@ -25,7 +24,6 @@ const StyledBoxContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 60px;
-  /* margin-bottom: 30px; */
 `;
 
 const StyledCard = styled.div`
@@ -36,6 +34,7 @@ const StyledCard = styled.div`
 `
 
 const StyledTitle = styled(Typography)`
+color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--black)'};
   @media (min-width: 768px) {
       overflow: hidden;
       display: -webkit-box;
@@ -43,7 +42,7 @@ const StyledTitle = styled(Typography)`
       -webkit-line-clamp: 2;
       height: 66px;
       line-height: 1.4;
-      color: ${({ theme }) => theme === 'dark' ? 'white' : 'black'};
+      color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--black)'};
     }
 `
 
@@ -54,7 +53,7 @@ const StyledContent = styled(Typography)`
     -webkit-line-clamp: 3;
     height: 60px;
     line-height: 1.4;
-    color: ${({ theme }) => theme === 'dark' ? 'white' : 'black'};
+    color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--black)'};
 `
 
 const PaginationWrapper = styled(Box)`

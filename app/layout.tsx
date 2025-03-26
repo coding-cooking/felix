@@ -36,8 +36,7 @@ export default function RootLayout({
   useEffect(() => {
     const fetchArticles = cache(async () => {
       try {
-        // const res = await fetch(`/api/articles`, { cache: 'force-cache' });
-        const res = await fetch(`/api/articles`);
+        const res = await fetch(`/api/articles`, { cache: 'force-cache' });
         const data = await res.json();
         setArticles(data);
       } catch (error) {
@@ -62,8 +61,8 @@ export default function RootLayout({
                     <main
                       style={{
                         minHeight: `${windowHeight}px`,
-                        marginTop: '4rem',
-                        ...(window.innerWidth < 768 && { marginTop: pathname === '/' ? '10rem' : '6rem' })
+                        // marginTop: '1rem',
+                        // ...(window.innerWidth < 768 && { marginTop: pathname === '/' ? '6rem' : '4rem' })
                       }}
                     >
                       {children}

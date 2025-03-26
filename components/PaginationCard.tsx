@@ -47,18 +47,18 @@ export default function PaginationCard({ page, articles }: PaginationProps) {
             onChange={handleChange}
             sx={{
                 "& .MuiPaginationItem-root": {
-                    color: theme === "dark" ? "#fff" : "#000", // Adjust based on your theme
-                    borderColor: theme === "dark" ? "#fff" : "#000", // Adjust border color as well
+                    color: theme === "dark" ? "var(--white)" : "var(--black)", // Adjust based on your theme
+                    borderColor: theme === "dark" ? "var(--white)" : "var(--black)", // Adjust border color as well
                 },
                 "& .MuiPaginationItem-ellipsis": {
-                    color: theme === "dark" ? "#fff" : "#000", // Color for ellipsis
+                    color: theme === "dark" ? "var(--white)" : "var(--black)", // Color for ellipsis
                 },
                 "& .MuiPaginationItem-page.Mui-selected": {
                     backgroundColor: theme === "dark" ? "#424242" : "#ddd", // Background of the selected page
-                    color: theme === "dark" ? "#fff" : "#000", // Color of selected page
+                    color: theme === "dark" ? "var(--white)" : "var(--black)", // Color of selected page
                 },
                 "& .MuiPaginationItem-root:hover": {
-                    backgroundColor: theme === "dark" ? "#616161" : "#f5f5f5", // Hover background
+                    backgroundColor: theme === "dark" ? "#616161" : "var(--light-bg)", // Hover background
                 },
             }}
         />

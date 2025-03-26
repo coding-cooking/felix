@@ -12,7 +12,7 @@ import { useThemeContext } from "@/context/ThemeContext";
 const Container = styled.div`
     min-width: 300px;
     height: 44px;
-    background-color: #ebedeb;
+    background-color: var(--light-border);
     border-radius: 10px;
 `
 
@@ -29,7 +29,7 @@ const StyledInputBase = styled(InputBase)`
     `
 
 const Congratulation = styled.div`
-    background-color: #528b5a;
+    background-color: var(--green-bg);
     border: none;
     border-radius: 10px;
     width: 100%;
@@ -84,9 +84,9 @@ export default function SubscriptionForm() {
                         style={{
                             width: "36px",
                             height: "36px",
-                            backgroundColor: loading ? "#0000004d" : theme === "dark" ? "#000000" : "#ffffff",
+                            backgroundColor: loading ? "#0000004d" : theme === "dark" ? "var(--dark-bg)" : "var(--light-bg)",
                             fontSize: "14px",
-                            color: theme === "dark" ? "#ffffff" : "#000000",
+                            color: theme === "dark" ? "var(--white)" : "var(--black)",
                         }}
                     >
                         {loading ? <CircularProgress size={20} color="inherit" /> : <ArrowForwardIcon />}

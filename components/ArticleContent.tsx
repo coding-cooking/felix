@@ -15,13 +15,13 @@ type ArticleContentInterface = {
 const StyledReactMarkdown = styled(ReactMarkdown)`
     line-height: 2;
     margin: 10px 0;
-    color: ${({ theme }) => theme === 'dark' ? '#ffffff' : '#000000'};
+    color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--black)'};
 `
 
 const StyledCaption = styled.p`
     font-size: 14px;
     font-weight: 200;
-    color: ${({ theme }) => theme === 'dark' ? '#ffffff' : '#000000'};
+    color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--black)'};
 `
 
 export const ArticleContent = ({ article }: ArticleContentInterface) => {
