@@ -44,6 +44,22 @@ const StyledLink = styled(Link)`
   color: var(--white);
 `;
 
+const WidgetsWrapper = styled(Stack)`
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+`;
+
+const StyledWidgets = styled(Link, {
+  shouldForwardProp: (prop) => prop !== 'customTheme'
+})<StyledAppBarProps>(({ customTheme }) => ({
+  fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+  fontSize: 16,
+  color: customTheme === 'dark' ? 'var(--white)' : 'var(--red)',
+  cursor: 'pointer',
+  textDecoration: 'none'
+}));
+
 const TableSeachBar = styled(Container)`
   width: 40%;
   @media (max-width: 768px) {
@@ -96,6 +112,15 @@ function HeaderBar() {
               <LightModeIcon sx={{ color: iconColor, cursor: 'pointer' }} onClick={() => setTheme('light')} />
             }
           </Stack>
+
+          <WidgetsWrapper>
+            <StyledWidgets customTheme={theme} href="/about">About</StyledWidgets>
+            <StyledWidgets customTheme={theme} href="https://x.com/coding_cooking">Twitter</StyledWidgets>
+            <StyledWidgets customTheme={theme} href="https://github.com/coding-cooking">GitHub</StyledWidgets>
+            <StyledWidgets customTheme={theme} href="mailto:felixzhang.rocinante@gmail.com">Contact</StyledWidgets>
+            <StyledWidgets customTheme={theme} href="/subscribe">Subscribe</StyledWidgets>
+          </WidgetsWrapper>
+
         </StyledToolBar>
         {/* <MobileSeachBar>
           <Suspense><SearchBar /></Suspense>

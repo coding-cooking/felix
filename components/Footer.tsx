@@ -9,7 +9,7 @@ const Wrapper = styled.div<{ theme: 'dark' | 'light' }>`
   width: 100%;
   height: 180px;
   background-color: ${props => props.theme === 'dark' ? 'var(--dark-bg)' : 'var(--light-bg)'};
-  border-top: 1px solid${props => props.theme === 'dark' ? 'var(--dark-border)' : 'var(--light-border)'}; 
+  border-top: 1px solid ${props => props.theme === 'dark' ? 'var(--dark-border)' : 'var(--light-border)'}; 
 `;
 
 const StyledContainer = styled(Container)`

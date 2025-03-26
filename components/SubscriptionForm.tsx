@@ -9,10 +9,10 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useState } from "react";
 import { useThemeContext } from "@/context/ThemeContext";
 
-const Container = styled.div`
+const Container = styled.div<{ theme: 'dark' | 'light' }>`
     min-width: 300px;
     height: 44px;
-    background-color: var(--light-border);
+    background-color: ${props => props.theme === 'dark' ? 'var(--dark-input-bg)' : 'var(--light-input-bg)'};
     border-radius: 10px;
 `
 
@@ -54,7 +54,7 @@ export default function SubscriptionForm() {
         setLoading(false);
     };
     return (
-        <Container>
+        <Container theme={theme}>
             {state.succeeded ? (
                 <Congratulation>
                     <DoneIcon />

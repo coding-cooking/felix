@@ -12,8 +12,11 @@ html * {
   --white: #ffffff;
   --black: #000000;
   --blue: #26316ecc;
-  --dark-border: #000000;
-  --light-border: #ebedeb;
+  --red: #8f0505;
+  --light-input-bg:#cdd2c459;
+  --dark-input-bg:#e3dfdf;
+  --dark-border: #2a2929;
+  --light-border: #dadcda;
   --nav-category-color: 65, 110, 166;
   --nav-category-active-bg: 25, 118, 210, 0.2;
 }

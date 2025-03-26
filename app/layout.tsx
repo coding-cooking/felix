@@ -25,7 +25,7 @@ export default function RootLayout({
   const pathname = usePathname();
   const [articles, setArticles] = useState<ArticleInterface[]>([]);
   const [lang, setLang] = useState<"CH" | "EN">("EN");
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     if (window) {
