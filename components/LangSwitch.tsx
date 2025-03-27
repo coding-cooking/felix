@@ -21,7 +21,7 @@ const MaterialUISwitch = styled(Switch, {
         padding: 0,
         transform: 'translateX(6px)',
         '&.Mui-checked': {
-            color: '#fff',
+            color: 'var(--light-bg)',
             transform: 'translateX(22px)',
             '& .MuiSwitch-thumb:before': {
                 backgroundImage: `url('/english_icon.svg')`,
@@ -34,7 +34,7 @@ const MaterialUISwitch = styled(Switch, {
         },
     },
     '& .MuiSwitch-thumb': {
-        backgroundColor: customTheme === 'dark' ? '#fff' : '#000',
+        backgroundColor: customTheme === 'dark' ? 'var(--light-bg)' : 'var(--dark-bg)',
         width: 20,
         height: 20,
         boxShadow: 'none',
@@ -63,7 +63,7 @@ type LangSwitchProps = {
 }
 
 export default function LangSwitch({ lang, setLang }: LangSwitchProps) {
-    const { theme, setTheme } = useThemeContext();
+    const { theme } = useThemeContext();
 
     function handleChange(event: React.SyntheticEvent<Element, Event>, checked: boolean) {
         setLang(checked ? "EN" : "CH");

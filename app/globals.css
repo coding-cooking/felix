@@ -7,16 +7,22 @@ html * {
 :root {
   --dark-bg: #000000;
   --light-bg: #F5F5F5;
+  --dark-card-bg: #1a1a1a;
+  --light-card-bg: #ffffff;
+  --dark-card-hover: #2a2a2a;
+  --light-card-hover: #f8f8f8;
   --green-bg: #528b5a;
   --light-green-bg:#bae498;
   --white: #ffffff;
   --black: #000000;
+  --gray: #a0a0a0;
+  --dark-gray: #666666;
   --blue: #26316ecc;
   --red: #8f0505;
-  --light-input-bg:#cdd2c459;
-  --dark-input-bg:#e3dfdf;
   --dark-border: #2a2929;
   --light-border: #dadcda;
+  --light-input-bg:#cdd2c459;
+  --dark-input-bg:#e3dfdf;
   --nav-category-color: 65, 110, 166;
   --nav-category-active-bg: 25, 118, 210, 0.2;
 }

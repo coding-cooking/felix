@@ -40,8 +40,8 @@ color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--black)'};
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
-      height: 66px;
-      line-height: 1.4;
+      height: 36px;
+      line-height: 1.2;
       color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--black)'};
     }
 `
@@ -51,8 +51,8 @@ const StyledContent = styled(Typography)`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-    height: 60px;
-    line-height: 1.4;
+    height: 50px;
+    line-height: 1.2;
     color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--black)'};
 `
 
