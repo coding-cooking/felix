@@ -19,7 +19,7 @@ export const ArticleTitle = ({ article }: ArticleTitleInterface) => {
 
     return (
         <StyledContainer theme={theme}>
-            {lang === "EN" ? article.englishTitle : article.chineseTitle}
+            {lang === "EN" ? article?.englishTitle : article?.chineseTitle}
         </StyledContainer>
     )
 }

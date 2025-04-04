@@ -30,7 +30,7 @@ export const ArticleContent = ({ article }: ArticleContentInterface) => {
 
     return (
         <>
-            {article.content.map((con, index) => {
+            {article?.content.map((con, index) => {
                 return con.type === "paragraph" ?
                     <StyledReactMarkdown key={index} theme={theme}>
                         {lang === "EN" ? con.englishContent : con.chineseContent}

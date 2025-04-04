@@ -3,6 +3,7 @@ import Subscription from "@/components/Subscription";
 import { GoogleTagManager } from '@next/third-parties/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { ArticleList } from "@/components/ArticleList";
+import HomePage from "@/components/HomePage";
 
 export const metadata: Metadata = {
   title: "Felix | Web Development | Product Operations",
@@ -59,7 +60,8 @@ export default async function Homepage({ searchParams }: HomepageProps) {
     <>
       <GoogleTagManager gtmId="GTM-TTVSHND3" />
       <GoogleAnalytics gaId="G-ZH9RXZMLJM" />
-      <ArticleList initialPage={initialPage} />
+      <HomePage />
+      {/* <ArticleList initialPage={initialPage} /> */}
       {/* <CardList initialPage={initialPage} /> */}
       {/* <Subscription /> */}
     </>

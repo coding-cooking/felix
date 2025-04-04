@@ -31,7 +31,7 @@ export const ArticleTag = ({ article }: ArticleTagProps) => {
     return <>
         <b>Tags:</b>
         {lang === "EN" ?
-            article.englishTags.map((tag, index) => {
+            article?.englishTags.map((tag, index) => {
                 const lowercaseTag = tag.toLowerCase();
                 return <Link href={`/article/category/${lowercaseTag}`} key={`${index}-${tag}`}>
                     <span
@@ -49,7 +49,7 @@ export const ArticleTag = ({ article }: ArticleTagProps) => {
                     </span>
                 </Link>
             })
-            : article.chineseTags.map((tag: keyof typeof tagMap, index) => {
+            : article?.chineseTags.map((tag: keyof typeof tagMap, index) => {
                 const transformedTag = tagMap[tag];
                 return <Link href={`/article/category/${transformedTag}`} key={`${index}-${tag}`}>
                     <span
