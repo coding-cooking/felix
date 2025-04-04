@@ -5,7 +5,6 @@ import { useContext } from "react";
 import { useLangContext } from "@/context/LangContext";
 import { useThemeContext } from "@/context/ThemeContext";
 import { ArticleTitle } from "./ArticleTitle";
-import { ArticleTag } from "./ArticleTag";
 import { ArticleContent } from "./ArticleContent";
 import styled from "@emotion/styled";
 
@@ -31,10 +30,10 @@ const Wrapper = styled.div<{ theme: 'dark' | 'light' }>`
     }
 `;
 
-const TitleWrapper = styled.div<{ theme: 'dark' | 'light' }>`
-margin: 0 auto;
+const TitleWrapper = styled.div<{ theme: 'dark' | 'light', lang: 'EN' | 'CH' }>`
+    margin: 0 auto;
     color: ${props => props.theme === 'dark' ? 'var(--white)' : 'var(--black)'};
-    font-family: "Europa", sans-serif;
+    font-family: ${props => props.lang === 'EN' ? '"Europa", sans-serif' : '"Noto Serif SC", serif'};
     font-size: 30px;
     font-weight: 600;
     line-height: 1.5;
@@ -50,12 +49,12 @@ const DateWrapper = styled.div<{ theme: 'dark' | 'light' }>`
     text-align: center;
 `;
 
-const ContentWrapper = styled.div<{ theme: 'dark' | 'light' }>`
+const ContentWrapper = styled.div<{ theme: 'dark' | 'light', lang: 'EN' | 'CH' }>`
     color: ${props => props.theme === 'dark' ? 'var(--white)' : 'var(--black)'};
-    font-family: "minion-pro", sans-serif;
-    font-size: 16px;
+    font-family: ${props => props.lang === 'EN' ? '"minion-pro", sans-serif' : '"Noto Serif SC", serif'};
+    font-size: ${props => props.lang === 'EN' ? '16px' : '18px'};
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.8;
 `;
 
 export default function HomePage() {
@@ -74,7 +73,7 @@ export default function HomePage() {
     return (
         <Container theme={theme}>
             <Wrapper theme={theme}>
-                <TitleWrapper theme={theme}>
+                <TitleWrapper theme={theme} lang={lang}>
                     <ArticleTitle article={mostRecentArticle} />
                 </TitleWrapper>
                 <DateWrapper theme={theme}>
@@ -82,7 +81,7 @@ export default function HomePage() {
                         <p>{new Date(mostRecentArticle.publishedDate).toLocaleDateString(lang === "EN" ? "en-US" : "zh-CN")}</p>
                     }
                 </DateWrapper>
-                <ContentWrapper theme={theme}>
+                <ContentWrapper theme={theme} lang={lang}>
                     <ArticleContent article={mostRecentArticle} />
                 </ContentWrapper>
             </Wrapper>

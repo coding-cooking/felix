@@ -15,7 +15,7 @@ import { useThemeContext } from "@/context/ThemeContext";
 
 const StyledContainer = styled(Container)`
     background-color: ${({ theme }) => theme === 'dark' ? 'var(--dark-bg)' : 'var(--light-bg)'};
-    padding-bottom: 40px;
+    padding: 40px 0;
 `
 
 const StyledBoxContainer = styled.div`
