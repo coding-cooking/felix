@@ -10,7 +10,7 @@ import styled from "@emotion/styled";
 
 const Container = styled.div<{ theme: 'dark' | 'light' }>`
     background-color: ${props => props.theme === 'dark' ? 'var(--dark-bg)' : 'var(--light-bg)'};
-    padding: 60px;
+    padding: 60px 0 ;
     display: flex;
     flex-direction: column;
     justify-content: center;
