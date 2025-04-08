@@ -7,6 +7,7 @@ import { useThemeContext } from "@/context/ThemeContext";
 import { ArticleTitle } from "./ArticleTitle";
 import { ArticleContent } from "./ArticleContent";
 import styled from "@emotion/styled";
+import LinkToArticle from "./LinkToArticle";
 
 const Container = styled.div<{ theme: 'dark' | 'light' }>`
     background-color: ${props => props.theme === 'dark' ? 'var(--dark-bg)' : 'var(--light-bg)'};
@@ -57,6 +58,20 @@ const ContentWrapper = styled.div<{ theme: 'dark' | 'light', lang: 'EN' | 'CH' }
     line-height: 1.8;
 `;
 
+const ArticleLinkWrapper = styled.div<{ theme: 'dark' | 'light' }>`
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    color: ${props => props.theme === 'dark' ? 'var(--white)' : 'var(--black)'};
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 20px;
+    }
+`;
+
 export default function HomePage() {
     const { lang } = useLangContext();
     const { theme } = useThemeContext();
@@ -67,8 +82,8 @@ export default function HomePage() {
         return dateB.getTime() - dateA.getTime();
     })
     const mostRecentArticle = sortedArticles?.[0];
-
-    console.log('mostRecentArticle', mostRecentArticle?.englishTitle)
+    const secondRecentArticle = sortedArticles?.[1];
+    const thirdRecentArticle = sortedArticles?.[2];
 
     return (
         <Container theme={theme}>
@@ -84,6 +99,11 @@ export default function HomePage() {
                 <ContentWrapper theme={theme} lang={lang}>
                     <ArticleContent article={mostRecentArticle} />
                 </ContentWrapper>
+
+                <ArticleLinkWrapper theme={theme}>
+                    <LinkToArticle article={secondRecentArticle} />
+                    <LinkToArticle article={thirdRecentArticle} />
+                </ArticleLinkWrapper>
             </Wrapper>
 
         </Container>
