@@ -1,3 +1,6 @@
+
+"use client"
+
 import { ArticleInterface } from "@/context/ArticleContext";
 import { useLangContext } from "@/context/LangContext";
 import { useThemeContext } from "@/context/ThemeContext";
@@ -46,7 +49,7 @@ const CardTag = styled.div`
 `;
 
 interface LinkToArticleProps {
-    article?: ArticleInterface;
+    article: ArticleInterface;
 }
 
 export default function LinkToArticle({ article }: LinkToArticleProps) {
@@ -62,7 +65,7 @@ export default function LinkToArticle({ article }: LinkToArticleProps) {
     return (
         <Link href={`/article/${article.handle}`} style={{ textDecoration: 'none' }}>
             <Container theme={theme}>
-                <CardTag>Recent Article</CardTag>
+                <CardTag>{lang === "EN" ? "Recent Article" : "近期文章"}</CardTag>
                 <Title theme={theme} lang={lang}>
                     {lang === "EN" ? article.englishTitle : article.chineseTitle}
                 </Title>

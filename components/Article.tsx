@@ -4,14 +4,14 @@ import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { ArticleImage } from "@/components/ArticleImage";
 import { ArticleInterface } from '@/context/ArticleContext';
-import { RecentArticles } from '@/components/RecentArticles';
 import { ArticleContent } from '@/components/ArticleContent';
 import { ArticleTitle } from '@/components/ArticleTitle';
 import { ArticleTag } from '@/components/ArticleTag';
 import { DiscussionEmbed, CommentCount } from 'disqus-react';
 import { useThemeContext } from '@/context/ThemeContext';
+import LinkToArticle from './LinkToArticle';
+import RecentArticle from './RecentArticle';
 
 type ArticleProps = {
     article: ArticleInterface,
@@ -22,7 +22,7 @@ export const Article = ({ article, handle }: ArticleProps) => {
     const articleDate = new Date(article.publishedDate);
     const { theme } = useThemeContext();
 
-    const bgColor = theme === "dark" ? "#000000" : "#ffffff";
+    const bgColor = theme === "dark" ? "var(--dark-bg)" : "var(--light-bg)";
     const txColor = theme === "dark" ? "#ffffff" : "#000000";
 
     const disqusShortname = "felixs-blog-1";
@@ -36,12 +36,11 @@ export const Article = ({ article, handle }: ArticleProps) => {
 
     return (
         <Stack sx={{ backgroundColor: bgColor }}>
-            <ArticleImage article={article} />
+            {/* <ArticleImage article={article} /> */}
             <Container maxWidth="lg" sx={{
-                width: "100%",
-                display: "flex",
-                gap: "60px",
-                color: txColor
+                width: "60%",
+                color: txColor,
+                "@media (max-width: 768px)": { width: "100%" }
             }}>
                 <Box
                     sx={{
@@ -67,6 +66,9 @@ export const Article = ({ article, handle }: ArticleProps) => {
                             <Box>
                                 <ArticleContent article={article} />
                             </Box>
+                            <Box>
+                                <RecentArticle handle={handle} />
+                            </Box>
                             <Box sx={{ margin: "30px 0" }}>
                                 <CommentCount shortname={disqusShortname} config={disqusConfig}>
                                     Comments
@@ -75,9 +77,6 @@ export const Article = ({ article, handle }: ArticleProps) => {
                             </Box>
                         </Box>
                     </Box>
-                </Box>
-                <Box sx={{ flex: 1, "@media (max-width: 768px)": { display: "none" } }}>
-                    <RecentArticles handle={handle} />
                 </Box>
             </Container>
         </Stack>
