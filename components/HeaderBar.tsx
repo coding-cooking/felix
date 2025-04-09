@@ -77,7 +77,7 @@ const MobileSeachBar = styled(Container)`
   }
 `
 
-function HeaderBar() {
+export default function HeaderBar() {
   const { lang, setLang } = useLangContext();
   const { theme, setTheme } = useThemeContext();
 
@@ -114,12 +114,11 @@ function HeaderBar() {
           </Stack>
 
           <WidgetsWrapper>
-            <StyledWidgets customTheme={theme} href="/">Home</StyledWidgets>
-            <StyledWidgets customTheme={theme} href="/blog">Blog</StyledWidgets>
-            <StyledWidgets customTheme={theme} href="/about">About</StyledWidgets>
-            <StyledWidgets customTheme={theme} href="https://x.com/coding_cooking">Twitter</StyledWidgets>
-            {/* <StyledWidgets customTheme={theme} href="mailto:felixzhang.rocinante@gmail.com">Contact</StyledWidgets> */}
-            <StyledWidgets customTheme={theme} href="/subscribe">Subscribe</StyledWidgets>
+            <StyledWidgets customTheme={theme} href="/">{lang === "EN" ? "Home" : "首页"}</StyledWidgets>
+            <StyledWidgets customTheme={theme} href="/blog">{lang === "EN" ? "Blog" : "博客"}</StyledWidgets>
+            <StyledWidgets customTheme={theme} href="/about">{lang === "EN" ? "About" : "关于"}</StyledWidgets>
+            <StyledWidgets customTheme={theme} href="https://x.com/coding_cooking">{lang === "EN" ? "Twitter" : "推特"}</StyledWidgets>
+            <StyledWidgets customTheme={theme} href="/subscribe">{lang === "EN" ? "Subscribe" : "订阅"}</StyledWidgets>
           </WidgetsWrapper>
 
         </StyledToolBar>
@@ -130,4 +129,3 @@ function HeaderBar() {
     </StyledAppBar>
   );
 }
-export default HeaderBar;
