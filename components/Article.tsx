@@ -10,8 +10,7 @@ import { ArticleTitle } from '@/components/ArticleTitle';
 import { ArticleTag } from '@/components/ArticleTag';
 import { DiscussionEmbed, CommentCount } from 'disqus-react';
 import { useThemeContext } from '@/context/ThemeContext';
-import LinkToArticle from './LinkToArticle';
-import RecentArticle from './RecentArticle';
+import RecentArticles from './RecentArticles';
 
 type ArticleProps = {
     article: ArticleInterface,
@@ -67,7 +66,7 @@ export const Article = ({ article, handle }: ArticleProps) => {
                                 <ArticleContent article={article} />
                             </Box>
                             <Box>
-                                <RecentArticle handle={handle} />
+                                <RecentArticles handle={handle} />
                             </Box>
                             <Box sx={{ margin: "30px 0" }}>
                                 <CommentCount shortname={disqusShortname} config={disqusConfig}>

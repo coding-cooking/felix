@@ -7,7 +7,7 @@ import { useThemeContext } from "@/context/ThemeContext";
 import { ArticleTitle } from "./ArticleTitle";
 import { ArticleContent } from "./ArticleContent";
 import styled from "@emotion/styled";
-import LinkToArticle from "./LinkToArticle";
+import RecentArticle from "./RecentArticle";
 
 const Container = styled.div<{ theme: 'dark' | 'light' }>`
     background-color: ${props => props.theme === 'dark' ? 'var(--dark-bg)' : 'var(--light-bg)'};
@@ -101,8 +101,8 @@ export default function HomePage() {
                 </ContentWrapper>
 
                 <ArticleLinkWrapper theme={theme}>
-                    <LinkToArticle article={secondRecentArticle} />
-                    <LinkToArticle article={thirdRecentArticle} />
+                    <RecentArticle article={secondRecentArticle} />
+                    <RecentArticle article={thirdRecentArticle} />
                 </ArticleLinkWrapper>
             </Wrapper>
 
