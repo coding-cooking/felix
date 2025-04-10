@@ -12,13 +12,16 @@ type ArticleContentInterface = {
     article: ArticleInterface;
 }
 
-const StyledReactMarkdown = styled(ReactMarkdown)`
+const StyledReactMarkdown = styled(ReactMarkdown) <{ theme: 'dark' | 'light', lang: 'EN' | 'CH' }>`
     line-height: 2;
     margin: 10px 0;
     color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--black)'};
+    font-family: ${props => props.lang === 'EN' ? '"Europa", sans-serif' : '"Noto Serif SC", serif'};
+
 `
 
-const StyledCaption = styled.p`
+const StyledCaption = styled.p<{ theme: 'dark' | 'light' }>`
+    padding-top: 4px;
     font-size: 14px;
     font-weight: 200;
     color: ${({ theme }) => theme === 'dark' ? 'var(--white)' : 'var(--black)'};
@@ -32,10 +35,10 @@ export const ArticleContent = ({ article }: ArticleContentInterface) => {
         <>
             {article?.content.map((con, index) => {
                 return con.type === "paragraph" ?
-                    <StyledReactMarkdown key={index} theme={theme}>
+                    <StyledReactMarkdown key={index} theme={theme} lang={lang}>
                         {lang === "EN" ? con.englishContent : con.chineseContent}
                     </StyledReactMarkdown>
-                    : <div key={index} style={{ position: 'relative', width: '100%', height: 'auto' }}>
+                    : <div key={index} style={{ position: 'relative', width: '100%', height: 'auto', textAlign: 'center' }}>
                         <Image
                             src={con.imageUrl || default_image}
                             alt={lang === "EN" ? con.englishCaption || "Image" : con.chineseCaption || "Image"}
